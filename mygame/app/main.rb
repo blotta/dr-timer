@@ -15,25 +15,13 @@ def format_time(seconds)
   format("%02d:%02d:%02d", hours, minutes, seconds)
 end
 
-def calc_rects(args)
-  args.state.mode_button.x = args.state.timer.x - args.state.timer.w / 2 - 50
-  args.state.mode_button.y = args.state.timer.y
-
-  args.state.reset_button.x = args.state.timer.x + args.state.timer.w / 2 + 50
-  args.state.reset_button.y = args.state.timer.y
-end
-
 def tick(args)
   args.outputs.background_color = Array.new(3, 33) << 255
 
   args.state.timer ||= TimerControl.new(x: Grid.w / 2, y: Grid.h / 2)
   args.state.mode_button ||= ArrowButton.new(size: 40)
   args.state.reset_button ||= ResetButton.new(w: 40, h: 40)
-  args.state.controls = [args.state.timer, args.state.mode_button, args.state.reset_button]
-
-  if Kernel.tick_count == 0
-    calc_rects(args)
-  end
+  args.state.controls ||= [args.state.timer, args.state.mode_button, args.state.reset_button]
 
   # UPDATE
   args.state.controls.each do |c|
@@ -70,16 +58,19 @@ class TimerControl
     @y = y
     @anchor_x = 0.5
     @anchor_y = 0.5
-    @size_px = 150
     @start = Time.now
     @end = Time.now
     @mode = :up
     @state = :stopped
     @font = "fonts/Sono-Regular.ttf"
     self.color = (COLOR_NORMAL)
+    set_size_px(size_px)
+  end
 
+  def set_size_px(spx)
+    @size_px = spx
     @w, @h = GTK.calcstringbox(
-      format_time(@end - @start),
+      format_time(0),
       size_px: @size_px, font: @font,
     )
   end
@@ -93,11 +84,6 @@ class TimerControl
     @g = val.g
     @b = val.b
     @a = val.a
-  end
-
-  def hover=(b)
-    @hover = b
-    self.color = @hover ? COLOR_HIGHLIGHT : COLOR_NORMAL
   end
 
   def text
@@ -169,9 +155,17 @@ class TimerControl
       return true
     end
 
+    if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
+      size_px = @size_px
+      size_px += args.inputs.mouse.wheel.y * 6
+      size_px = size_px.clamp(90, 200)
+      set_size_px(size_px)
+      return true
+    end
+
     self.color = @state == :running ? COLOR_HIGHLIGHT : COLOR_NORMAL
     return false unless args.inputs.mouse.intersect_rect?(self)
-    self.color = COLOR_HOVER
+    self.color = @state == :running ? COLOR_HIGHLIGHT : COLOR_HOVER
 
     # click
     if args.inputs.mouse.click
@@ -244,7 +238,6 @@ class TimerControl
 end
 
 class ArrowButton
-
   def initialize(x: 0, y: 0, size: 40)
     # center -> x, y
     @enabled = true
@@ -296,6 +289,8 @@ class ArrowButton
   end
 
   def tick(args)
+    @x = args.state.timer.x - args.state.timer.w / 2 - 50
+    @y = args.state.timer.y
     @angle = @angle.lerp(args.state.timer.mode == :up ? 90 : 270, 0.2)
   end
 
@@ -341,6 +336,8 @@ class ResetButton
   end
 
   def tick(args)
+    @x = args.state.timer.x + args.state.timer.w / 2 + 50
+    @y = args.state.timer.y
     @angle = @angle.lerp(0, 0.2)
   end
 
