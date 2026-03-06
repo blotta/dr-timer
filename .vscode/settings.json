@@ -1,0 +1,9 @@
+{
+    "rufo.useBundler": false,
+    "[ruby]": {
+        "editor.defaultFormatter": "jnbt.vscode-rufo",
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    }
+}
