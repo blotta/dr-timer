@@ -19,7 +19,7 @@ def tick(args)
   args.outputs.background_color = Array.new(3, 33) << 255
 
   args.state.timer ||= TimerControl.new(x: Grid.w / 2, y: Grid.h / 2)
-  args.state.mode_button ||= ArrowButton.new(size: 40)
+  args.state.mode_button ||= ModeButton.new(size: 40)
   args.state.reset_button ||= ResetButton.new(w: 40, h: 40)
   args.state.controls ||= [args.state.timer, args.state.mode_button, args.state.reset_button]
 
@@ -42,9 +42,61 @@ end
 
 $gtk.reset
 
-class TimerControl
-  attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :text, :font, :anchor_x,
-                :anchor_y, :blendmode_enum, :size_px, :size_enum, :alignment_enum,
+class Control
+  attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :anchor_x, :anchor_y
+
+  attr_reader :hover
+
+  def initialize(x: 0, y: 0, w: 20, h: 20, anchor_x: 0.5, anchor_y: 0.5)
+    @x = x
+    @y = y
+    @w = w
+    @h = h
+    @anchor_x = anchor_x
+    @anchor_y = anchor_y
+  end
+
+  def color
+    return { r: @r, g: @g, b: @b, a: @a }
+  end
+
+  def color=(val)
+    @r = val.r
+    @g = val.g
+    @b = val.b
+    @a = val.a
+  end
+
+  def rect
+    return {
+             x: @x,
+             y: @y,
+             w: @w,
+             h: @h,
+             anchor_x: @anchor_x,
+             anchor_y: @anchor_y,
+           }
+  end
+
+  def tick(args)
+    args.outputs.debug << "#{self.class} hover #{@hover}"
+  end
+
+  def draw(args)
+  end
+
+  def handle_input(args)
+    @hover = self.point_inside?(args.inputs.mouse)
+  end
+
+  def point_inside?(p)
+    return p.inside_rect? self
+  end
+end
+
+class TimerControl < Control
+  attr_accessor :text, :font,
+                :blendmode_enum, :size_px, :size_enum, :alignment_enum,
                 :vertical_alignment_enum
 
   attr_reader :mode
@@ -54,10 +106,7 @@ class TimerControl
   end
 
   def initialize(x: 0, y: 0, size_px: 150)
-    @x = x
-    @y = y
-    @anchor_x = 0.5
-    @anchor_y = 0.5
+    super(x: x, y: y)
     @start = Time.now
     @end = Time.now
     @mode = :up
@@ -73,17 +122,6 @@ class TimerControl
       format_time(0),
       size_px: @size_px, font: @font,
     )
-  end
-
-  def color
-    return { r: @r, g: @g, b: @b, a: @a }
-  end
-
-  def color=(val)
-    @r = val.r
-    @g = val.g
-    @b = val.b
-    @a = val.a
   end
 
   def text
@@ -133,6 +171,14 @@ class TimerControl
   end
 
   def tick(args)
+    super(args)
+
+    if @state == :running
+      self.color = COLOR_HIGHLIGHT
+    else
+      self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
+    end
+
     return unless @state == :running
     if @mode == :up
       @end = Time.now
@@ -150,6 +196,7 @@ class TimerControl
   end
 
   def handle_input(args)
+    super(args)
     if args.inputs.keyboard.key_down.r
       reset()
       return true
@@ -163,9 +210,7 @@ class TimerControl
       return true
     end
 
-    self.color = @state == :running ? COLOR_HIGHLIGHT : COLOR_NORMAL
-    return false unless args.inputs.mouse.intersect_rect?(self)
-    self.color = @state == :running ? COLOR_HIGHLIGHT : COLOR_HOVER
+    return false unless @hover
 
     # click
     if args.inputs.mouse.click
@@ -237,12 +282,10 @@ class TimerControl
   end
 end
 
-class ArrowButton
+class ModeButton < Control
   def initialize(x: 0, y: 0, size: 40)
     # center -> x, y
-    @enabled = true
-    @x = x
-    @y = y
+    super(x: x, y: y)
     @size = size
     @ssize = 8
     @sx_off = 2
@@ -289,6 +332,8 @@ class ArrowButton
   end
 
   def tick(args)
+    super(args)
+    self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
     @x = args.state.timer.x - args.state.timer.w / 2 - 50
     @y = args.state.timer.y
     @angle = @angle.lerp(args.state.timer.mode == :up ? 90 : 270, 0.2)
@@ -299,43 +344,38 @@ class ArrowButton
   end
 
   def handle_input(args)
-    self.color = COLOR_NORMAL
-    return false unless Geometry.point_inside_circle?(args.inputs.mouse, { x: @x, y: @y }, @size / 2)
-    self.color = COLOR_HOVER
+    super(args)
+    return false unless @hover
     if args.inputs.mouse.click
       puts "toggle mode"
       args.state.timer.toggle_mode()
       return true
     end
   end
+
+  def point_inside?(p)
+    return Geometry.point_inside_circle?(p, { x: @x, y: @y }, @size / 2)
+  end
 end
 
-class ResetButton
+class ResetButton < Control
   attr_sprite
 
+  def primitive_marker
+    :solid
+  end
+
   def initialize(x: 0, y: 0, w: 0, h: 0)
-    @x = x
-    @y = y
-    @w = w
-    @h = h
-    @anchor_y = 0.5
+    super(x: x, y: y, w: w, h: h, anchor_x: 0, anchor_y: 0.5)
     @angle = 0
     @path = :solid
     self.color = COLOR_NORMAL
   end
 
-  def color
-    return { r: @r, g: @g, b: @b, a: @a }
-  end
-
-  def color=(val)
-    @r = val.r
-    @g = val.g
-    @b = val.b
-    @a = val.a
-  end
-
   def tick(args)
+    super(args)
+    self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
+
     @x = args.state.timer.x + args.state.timer.w / 2 + 50
     @y = args.state.timer.y
     @angle = @angle.lerp(0, 0.2)
@@ -343,15 +383,27 @@ class ResetButton
 
   def draw(args)
     args.outputs.sprites << self
+    p = self.rect.rect_center_point
+    args.outputs.sprites << {
+      x: p.x,
+      y: p.y,
+      w: @w * 0.7,
+      h: @h * 0.7,
+      anchor_x: 0.5,
+      anchor_y: 0.5,
+      angle: @angle,
+      path: :solid,
+      blendmode: 4
+    }.merge(self.color)
   end
 
   def handle_input(args)
-    self.color = COLOR_NORMAL
-    return false unless args.inputs.mouse.intersect_rect?(self)
+    super(args)
+    return false unless @hover
     if args.inputs.mouse.click
+      puts "here"
       args.state.timer.reset()
       @angle = -180
     end
-    self.color = COLOR_HOVER
   end
 end
