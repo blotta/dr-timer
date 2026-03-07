@@ -1,6 +1,15 @@
+require_relative "bezier"
+
 COLOR_NORMAL = { r: 200, g: 200, b: 200, a: 100 }
 COLOR_HIGHLIGHT = { r: 200, g: 200, b: 200, a: 255 }
 COLOR_HOVER = { r: 200, g: 200, b: 200, a: 160 }
+
+HOLE_PUNCH_BLENDMODE = Numeric.compose_blendmode(BLENDFACTOR_ZERO,
+                                                 BLENDFACTOR_ONE_MINUS_SRC_ALPHA,
+                                                 BLENDOPERATION_ADD,
+                                                 BLENDFACTOR_ZERO,
+                                                 BLENDFACTOR_ONE_MINUS_SRC_ALPHA,
+                                                 BLENDOPERATION_ADD)
 
 def time_segments(seconds)
   s = seconds
@@ -15,12 +24,121 @@ def format_time(seconds)
   format("%02d:%02d:%02d", hours, minutes, seconds)
 end
 
+def make_trigangle_rt(args)
+  size = 200
+  p1 = { x: size / 2, y: 0 }
+  p2 = Geometry.rotate_point(p1, 120)
+  p3 = Geometry.rotate_point(p1, 240)
+  args.outputs[:triangle].w = size
+  args.outputs[:triangle].h = size
+  args.outputs[:triangle].background_color = [0, 0, 0, 0]
+  args.outputs[:triangle].primitives << {
+    x: size / 2 + p1.x,
+    y: size / 2 + p1.y,
+    x2: size / 2 + p2.x,
+    y2: size / 2 + p2.y,
+    x3: size / 2 + p3.x,
+    y3: size / 2 + p3.y,
+    source_x: size / 2 + p1.x,
+    source_y: size / 2 + p1.y,
+    source_x2: size / 2 + p2.x,
+    source_y2: size / 2 + p2.y,
+    source_x3: size / 2 + p3.x,
+    source_y3: size / 2 + p3.y,
+    r: 255, g: 255, b: 255, a: 255,
+    path: :solid,
+  }
+
+  # hole punch doesn't seem to work with triangles
+  # args.outputs[:triangle].primitives << {
+  #   x:  size / 2 + p1.x * 0.7,
+  #   y:  size / 2 + p1.y * 0.7,
+  #   x2: size / 2 + p2.x * 0.7,
+  #   y2: size / 2 + p2.y * 0.7,
+  #   x3: size / 2 + p3.x * 0.7,
+  #   y3: size / 2 + p3.y * 0.7,
+  #   source_x: size / 2 +  p1.x * 0.7,
+  #   source_y: size / 2 +  p1.y * 0.7,
+  #   source_x2: size / 2 + p2.x * 0.7,
+  #   source_y2: size / 2 + p2.y * 0.7,
+  #   source_x3: size / 2 + p3.x * 0.7,
+  #   source_y3: size / 2 + p3.y * 0.7,
+  #   # r: 33, g: 33, b: 33, a: 255,
+  #   r: 0, g: 0, b: 0, a: 255,
+  #   path: :solid,
+  #   blendmode: HOLE_PUNCH_BLENDMODE
+  # }
+end
+
+def make_reset_btn_rt(args)
+  size = 200
+  args.outputs[:reset_btn].w = size
+  args.outputs[:reset_btn].h = size
+  args.outputs[:reset_btn].background_color = [0, 0, 0, 0]
+  args.outputs[:reset_btn].primitives << {
+    x: size / 2,
+    y: size / 2,
+    w: size,
+    h: size,
+    anchor_x: 0.5,
+    anchor_y: 0.5,
+    r: 255, g: 255, b: 255, a: 255,
+    path: :solid,
+  }
+
+  c = size * 0.3 / 2
+  args.outputs[:reset_btn].primitives << {
+    x: size / 2,
+    y: size / 2,
+    w: size - c * 2,
+    h: size - c * 2,
+    anchor_x: 0.5,
+    anchor_y: 0.5,
+    angle: 0,
+    r: 0, g: 0, b: 0, a: 255,
+    blendmode: HOLE_PUNCH_BLENDMODE,
+    path: :solid,
+  }
+
+  inner_se = [size - c, c]
+  args.outputs[:reset_btn].primitives << {
+    x: inner_se.x,
+    y: inner_se.y,
+    w: c,
+    h: c,
+    anchor_x: 1,
+    anchor_y: 1,
+    angle: 0,
+    r: 0, g: 0, b: 0, a: 255,
+    blendmode: HOLE_PUNCH_BLENDMODE,
+    path: :solid,
+  }
+  inner_nw = [c, size - c]
+  args.outputs[:reset_btn].primitives << {
+    x: inner_nw.x,
+    y: inner_nw.y,
+    w: c,
+    h: c,
+    anchor_x: 0,
+    anchor_y: 0,
+    angle: 0,
+    r: 0, g: 0, b: 0, a: 255,
+    blendmode: HOLE_PUNCH_BLENDMODE,
+    path: :solid,
+  }
+end
+
 def tick(args)
+  if Kernel.tick_count == 0
+    make_trigangle_rt(args)
+    make_reset_btn_rt(args)
+  end
+
   args.outputs.background_color = Array.new(3, 33) << 255
 
   args.state.timer ||= TimerControl.new(x: Grid.w / 2, y: Grid.h / 2)
   args.state.mode_button ||= ModeButton.new(size: 40)
-  args.state.reset_button ||= ResetButton.new(w: 40, h: 40)
+  args.state.reset_button ||= ResetButton.new(x: Grid.w, w: 40, h: 40)
   args.state.controls ||= [args.state.timer, args.state.mode_button, args.state.reset_button]
 
   # UPDATE
@@ -47,7 +165,7 @@ class Control
 
   attr_reader :hover
 
-  def initialize(x: 0, y: 0, w: 20, h: 20, anchor_x: 0.5, anchor_y: 0.5)
+  def initialize(x: 0, y: 0, w: 20, h: 20, anchor_x: 0.5, anchor_y: 0.5, r: 255, g: 255, b: 255, a: 255)
     @x = x
     @y = y
     @w = w
@@ -99,7 +217,10 @@ class TimerControl < Control
                 :blendmode_enum, :size_px, :size_enum, :alignment_enum,
                 :vertical_alignment_enum
 
-  attr_reader :mode
+  attr_reader :mode, :bezier_control_points
+
+  SIZE_PX_MIN = 90
+  SIZE_PX_MAX = 200
 
   def primitive_marker
     :label
@@ -114,6 +235,7 @@ class TimerControl < Control
     @font = "fonts/Sono-Regular.ttf"
     self.color = (COLOR_NORMAL)
     set_size_px(size_px)
+    calc_bezier_control_points()
   end
 
   def set_size_px(spx)
@@ -122,6 +244,10 @@ class TimerControl < Control
       format_time(0),
       size_px: @size_px, font: @font,
     )
+  end
+
+  def size_perc
+    return (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
   end
 
   def text
@@ -195,6 +321,16 @@ class TimerControl < Control
     args.outputs.labels << self
   end
 
+  def calc_bezier_control_points()
+    margin = [150, 150]
+    @bezier_control_points = [
+      [@x - @w / 2 - margin.x, @y],
+      [@x - @w / 2 - margin.x, @y - @h / 2 - margin.y],
+      [@x + @w / 2 + margin.x, @y - @h / 2 - margin.y],
+      [@x + @w / 2 + margin.x, @y],
+    ]
+  end
+
   def handle_input(args)
     super(args)
     if args.inputs.keyboard.key_down.r
@@ -202,11 +338,13 @@ class TimerControl < Control
       return true
     end
 
-    if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
+    # if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
+    if !@hover && args.inputs.mouse.wheel != nil
       size_px = @size_px
       size_px += args.inputs.mouse.wheel.y * 6
-      size_px = size_px.clamp(90, 200)
+      size_px = size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
       set_size_px(size_px)
+      calc_bezier_control_points()
       return true
     end
 
@@ -283,125 +421,73 @@ class TimerControl < Control
 end
 
 class ModeButton < Control
-  def initialize(x: 0, y: 0, size: 40)
-    # center -> x, y
-    super(x: x, y: y)
-    @size = size
-    @ssize = 8
-    @sx_off = 2
-    @sy_off = 2
+  attr_sprite
+
+  def initialize(x: 0, y: 0, size: 100)
+    super(x: x, y: y, w: size, h: size, anchor_x: 0.5, anchor_y: 0.5, **COLOR_NORMAL)
     @angle = 0
-    self.color = COLOR_NORMAL
-
-    @p1 = { x: @size / 2, y: 0 }
-    @p2 = Geometry.rotate_point(@p1, 120)
-    @p3 = Geometry.rotate_point(@p1, 240)
-  end
-
-  def color
-    return { r: @r, g: @g, b: @b, a: @a }
-  end
-
-  def color=(val)
-    @r = val.r
-    @g = val.g
-    @b = val.b
-    @a = val.a
-  end
-
-  def sprite(args)
-    off1 = Geometry.rotate_point(@p1, @angle)
-    off2 = Geometry.rotate_point(@p2, @angle)
-    off3 = Geometry.rotate_point(@p3, @angle)
-    return {
-             x: @x + off1.x,
-             y: @y + off1.y,
-             x2: @x + off2.x,
-             y2: @y + off2.y,
-             x3: @x + off3.x,
-             y3: @y + off3.y,
-             source_x: 0,
-             source_y: 0,
-             source_x2: 0,
-             source_y2: 0,
-             source_x3: 0,
-             source_y3: 0,
-             r: @r, g: @g, b: @b, a: @a,
-             path: :solid,
-           }
+    @path = :triangle
   end
 
   def tick(args)
     super(args)
     self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
-    @x = args.state.timer.x - args.state.timer.w / 2 - 50
-    @y = args.state.timer.y
+    p = point_on_bezier(*args.state.timer.bezier_control_points, 0 + args.state.timer.size_perc * 0.3)
+    @x = @x.lerp(p.x, 0.2)
+    @y = @y.lerp(p.y, 0.2)
     @angle = @angle.lerp(args.state.timer.mode == :up ? 90 : 270, 0.2)
+    @w = 50 + args.state.timer.size_perc * 30
+    @h = @w
   end
 
   def draw(args)
-    args.outputs.sprites << self.sprite(args)
+    args.outputs.sprites << self
   end
 
   def handle_input(args)
     super(args)
     return false unless @hover
     if args.inputs.mouse.click
-      puts "toggle mode"
       args.state.timer.toggle_mode()
       return true
     end
   end
 
   def point_inside?(p)
-    return Geometry.point_inside_circle?(p, { x: @x, y: @y }, @size / 2)
+    return Geometry.point_inside_circle?(p, { x: @x, y: @y }, @w / 2)
   end
 end
 
 class ResetButton < Control
   attr_sprite
 
-  def primitive_marker
-    :solid
-  end
-
   def initialize(x: 0, y: 0, w: 0, h: 0)
-    super(x: x, y: y, w: w, h: h, anchor_x: 0, anchor_y: 0.5)
+    super(x: x, y: y, w: w, h: h, anchor_x: 0.5, anchor_y: 0.5, **COLOR_NORMAL)
     @angle = 0
-    @path = :solid
-    self.color = COLOR_NORMAL
+    @path = :reset_btn
   end
 
   def tick(args)
     super(args)
     self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
 
-    @x = args.state.timer.x + args.state.timer.w / 2 + 50
-    @y = args.state.timer.y
+    p = point_on_bezier(*args.state.timer.bezier_control_points, 1 - args.state.timer.size_perc * 0.3)
+    @x = @x.lerp(p.x, 0.2)
+    @y = @y.lerp(p.y, 0.2)
+
     @angle = @angle.lerp(0, 0.2)
+    @w = 40 + args.state.timer.size_perc * 20
+    @h = @w
   end
 
   def draw(args)
     args.outputs.sprites << self
-    p = self.rect.rect_center_point
-    args.outputs.sprites << {
-      x: p.x,
-      y: p.y,
-      w: @w * 0.7,
-      h: @h * 0.7,
-      anchor_x: 0.5,
-      anchor_y: 0.5,
-      angle: @angle,
-      path: :solid,
-      blendmode: 4
-    }.merge(self.color)
   end
 
   def handle_input(args)
     super(args)
     return false unless @hover
     if args.inputs.mouse.click
-      puts "here"
       args.state.timer.reset()
       @angle = -180
     end
