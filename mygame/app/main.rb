@@ -236,6 +236,7 @@ class TimerControl < Control
     self.color = (COLOR_NORMAL)
     set_size_px(size_px)
     calc_bezier_control_points()
+    @indicators = []
   end
 
   def set_size_px(spx)
@@ -305,6 +306,16 @@ class TimerControl < Control
       self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
     end
 
+    @indicators.each do |ind|
+      ind.y += ind.dir * 5
+      ind.w *= 0.9
+      ind.h *= 0.9
+      ind.a *= 0.75
+    end
+    @indicators.reject! do |ind|
+      ind.a <= 0
+    end
+
     return unless @state == :running
     if @mode == :up
       @end = Time.now
@@ -319,6 +330,7 @@ class TimerControl < Control
 
   def draw(args)
     args.outputs.labels << self
+    args.outputs.solids << @indicators
   end
 
   def calc_bezier_control_points()
@@ -391,6 +403,7 @@ class TimerControl < Control
         end
         new_elapsed = (h * 60 * 60) + (m * 60) + s
         @end = @start + new_elapsed
+        add_indicator(over_at, wheel_y)
         return true
       else
         add_secs = wheel_y * (60 ** over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
@@ -401,12 +414,32 @@ class TimerControl < Control
         else
           @end = @start + new_elapsed
         end
+        add_indicator(over_at, wheel_y)
         return true
       end
 
       return false
     end
     return false
+  end
+
+  def add_indicator(over_at, y_dir)
+    dir = (y_dir/y_dir.abs)
+    over = over_at.remap(2, 0, -1, 1)
+    x = @x + @w * (over * 0.38)
+    y = @y + dir * @h/2
+    @indicators << {
+      x: x,
+      y: y,
+      w: 15,
+      h: 15,
+      anchor_x: 0.5,
+      anchor_y: 0.5,
+      **COLOR_HIGHLIGHT,
+      path: :solid,
+      dir: dir,
+      created_at: Kernel.tick_count
+    }
   end
 
   def serialize
