@@ -237,6 +237,8 @@ class TimerControl < Control
     set_size_px(size_px)
     calc_bezier_control_points()
     @indicators = []
+    @running_time_added = 0
+    @running_start_time = nil
   end
 
   def set_size_px(spx)
@@ -261,10 +263,16 @@ class TimerControl < Control
     @state = :stopped
     @mode = :up
     self.color = COLOR_NORMAL
+    @running_time_added = 0
+    @running_start_time = nil
   end
 
   def elapsed
     return @end - @start
+  end
+
+  def running_elapsed
+    return @end - @running_start_time
   end
 
   def toggle_state
@@ -279,6 +287,7 @@ class TimerControl < Control
       end
       self.color = COLOR_HIGHLIGHT
       @state = :running
+      @running_start_time = Time.now
     elsif @state == :running
       self.color = COLOR_NORMAL
       @state = :stopped
@@ -331,6 +340,25 @@ class TimerControl < Control
   def draw(args)
     args.outputs.labels << self
     args.outputs.solids << @indicators
+    if @state == :running && @running_time_added != 0
+      h, m, s = time_segments(@running_time_added.abs)
+      sign = @running_time_added > 0 ? "+" : "-"
+      text = [h, m, s]
+        .zip(["h", "m", "s"])
+        .reject { |el| el[0] == 0 }
+        .map { |el| el.join }
+        .join
+      args.outputs.labels << {
+        x: 10.from_right,
+        y: 10.from_top,
+        anchor_x: 1,
+        anchor_y: 1,
+        **COLOR_NORMAL,
+        font: @font,
+        size_px: 30,
+        text: "#{sign}#{text}",
+      }
+    end
   end
 
   def calc_bezier_control_points()
@@ -407,14 +435,19 @@ class TimerControl < Control
         return true
       else
         add_secs = wheel_y * (60 ** over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
-        new_elapsed = elapsed() + add_secs
-        new_elapsed = [new_elapsed, 0].max
+        prev_elapsed = elapsed()
+        new_elapsed = prev_elapsed + add_secs
+        if new_elapsed <= 0
+          return false
+        end
+        # new_elapsed = [new_elapsed, 0].max
         if @mode == :up
           @start = @end - new_elapsed
         else
           @end = @start + new_elapsed
         end
         add_indicator(over_at, wheel_y)
+        @running_time_added += add_secs
         return true
       end
 
@@ -424,10 +457,10 @@ class TimerControl < Control
   end
 
   def add_indicator(over_at, y_dir)
-    dir = (y_dir/y_dir.abs)
+    dir = (y_dir / y_dir.abs)
     over = over_at.remap(2, 0, -1, 1)
     x = @x + @w * (over * 0.38)
-    y = @y + dir * @h/2
+    y = @y + dir * @h / 2
     @indicators << {
       x: x,
       y: y,
@@ -438,7 +471,7 @@ class TimerControl < Control
       **COLOR_HIGHLIGHT,
       path: :solid,
       dir: dir,
-      created_at: Kernel.tick_count
+      created_at: Kernel.tick_count,
     }
   end
 
