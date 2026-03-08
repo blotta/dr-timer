@@ -348,6 +348,11 @@ class TimerControl < Control
       return true
     end
 
+    if args.inputs.keyboard.key_down.space
+      toggle_state()
+      return true
+    end
+
     return false unless @hover
 
     # click
