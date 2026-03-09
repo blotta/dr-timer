@@ -8,3 +8,41 @@
 # where the inspected file is and continue its way up to the root directory.
 #
 # See https://docs.rubocop.org/rubocop/configuration
+AllCops:
+  TargetRubyVersion: 2.6
+
+Style:
+  Enabled: true
+
+Style/GuardClause:
+  Enabled: false
+
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false
+
+Style/CombinableLoops:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/NegatedIf:
+  Enabled: false
+
+Layout:
+  Enabled: true
+
+Layout/EndOfLine:
+  Enabled: false
+
+Metrics:
+  Enabled: false
+
+Naming:
+  Enabled: false

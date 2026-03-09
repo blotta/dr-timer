@@ -1,8 +1,10 @@
-require_relative "bezier"
+# frozen_string_literal: true
 
-COLOR_NORMAL = { r: 200, g: 200, b: 200, a: 100 }
-COLOR_HIGHLIGHT = { r: 200, g: 200, b: 200, a: 255 }
-COLOR_HOVER = { r: 200, g: 200, b: 200, a: 160 }
+require 'app/bezier'
+
+COLOR_NORMAL = { r: 200, g: 200, b: 200, a: 100 }.freeze
+COLOR_HIGHLIGHT = { r: 200, g: 200, b: 200, a: 255 }.freeze
+COLOR_HOVER = { r: 200, g: 200, b: 200, a: 160 }.freeze
 
 HOLE_PUNCH_BLENDMODE = Numeric.compose_blendmode(BLENDFACTOR_ZERO,
                                                  BLENDFACTOR_ONE_MINUS_SRC_ALPHA,
@@ -16,12 +18,13 @@ def time_segments(seconds)
   hours = (s / 3600).floor
   minutes = ((s % 3600) / 60).floor
   secs = s % 60
-  return hours, minutes, secs
+  [hours, minutes, secs]
 end
 
 def format_time(seconds)
   hours, minutes, seconds = time_segments(seconds)
-  format("%02d:%02d:%02d", hours, minutes, seconds)
+  format('%<hours>02d:%<minutes>02d:%<seconds>02d',
+         hours: hours, minutes: minutes, seconds: seconds)
 end
 
 def make_trigangle_rt(args)
@@ -46,7 +49,7 @@ def make_trigangle_rt(args)
     source_x3: size / 2 + p3.x,
     source_y3: size / 2 + p3.y,
     r: 255, g: 255, b: 255, a: 255,
-    path: :solid,
+    path: :solid
   }
 
   # hole punch doesn't seem to work with triangles
@@ -83,7 +86,7 @@ def make_reset_btn_rt(args)
     anchor_x: 0.5,
     anchor_y: 0.5,
     r: 255, g: 255, b: 255, a: 255,
-    path: :solid,
+    path: :solid
   }
 
   c = size * 0.3 / 2
@@ -97,7 +100,7 @@ def make_reset_btn_rt(args)
     angle: 0,
     r: 0, g: 0, b: 0, a: 255,
     blendmode: HOLE_PUNCH_BLENDMODE,
-    path: :solid,
+    path: :solid
   }
 
   inner_se = [size - c, c]
@@ -111,7 +114,7 @@ def make_reset_btn_rt(args)
     angle: 0,
     r: 0, g: 0, b: 0, a: 255,
     blendmode: HOLE_PUNCH_BLENDMODE,
-    path: :solid,
+    path: :solid
   }
   inner_nw = [c, size - c]
   args.outputs[:reset_btn].primitives << {
@@ -124,17 +127,27 @@ def make_reset_btn_rt(args)
     angle: 0,
     r: 0, g: 0, b: 0, a: 255,
     blendmode: HOLE_PUNCH_BLENDMODE,
-    path: :solid,
+    path: :solid
   }
 end
 
+def render_targets_ready?(args)
+  return args.outputs.render_targets.ready?(:triangle) && args.outputs.render_targets.ready?(:reset_btn)
+end
+
 def tick(args)
-  if Kernel.tick_count == 0
+  args.outputs.background_color = Array.new(3, 33) << 255
+  if Kernel.tick_count.zero?
     make_trigangle_rt(args)
     make_reset_btn_rt(args)
   end
-
-  args.outputs.background_color = Array.new(3, 33) << 255
+  if !render_targets_ready?(args)
+    args.outputs.labels << { x: Grid.w.half, y: Grid.h.half,
+                             anchor_x: 0.5, anchor_y: 0.5,
+                             **COLOR_NORMAL, size_px: 30, text: 'Loading' }
+                           .merge(a: Math.sin(Kernel.tick_count / 20).remap(-1, 1, 30, 255))
+    return
+  end
 
   args.state.timer ||= TimerControl.new(x: Grid.w / 2, y: Grid.h / 2)
   args.state.mode_button ||= ModeButton.new(size: 40)
@@ -145,7 +158,7 @@ def tick(args)
   args.state.controls.each do |c|
     c.tick(args)
   end
-  args.outputs.debug << format("%.4f", args.state.timer.elapsed())
+  args.outputs.debug << format('%.4f', args.state.timer.elapsed())
 
   # DRAW
   args.state.controls.each do |c|
@@ -158,8 +171,6 @@ def tick(args)
   end
 end
 
-$gtk.reset
-
 class Control
   attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :anchor_x, :anchor_y
 
@@ -170,12 +181,16 @@ class Control
     @y = y
     @w = w
     @h = h
+    @r = r
+    @g = g
+    @b = b
+    @a = a
     @anchor_x = anchor_x
     @anchor_y = anchor_y
   end
 
   def color
-    return { r: @r, g: @g, b: @b, a: @a }
+    { r: @r, g: @g, b: @b, a: @a }
   end
 
   def color=(val)
@@ -186,38 +201,37 @@ class Control
   end
 
   def rect
-    return {
-             x: @x,
-             y: @y,
-             w: @w,
-             h: @h,
-             anchor_x: @anchor_x,
-             anchor_y: @anchor_y,
-           }
+    {
+      x: @x,
+      y: @y,
+      w: @w,
+      h: @h,
+      anchor_x: @anchor_x,
+      anchor_y: @anchor_y
+    }
   end
 
   def tick(args)
     args.outputs.debug << "#{self.class} hover #{@hover}"
   end
 
-  def draw(args)
-  end
+  def draw(args); end
 
   def handle_input(args)
-    @hover = self.point_inside?(args.inputs.mouse)
+    @hover = point_inside?(args.inputs.mouse)
   end
 
   def point_inside?(p)
-    return p.inside_rect? self
+    p.inside_rect? self
   end
 end
 
 class TimerControl < Control
-  attr_accessor :text, :font,
-                :blendmode_enum, :size_px, :size_enum, :alignment_enum,
+  attr_accessor :font,
+                :blendmode_enum, :size_enum, :alignment_enum,
                 :vertical_alignment_enum
 
-  attr_reader :mode, :bezier_control_points
+  attr_reader :mode, :bezier_control_points, :size_px
 
   SIZE_PX_MIN = 90
   SIZE_PX_MAX = 200
@@ -232,29 +246,29 @@ class TimerControl < Control
     @end = Time.now
     @mode = :up
     @state = :stopped
-    @font = "fonts/Sono-Regular.ttf"
+    @font = 'fonts/Sono-Regular.ttf'
     self.color = (COLOR_NORMAL)
-    set_size_px(size_px)
+    self.size_px = size_px
     calc_bezier_control_points()
     @indicators = []
     @running_time_added = 0
     @running_start_time = nil
   end
 
-  def set_size_px(spx)
+  def size_px=(spx)
     @size_px = spx
     @w, @h = GTK.calcstringbox(
       format_time(0),
-      size_px: @size_px, font: @font,
+      size_px: @size_px, font: @font
     )
   end
 
   def size_perc
-    return (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
+    (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
   end
 
   def text
-    return format_time(elapsed())
+    format_time(elapsed())
   end
 
   def reset
@@ -268,11 +282,11 @@ class TimerControl < Control
   end
 
   def elapsed
-    return @end - @start
+    @end - @start
   end
 
   def running_elapsed
-    return @end - @running_start_time
+    @end - @running_start_time
   end
 
   def toggle_state
@@ -309,11 +323,13 @@ class TimerControl < Control
   def tick(args)
     super(args)
 
-    if @state == :running
-      self.color = COLOR_HIGHLIGHT
-    else
-      self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
-    end
+    self.color = if @state == :running
+                   COLOR_HIGHLIGHT
+                 elsif @hover
+                   COLOR_HOVER
+                 else
+                   COLOR_NORMAL
+                 end
 
     @indicators.each do |ind|
       ind.y += ind.dir * 5
@@ -325,14 +341,15 @@ class TimerControl < Control
       ind.a <= 0
     end
 
-    return unless @state == :running
-    if @mode == :up
-      @end = Time.now
-    else
-      @start = Time.now
-      if elapsed() <= 0
-        toggle_state()
-        @start = @end
+    if @state == :running
+      if @mode == :up
+        @end = Time.now
+      else
+        @start = Time.now
+        if elapsed() <= 0
+          toggle_state()
+          @start = @end
+        end
       end
     end
   end
@@ -342,12 +359,8 @@ class TimerControl < Control
     args.outputs.solids << @indicators
     if @state == :running && @running_time_added != 0
       h, m, s = time_segments(@running_time_added.abs)
-      sign = @running_time_added > 0 ? "+" : "-"
-      text = [h, m, s]
-        .zip(["h", "m", "s"])
-        .reject { |el| el[0] == 0 }
-        .map { |el| el.join }
-        .join
+      sign = @running_time_added.positive? ? '+' : '-'
+      text = [h, m, s].zip(%w[h m s]).reject { |el| el[0].zero? }.map(&:join).join
       args.outputs.labels << {
         x: 10.from_right,
         y: 10.from_top,
@@ -356,18 +369,18 @@ class TimerControl < Control
         **COLOR_NORMAL,
         font: @font,
         size_px: 30,
-        text: "#{sign}#{text}",
+        text: "#{sign}#{text}"
       }
     end
   end
 
-  def calc_bezier_control_points()
+  def calc_bezier_control_points
     margin = [150, 150]
     @bezier_control_points = [
       [@x - @w / 2 - margin.x, @y],
       [@x - @w / 2 - margin.x, @y - @h / 2 - margin.y],
       [@x + @w / 2 + margin.x, @y - @h / 2 - margin.y],
-      [@x + @w / 2 + margin.x, @y],
+      [@x + @w / 2 + margin.x, @y]
     ]
   end
 
@@ -379,11 +392,11 @@ class TimerControl < Control
     end
 
     # if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
-    if !@hover && args.inputs.mouse.wheel != nil
-      size_px = @size_px
-      size_px += args.inputs.mouse.wheel.y * 6
-      size_px = size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
-      set_size_px(size_px)
+    if !@hover && !args.inputs.mouse.wheel.nil?
+      new_size_px = @size_px
+      new_size_px += args.inputs.mouse.wheel.y * 6
+      new_size_px = new_size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
+      self.size_px = new_size_px
       calc_bezier_control_points()
       return true
     end
@@ -402,7 +415,7 @@ class TimerControl < Control
     end
 
     # wheel
-    if args.inputs.mouse.wheel != nil
+    unless args.inputs.mouse.wheel.nil?
       wheel_y = args.inputs.mouse.wheel.y
       if @state == :stopped
         # reset milliseconds
@@ -431,32 +444,28 @@ class TimerControl < Control
         end
         new_elapsed = (h * 60 * 60) + (m * 60) + s
         @end = @start + new_elapsed
-        add_indicator(over_at, wheel_y)
-        return true
+        spawn_indicator(over_at, wheel_y)
       else
-        add_secs = wheel_y * (60 ** over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
+        add_secs = wheel_y * (60**over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
         prev_elapsed = elapsed()
         new_elapsed = prev_elapsed + add_secs
-        if new_elapsed <= 0
-          return false
-        end
-        # new_elapsed = [new_elapsed, 0].max
+        return false if new_elapsed <= 0
+
         if @mode == :up
           @start = @end - new_elapsed
         else
           @end = @start + new_elapsed
         end
-        add_indicator(over_at, wheel_y)
+        spawn_indicator(over_at, wheel_y)
         @running_time_added += add_secs
-        return true
       end
 
-      return false
+      return true
     end
     return false
   end
 
-  def add_indicator(over_at, y_dir)
+  def spawn_indicator(over_at, y_dir)
     dir = (y_dir / y_dir.abs)
     over = over_at.remap(2, 0, -1, 1)
     x = @x + @w * (over * 0.38)
@@ -471,19 +480,19 @@ class TimerControl < Control
       **COLOR_HIGHLIGHT,
       path: :solid,
       dir: dir,
-      created_at: Kernel.tick_count,
+      created_at: Kernel.tick_count
     }
   end
 
   def serialize
-    return {
-             x: @x, y: @y,
-             w: @w, h: @h,
-             anchor_x: @anchor_x, anchor_y: @anchor_y,
-             size_px: @size_px, font: @font,
-             r: @r, g: @g, b: @b, a: @a,
-             text: text(),
-           }
+    {
+      x: @x, y: @y,
+      w: @w, h: @h,
+      anchor_x: @anchor_x, anchor_y: @anchor_y,
+      size_px: @size_px, font: @font,
+      r: @r, g: @g, b: @b, a: @a,
+      text: text()
+    }
   end
 
   def inspect
@@ -518,14 +527,15 @@ class ModeButton < Control
   def handle_input(args)
     super(args)
     return false unless @hover
+
     if args.inputs.mouse.click
       args.state.timer.toggle_mode()
-      return true
+      true
     end
   end
 
   def point_inside?(p)
-    return Geometry.point_inside_circle?(p, { x: @x, y: @y }, @w / 2)
+    Geometry.point_inside_circle?(p, { x: @x, y: @y }, @w / 2)
   end
 end
 
@@ -558,9 +568,12 @@ class ResetButton < Control
   def handle_input(args)
     super(args)
     return false unless @hover
+
     if args.inputs.mouse.click
       args.state.timer.reset()
       @angle = -180
     end
   end
 end
+
+$gtk.reset
