@@ -401,7 +401,7 @@ class Timer
   end
 
   def tick
-    return unless running? #&& Kernel.tick_count.zmod?(30)
+    return unless running? # && Kernel.tick_count.zmod?(30)
 
     if mode_up?
       @end = Time.now
@@ -422,7 +422,7 @@ class TimerControl < Control
     super(x: x, y: y)
     @timer = timer
     @size_perc = 0.5
-    @visual = NumberTextVisual.new(self)
+    @visual = BoxesVisual.new(self)
     self.color = (COLOR_NORMAL)
     calc_bezier_control_points()
     @indicators = []
@@ -499,6 +499,15 @@ class TimerControl < Control
       return true
     end
 
+    if args.inputs.keyboard.key_down.tab
+      @visual = if @visual.instance_of?(NumberTextVisual)
+                  BoxesVisual.new(self)
+                else
+                  NumberTextVisual.new(self)
+                end
+      return true
+    end
+
     return false unless @hover
 
     # click
@@ -561,8 +570,94 @@ class TimerControl < Control
     }
   end
 
-  class NumberTextVisual
+  class BoxesVisual
+    WIDTH_MIN = Grid.w * 0.5
+    WIDTH_MAX = Grid.w * 0.8
 
+    def initialize(control)
+      @control = control
+      @rects = {}
+      update_size()
+    end
+
+    def update_size
+      base_w = @control.size_perc.remap(0, 1, WIDTH_MIN, WIDTH_MAX)
+      base_h = 0.6 * base_w / 3 # so boxes have 1:1 ratio
+      @box_w = base_w / 3 / 10
+      @box_h = @box_w
+
+      @pad = 3
+      @gap = 6 + 2 * @pad
+
+      @rects[:s] = {
+        x: @control.x + base_w / 3 + @gap,
+        y: @control.y,
+        w: base_w / 3 + 2 * @pad,
+        h: base_h + 2 * @pad,
+        anchor_x: 0.5,
+        anchor_y: 0.5
+      }
+
+      @rects[:m] = {
+        x: @control.x,
+        y: @control.y,
+        w: base_w / 3 + 2 * @pad,
+        h: base_h + 2 * @pad,
+        anchor_x: 0.5,
+        anchor_y: 0.5
+      }
+
+      @rects[:h] = {
+        x: @control.x - base_w / 3 - @gap,
+        y: @control.y,
+        w: base_w / 3 + 2 * @pad,
+        h: base_h + 2 * @pad,
+        anchor_x: 0.5,
+        anchor_y: 0.5
+      }
+
+      @control.w = @rects[:s].x + @rects[:s].w / 2 - (@rects[:h].x - @rects[:h].w / 2)
+      @control.h = @rects[:s].h
+    end
+
+    def draw(args)
+      args.outputs.borders << {
+        x: @control.x,
+        y: @control.y,
+        w: @control.w + 4 * @pad,
+        h: @control.h + 4 * @pad,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        **@control.color,
+        a: 50
+      }
+
+      ts = time_segments(@control.timer.elapsed())
+
+      ts.zip(%i[h m s]).map { |el| { val: el[0], seg: el[1] } }.each do |el|
+        r = Geometry.rect_props @rects[el[:seg]]
+        args.outputs.solids << @rects[el[:seg]].merge(**@control.color, a: 20)
+        el[:val].times_with_index do |i|
+          col = i % 10
+          row = i.idiv(10)
+          puts el[:val], el[:val].floor, i + 1
+          scale = @control.timer.running? && el[:seg] == :s && el[:val].floor == i + 1 ? (el[:val] - el[:val].floor) : 1
+          puts scale
+          args.outputs.solids << {
+            x: r.x + @box_w / 2 + col * @box_w + @pad,
+            y: r.y + @box_h / 2 + row * @box_h + @pad,
+            w: scale * (@box_w - @pad * 2),
+            h: scale * (@box_h - @pad * 2),
+            anchor_x: 0.5,
+            anchor_y: 0.5,
+            **@control.color
+          }
+        end
+      end
+    end
+  end
+
+  class NumberTextVisual
     SIZE_PX_MIN = 90
     SIZE_PX_MAX = 200
 
