@@ -149,10 +149,11 @@ def tick(args)
     return
   end
 
-  args.state.timer ||= TimerControl.new(x: Grid.w / 2, y: Grid.h / 2)
+  args.state.timer ||= Timer.new()
+  args.state.timer_control ||= TimerControl.new(args.state.timer, x: Grid.w / 2, y: Grid.h / 2)
   args.state.mode_button ||= ModeButton.new(size: 40)
   args.state.reset_button ||= ResetButton.new(x: Grid.w, w: 40, h: 40)
-  args.state.controls ||= [args.state.timer, args.state.mode_button, args.state.reset_button]
+  args.state.controls ||= [args.state.timer_control, args.state.mode_button, args.state.reset_button]
 
   # UPDATE
   args.state.controls.each do |c|
@@ -226,280 +227,6 @@ class Control
   end
 end
 
-class TimerControl < Control
-  attr_accessor :font,
-                :blendmode_enum, :size_enum, :alignment_enum,
-                :vertical_alignment_enum
-
-  attr_reader :mode, :bezier_control_points, :size_px
-
-  SIZE_PX_MIN = 90
-  SIZE_PX_MAX = 200
-
-  def primitive_marker
-    :label
-  end
-
-  def initialize(x: 0, y: 0, size_px: 150)
-    super(x: x, y: y)
-    @start = Time.now
-    @end = Time.now
-    @mode = :up
-    @state = :stopped
-    @font = 'fonts/Sono-Regular.ttf'
-    self.color = (COLOR_NORMAL)
-    self.size_px = size_px
-    calc_bezier_control_points()
-    @indicators = []
-    @running_time_added = 0
-    @running_start_time = nil
-  end
-
-  def size_px=(spx)
-    @size_px = spx
-    @w, @h = GTK.calcstringbox(
-      format_time(0),
-      size_px: @size_px, font: @font
-    )
-  end
-
-  def size_perc
-    (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
-  end
-
-  def text
-    format_time(elapsed())
-  end
-
-  def reset
-    @start = Time.now
-    @end = @start
-    @state = :stopped
-    @mode = :up
-    self.color = COLOR_NORMAL
-    @running_time_added = 0
-    @running_start_time = nil
-  end
-
-  def elapsed
-    @end - @start
-  end
-
-  def running_elapsed
-    @end - @running_start_time
-  end
-
-  def toggle_state
-    if @state == :stopped
-      el = elapsed()
-      if @mode == :up
-        @end = Time.now
-        @start = @end - el
-      else
-        @start = Time.now
-        @end = @start + el
-      end
-      self.color = COLOR_HIGHLIGHT
-      @state = :running
-      @running_start_time = Time.now
-    elsif @state == :running
-      self.color = COLOR_NORMAL
-      @state = :stopped
-    end
-  end
-
-  def toggle_mode
-    @mode = @mode == :up ? :down : :up
-    el = elapsed()
-    if @mode == :up
-      @end = Time.now
-      @start = @end - el
-    else
-      @start = Time.now
-      @end = @start + el
-    end
-  end
-
-  def tick(args)
-    super(args)
-
-    self.color = if @state == :running
-                   COLOR_HIGHLIGHT
-                 elsif @hover
-                   COLOR_HOVER
-                 else
-                   COLOR_NORMAL
-                 end
-
-    @indicators.each do |ind|
-      ind.y += ind.dir * 5
-      ind.w *= 0.9
-      ind.h *= 0.9
-      ind.a *= 0.75
-    end
-    @indicators.reject! do |ind|
-      ind.a <= 0
-    end
-
-    if @state == :running
-      if @mode == :up
-        @end = Time.now
-      else
-        @start = Time.now
-        if elapsed() <= 0
-          toggle_state()
-          @start = @end
-        end
-      end
-    end
-  end
-
-  def draw(args)
-    args.outputs.labels << self
-    args.outputs.solids << @indicators
-    if @state == :running && @running_time_added != 0
-      h, m, s = time_segments(@running_time_added.abs)
-      sign = @running_time_added.positive? ? '+' : '-'
-      text = [h, m, s].zip(%w[h m s]).reject { |el| el[0].zero? }.map(&:join).join
-      args.outputs.labels << {
-        x: 10.from_right,
-        y: 10.from_top,
-        anchor_x: 1,
-        anchor_y: 1,
-        **COLOR_NORMAL,
-        font: @font,
-        size_px: 30,
-        text: "#{sign}#{text}"
-      }
-    end
-  end
-
-  def calc_bezier_control_points
-    margin = [150, 150]
-    @bezier_control_points = [
-      [@x - @w / 2 - margin.x, @y],
-      [@x - @w / 2 - margin.x, @y - @h / 2 - margin.y],
-      [@x + @w / 2 + margin.x, @y - @h / 2 - margin.y],
-      [@x + @w / 2 + margin.x, @y]
-    ]
-  end
-
-  def handle_input(args)
-    super(args)
-    if args.inputs.keyboard.key_down.r
-      reset()
-      return true
-    end
-
-    # if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
-    if !@hover && !args.inputs.mouse.wheel.nil?
-      new_size_px = @size_px
-      new_size_px += args.inputs.mouse.wheel.y * 6
-      new_size_px = new_size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
-      self.size_px = new_size_px
-      calc_bezier_control_points()
-      return true
-    end
-
-    if args.inputs.keyboard.key_down.space
-      toggle_state()
-      return true
-    end
-
-    return false unless @hover
-
-    # click
-    if args.inputs.mouse.click
-      toggle_state()
-      return true
-    end
-
-    # wheel
-    unless args.inputs.mouse.wheel.nil?
-      wheel_y = args.inputs.mouse.wheel.y
-      if @state == :stopped
-        # reset milliseconds
-        el = elapsed()
-        el -= el - el.floor
-        @start = @end - el
-      end
-
-      offset = args.inputs.mouse.x - (@x - @w / 2)
-      over_at = 2 - (offset / (@w / 3)).floor # h -> 2, m -> 1, s -> 0
-
-      if @state == :stopped
-        h, m, s = time_segments(elapsed)
-        if over_at == 2
-          # hour
-          h += wheel_y
-          h = h.clamp_wrap(0, 99)
-        elsif over_at == 1
-          # minute
-          m += wheel_y
-          m = m.clamp_wrap(0, 59)
-        else
-          # second
-          s += wheel_y
-          s = s.clamp_wrap(0, 59)
-        end
-        new_elapsed = (h * 60 * 60) + (m * 60) + s
-        @end = @start + new_elapsed
-        spawn_indicator(over_at, wheel_y)
-      else
-        add_secs = wheel_y * (60**over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
-        prev_elapsed = elapsed()
-        new_elapsed = prev_elapsed + add_secs
-        return false if new_elapsed <= 0
-
-        if @mode == :up
-          @start = @end - new_elapsed
-        else
-          @end = @start + new_elapsed
-        end
-        spawn_indicator(over_at, wheel_y)
-        @running_time_added += add_secs
-      end
-
-      return true
-    end
-    return false
-  end
-
-  def spawn_indicator(over_at, y_dir)
-    dir = (y_dir / y_dir.abs)
-    over = over_at.remap(2, 0, -1, 1)
-    x = @x + @w * (over * 0.38)
-    y = @y + dir * @h / 2
-    @indicators << {
-      x: x,
-      y: y,
-      w: 15,
-      h: 15,
-      anchor_x: 0.5,
-      anchor_y: 0.5,
-      **COLOR_HIGHLIGHT,
-      path: :solid,
-      dir: dir,
-      created_at: Kernel.tick_count
-    }
-  end
-
-  def serialize
-    {
-      x: @x, y: @y,
-      w: @w, h: @h,
-      anchor_x: @anchor_x, anchor_y: @anchor_y,
-      size_px: @size_px, font: @font,
-      r: @r, g: @g, b: @b, a: @a,
-      text: text()
-    }
-  end
-
-  def inspect
-    serialize.to_s
-  end
-end
-
 class ModeButton < Control
   attr_sprite
 
@@ -512,11 +239,11 @@ class ModeButton < Control
   def tick(args)
     super(args)
     self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
-    p = point_on_bezier(*args.state.timer.bezier_control_points, 0 + args.state.timer.size_perc * 0.3)
+    p = point_on_bezier(*args.state.timer_control.bezier_control_points, 0 + args.state.timer_control.size_perc * 0.3)
     @x = @x.lerp(p.x, 0.2)
     @y = @y.lerp(p.y, 0.2)
-    @angle = @angle.lerp(args.state.timer.mode == :up ? 90 : 270, 0.2)
-    @w = 50 + args.state.timer.size_perc * 30
+    @angle = @angle.lerp(args.state.timer.mode_up? ? 90 : 270, 0.2)
+    @w = 50 + args.state.timer_control.size_perc * 30
     @h = @w
   end
 
@@ -552,12 +279,12 @@ class ResetButton < Control
     super(args)
     self.color = @hover ? COLOR_HOVER : COLOR_NORMAL
 
-    p = point_on_bezier(*args.state.timer.bezier_control_points, 1 - args.state.timer.size_perc * 0.3)
+    p = point_on_bezier(*args.state.timer_control.bezier_control_points, 1 - args.state.timer_control.size_perc * 0.3)
     @x = @x.lerp(p.x, 0.2)
     @y = @y.lerp(p.y, 0.2)
 
     @angle = @angle.lerp(0, 0.2)
-    @w = 40 + args.state.timer.size_perc * 20
+    @w = 40 + args.state.timer_control.size_perc * 20
     @h = @w
   end
 
@@ -573,6 +300,288 @@ class ResetButton < Control
       args.state.timer.reset()
       @angle = -180
     end
+  end
+end
+
+class Timer
+  attr_reader :running_time_added
+
+  def initialize
+    @start = Time.now
+    @end = Time.now
+    @mode = :up
+    @state = :stopped
+    @running_time_added = 0
+    @running_start_time = nil
+  end
+
+  def reset
+    @start = Time.now
+    @end = @start
+    @state = :stopped
+    @mode = :up
+    @running_time_added = 0
+    @running_start_time = nil
+  end
+
+  def elapsed
+    @end - @start
+  end
+
+  def elapsed=(new_elapsed)
+    return unless stopped?
+
+    @end = @start + new_elapsed.floor
+  end
+
+  # add elapsed time
+  def <<(secs)
+    return unless running?
+
+    new_elapsed = elapsed() + secs
+
+    return unless new_elapsed.positive?
+
+    if mode_up?
+      @start = @end - new_elapsed
+    else
+      @end = @start + new_elapsed
+    end
+    @running_time_added += secs
+  end
+
+  def running_elapsed
+    Time.now - @running_start_time
+  end
+
+  def running?
+    @state == :running
+  end
+
+  def stopped?
+    @state == :stopped
+  end
+
+  def mode_up?
+    @mode == :up
+  end
+
+  def mode_down?
+    @mode == :down
+  end
+
+  def toggle_state
+    if stopped?
+      el = elapsed()
+      if @mode == :up
+        @end = Time.now
+        @start = @end - el
+      else
+        @start = Time.now
+        @end = @start + el
+      end
+      @state = :running
+      @running_start_time = Time.now
+    elsif running?
+      @state = :stopped
+    end
+  end
+
+  def toggle_mode
+    el = elapsed()
+    if @mode == :down
+      @mode = :up
+      @end = Time.now
+      @start = @end - el
+    elsif @mode == :up
+      @mode = :down
+      @start = Time.now
+      @end = @start + el
+    end
+  end
+
+  def tick
+    return unless running? && Kernel.tick_count.zmod?(30)
+
+    if mode_up?
+      @end = Time.now
+    elsif mode_down?
+      @start = Time.now
+      if elapsed() <= 0
+        toggle_state()
+        @start = @end
+      end
+    end
+  end
+end
+
+class TimerControl < Control
+  attr_label
+
+  attr_reader :bezier_control_points, :size_px
+
+  SIZE_PX_MIN = 90
+  SIZE_PX_MAX = 200
+
+  def initialize(timer, x: 0, y: 0, size_px: 150)
+    @timer = timer
+    super(x: x, y: y)
+    @font = 'fonts/Sono-Regular.ttf'
+    self.color = (COLOR_NORMAL)
+    self.size_px = size_px
+    calc_bezier_control_points()
+    @indicators = []
+  end
+
+  def text
+    format_time(@timer.elapsed())
+  end
+
+  def size_px=(spx)
+    @size_px = spx
+    @w, @h = GTK.calcstringbox(
+      format_time(0),
+      size_px: @size_px, font: @font
+    )
+  end
+
+  def size_perc
+    (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
+  end
+
+  def tick(args)
+    super(args)
+    @timer.tick
+
+    self.color = if @timer.running?
+                   COLOR_HIGHLIGHT
+                 elsif @hover
+                   COLOR_HOVER
+                 else
+                   COLOR_NORMAL
+                 end
+
+    @indicators.each do |ind|
+      ind.y += ind.dir * 5
+      ind.a -= 30
+    end
+    @indicators.reject! do |ind|
+      ind.a <= 0
+    end
+  end
+
+  def draw(args)
+    args.outputs.labels << self
+    args.outputs.solids << @indicators
+    if @timer.running? && @timer.running_time_added != 0
+      h, m, s = time_segments(@timer.running_time_added.abs)
+      sign = @timer.running_time_added.positive? ? '+' : '-'
+      text = [h, m, s].zip(%w[h m s]).reject { |el| el[0].zero? }.map(&:join).join
+      args.outputs.labels << {
+        x: 10.from_right,
+        y: 10.from_top,
+        anchor_x: 1,
+        anchor_y: 1,
+        **COLOR_NORMAL,
+        font: @font,
+        size_px: 30,
+        text: "#{sign}#{text}"
+      }
+    end
+  end
+
+  def calc_bezier_control_points
+    margin = [150, 150]
+    @bezier_control_points = [
+      [@x - @w / 2 - margin.x, @y],
+      [@x - @w / 2 - margin.x, @y - @h / 2 - margin.y],
+      [@x + @w / 2 + margin.x, @y - @h / 2 - margin.y],
+      [@x + @w / 2 + margin.x, @y]
+    ]
+  end
+
+  def handle_input(args)
+    super(args)
+    if args.inputs.keyboard.key_down.r
+      @timer.reset()
+      return true
+    end
+
+    # if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
+    if !@hover && !args.inputs.mouse.wheel.nil?
+      new_size_px = @size_px
+      new_size_px += args.inputs.mouse.wheel.y * 6
+      new_size_px = new_size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
+      self.size_px = new_size_px
+      calc_bezier_control_points()
+      return true
+    end
+
+    if args.inputs.keyboard.key_down.space
+      @timer.toggle_state()
+      return true
+    end
+
+    return false unless @hover
+
+    # click
+    if args.inputs.mouse.click
+      @timer.toggle_state()
+      return true
+    end
+
+    # wheel
+    unless args.inputs.mouse.wheel.nil?
+      wheel_y = args.inputs.mouse.wheel.y
+
+      offset = args.inputs.mouse.x - (@x - @w / 2)
+      over_at = 2 - (offset / (@w / 3)).floor # h -> 2, m -> 1, s -> 0
+
+      if @timer.stopped?
+        h, m, s = time_segments(@timer.elapsed)
+        if over_at == 2
+          # hour
+          h += wheel_y
+          h = h.clamp_wrap(0, 59)
+        elsif over_at == 1
+          # minute
+          m += wheel_y
+          m = m.clamp_wrap(0, 59)
+        else
+          # second
+          s += wheel_y
+          s = s.clamp_wrap(0, 59)
+        end
+        new_elapsed = (h * 60 * 60) + (m * 60) + s
+        @timer.elapsed = new_elapsed
+      else
+        add_secs = wheel_y * (60**over_at) # 60^2 = 3600, 60^1 = 60, 60^0 = 1
+        @timer << add_secs
+      end
+      spawn_indicator(over_at, wheel_y)
+
+      return true
+    end
+    return false
+  end
+
+  def spawn_indicator(over_at, y_dir)
+    dir = (y_dir / y_dir.abs)
+    over = over_at.remap(2, 0, -1, 1)
+    x = @x + @w * (over * 0.38)
+    y = @y + dir * @h / 2
+    @indicators << {
+      x: x,
+      y: y,
+      w: 10,
+      h: 10,
+      anchor_x: 0.5,
+      anchor_y: 0.5,
+      **COLOR_HIGHLIGHT,
+      path: :solid,
+      dir: dir,
+      created_at: Kernel.tick_count
+    }
   end
 end
 
