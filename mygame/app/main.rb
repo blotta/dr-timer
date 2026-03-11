@@ -401,7 +401,7 @@ class Timer
   end
 
   def tick
-    return unless running? && Kernel.tick_count.zmod?(30)
+    return unless running? #&& Kernel.tick_count.zmod?(30)
 
     if mode_up?
       @end = Time.now
@@ -416,37 +416,16 @@ class Timer
 end
 
 class TimerControl < Control
-  attr_label
+  attr_reader :bezier_control_points, :timer, :size_perc
 
-  attr_reader :bezier_control_points, :size_px
-
-  SIZE_PX_MIN = 90
-  SIZE_PX_MAX = 200
-
-  def initialize(timer, x: 0, y: 0, size_px: 150)
-    @timer = timer
+  def initialize(timer, x: 0, y: 0)
     super(x: x, y: y)
-    @font = 'fonts/Sono-Regular.ttf'
+    @timer = timer
+    @size_perc = 0.5
+    @visual = NumberTextVisual.new(self)
     self.color = (COLOR_NORMAL)
-    self.size_px = size_px
     calc_bezier_control_points()
     @indicators = []
-  end
-
-  def text
-    format_time(@timer.elapsed())
-  end
-
-  def size_px=(spx)
-    @size_px = spx
-    @w, @h = GTK.calcstringbox(
-      format_time(0),
-      size_px: @size_px, font: @font
-    )
-  end
-
-  def size_perc
-    (@size_px - SIZE_PX_MIN) / (SIZE_PX_MAX - SIZE_PX_MIN)
   end
 
   def tick(args)
@@ -471,7 +450,7 @@ class TimerControl < Control
   end
 
   def draw(args)
-    args.outputs.labels << self
+    @visual.draw(args)
     args.outputs.solids << @indicators
     if @timer.running? && @timer.running_time_added != 0
       h, m, s = time_segments(@timer.running_time_added.abs)
@@ -509,10 +488,8 @@ class TimerControl < Control
 
     # if args.inputs.keyboard.ctrl && args.inputs.mouse.wheel != nil
     if !@hover && !args.inputs.mouse.wheel.nil?
-      new_size_px = @size_px
-      new_size_px += args.inputs.mouse.wheel.y * 6
-      new_size_px = new_size_px.clamp(SIZE_PX_MIN, SIZE_PX_MAX)
-      self.size_px = new_size_px
+      @size_perc = (@size_perc + args.inputs.mouse.wheel.y / 10).clamp(0, 1)
+      @visual.update_size()
       calc_bezier_control_points()
       return true
     end
@@ -582,6 +559,39 @@ class TimerControl < Control
       dir: dir,
       created_at: Kernel.tick_count
     }
+  end
+
+  class NumberTextVisual
+
+    SIZE_PX_MIN = 90
+    SIZE_PX_MAX = 200
+
+    def initialize(control)
+      @control = control
+      @font = 'fonts/Sono-Regular.ttf'
+      update_size()
+    end
+
+    def update_size
+      @size_px = @control.size_perc.remap(0, 1, SIZE_PX_MIN, SIZE_PX_MAX)
+      @control.w, @control.h = GTK.calcstringbox(
+        format_time(0),
+        size_px: @size_px, font: @font
+      )
+    end
+
+    def draw(args)
+      args.outputs.labels << {
+        x: @control.x,
+        y: @control.y,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        **@control.color,
+        font: @font,
+        size_px: @size_px,
+        text: format_time(@control.timer.elapsed())
+      }
+    end
   end
 end
 
