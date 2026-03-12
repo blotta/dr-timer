@@ -35,6 +35,12 @@ Style/GlobalVars:
 Style/NegatedIf:
   Enabled: false
 
+Style/SoleNestedConditional:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
 Layout:
   Enabled: true
 

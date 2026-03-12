@@ -194,11 +194,11 @@ class Control
     { r: @r, g: @g, b: @b, a: @a }
   end
 
-  def color=(val)
-    @r = val.r
-    @g = val.g
-    @b = val.b
-    @a = val.a
+  def color=(value)
+    @r = value.r
+    @g = value.g
+    @b = value.b
+    @a = value.a
   end
 
   def rect
@@ -431,6 +431,7 @@ class TimerControl < Control
   def tick(args)
     super(args)
     @timer.tick
+    @visual.tick args
 
     self.color = if @timer.running?
                    COLOR_HIGHLIGHT
@@ -577,6 +578,7 @@ class TimerControl < Control
     def initialize(control)
       @control = control
       @rects = {}
+      @boxes = { s: [], m: [], h: [] }
       update_size()
     end
 
@@ -618,6 +620,59 @@ class TimerControl < Control
 
       @control.w = @rects[:s].x + @rects[:s].w / 2 - (@rects[:h].x - @rects[:h].w / 2)
       @control.h = @rects[:s].h
+
+      %i[h m s].each do |sym|
+        r = Geometry.rect_props @rects[sym]
+        @boxes[sym].each do |b|
+          b.x = r.x + @box_w / 2 + b.col * @box_w + @pad
+          b.y = r.y + @box_h / 2 + b.row * @box_h + @pad
+          b.w = @box_w - @pad * 2
+          b.h = @box_h - @pad * 2
+        end
+      end
+    end
+
+    def tick(_args)
+      h, m, s = time_segments(@control.timer.elapsed())
+
+      ts = { h: h, m: m, s: s }
+
+      ts.each_pair do |sym, value|
+        diff = value.to_i - @boxes[sym].length
+        diff += 1 if sym == :s && @control.timer.running?
+        if diff.positive?
+          # add boxes
+          diff.times do
+            @boxes[sym] << {
+              created_at: Kernel.tick_count,
+              anchor_x: 0.5,
+              anchor_y: 0.5,
+              **@control.color
+            }
+          end
+        elsif diff.negative?
+          # remove boxes
+          @boxes[sym] = @boxes[sym][0, value]
+        end
+
+        r = Geometry.rect_props @rects[sym]
+        @boxes[sym].each_with_index do |b, i|
+          if b.created_at == Kernel.tick_count
+            # initialize box
+            b.col = i % 10
+            b.row = i.idiv(10)
+            b.x = r.x + @box_w / 2 + b.col * @box_w + @pad
+            b.y = r.y + @box_h / 2 + b.row * @box_h + @pad
+            b.w = @box_w - @pad * 2
+            b.h = @box_h - @pad * 2
+          end
+
+          b.a = @control.a * Easing.smooth_stop(start_at: b.created_at,
+                                                end_at: b.created_at + 60,
+                                                tick_count: Kernel.tick_count,
+                                                power: 2)
+        end
+      end
     end
 
     def draw(args)
@@ -632,28 +687,14 @@ class TimerControl < Control
         a: 50
       }
 
-      ts = time_segments(@control.timer.elapsed())
+      args.outputs.solids << @rects[:s].merge(**@control.color, a: 20)
+      args.outputs.solids << @boxes[:s]
 
-      ts.zip(%i[h m s]).map { |el| { val: el[0], seg: el[1] } }.each do |el|
-        r = Geometry.rect_props @rects[el[:seg]]
-        args.outputs.solids << @rects[el[:seg]].merge(**@control.color, a: 20)
-        el[:val].times_with_index do |i|
-          col = i % 10
-          row = i.idiv(10)
-          puts el[:val], el[:val].floor, i + 1
-          scale = @control.timer.running? && el[:seg] == :s && el[:val].floor == i + 1 ? (el[:val] - el[:val].floor) : 1
-          puts scale
-          args.outputs.solids << {
-            x: r.x + @box_w / 2 + col * @box_w + @pad,
-            y: r.y + @box_h / 2 + row * @box_h + @pad,
-            w: scale * (@box_w - @pad * 2),
-            h: scale * (@box_h - @pad * 2),
-            anchor_x: 0.5,
-            anchor_y: 0.5,
-            **@control.color
-          }
-        end
-      end
+      args.outputs.solids << @rects[:m].merge(**@control.color, a: 20)
+      args.outputs.solids << @boxes[:m]
+
+      args.outputs.solids << @rects[:h].merge(**@control.color, a: 20)
+      args.outputs.solids << @boxes[:h]
     end
   end
 
@@ -674,6 +715,8 @@ class TimerControl < Control
         size_px: @size_px, font: @font
       )
     end
+
+    def tick(args); end
 
     def draw(args)
       args.outputs.labels << {
