@@ -23,7 +23,13 @@ class TimerControl < Control
     super(x: x, y: y)
     @timer = timer
     @size_perc = 0.5
-    @visual = BoxesVisual.new(self)
+    @visuals = [
+      NumberTextVisual.new(self),
+      BoxesVisual.new(self)
+    ]
+    @visuals_enum = @visuals.cycle
+    @visual = @visuals_enum.next # BoxesVisual.new(self)
+    @visual.update_size()
     self.color = (COLOR_NORMAL)
     calc_bezier_control_points()
   end
@@ -40,7 +46,6 @@ class TimerControl < Control
                  else
                    COLOR_NORMAL
                  end
-
   end
 
   def draw(args)
@@ -64,7 +69,7 @@ class TimerControl < Control
   end
 
   def calc_bezier_control_points
-    margin = [150, 150]
+    margin = [150, 180]
     @bezier_control_points = [
       [@x - @w / 2 - margin.x, @y],
       [@x - @w / 2 - margin.x, @y - @h / 2 - margin.y],
@@ -94,11 +99,13 @@ class TimerControl < Control
     end
 
     if args.inputs.keyboard.key_down.tab
-      @visual = if @visual.instance_of?(NumberTextVisual)
-                  BoxesVisual.new(self)
-                else
-                  NumberTextVisual.new(self)
-                end
+      if args.inputs.keyboard.ctrl
+        @visual.next_mode()
+      else
+        @visual = @visuals_enum.next
+        @visual.update_size()
+        calc_bezier_control_points()
+      end
       return true
     end
 

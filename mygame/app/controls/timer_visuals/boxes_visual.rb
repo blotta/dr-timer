@@ -1,3 +1,5 @@
+require 'app/cell_ordering'
+
 class TimerControl < Control
   class BoxesVisual
     WIDTH_MIN = Grid.w * 0.5
@@ -6,6 +8,7 @@ class TimerControl < Control
     def initialize(control)
       @control = control
       @rects = {}
+      @border = []
       @boxes = { s: [], m: [], h: [] }
       @ms_box = {
         moved_at: Kernel.tick_count,
@@ -19,6 +22,7 @@ class TimerControl < Control
         anchor_y: 0.5,
         **@control.color
       }
+      @ordering = CellOrdering.new(10, 6)
       update_size()
     end
 
@@ -61,6 +65,34 @@ class TimerControl < Control
       @control.w = @rects[:s].x + @rects[:s].w / 2 - (@rects[:h].x - @rects[:h].w / 2)
       @control.h = @rects[:s].h
 
+      # border
+      border_lines = Geometry.rect_to_lines(@control)
+      margin = 4 * @pad
+      border_line_width = 2
+      @border = border_lines.map do |line|
+        {
+          x: line.x,
+          y: line.y,
+          w: line.x2 - line.x,
+          h: line.y2 - line.y,
+          **@control.color,
+          a: 50
+        }
+      end
+      # bottom
+      @border[0].y -= margin + border_line_width
+      @border[0].h = border_line_width
+      # top
+      @border[2].y += margin
+      @border[2].h = border_line_width
+      # right
+      @border[1].x += margin
+      @border[1].w = border_line_width
+      # left
+      @border[3].x -= margin + border_line_width
+      @border[3].w = border_line_width
+
+      # boxes
       %i[h m s].each do |sym|
         r = Geometry.rect_props @rects[sym]
         @boxes[sym].each do |b|
@@ -76,6 +108,20 @@ class TimerControl < Control
       @ms_box.y = r.y + @box_h / 2 + @ms_box.row * @box_h + @pad
       @ms_box.w = @box_w - @pad * 2
       @ms_box.h = @box_h - @pad * 2
+    end
+
+    def next_mode
+      @ordering.next_variant()
+      %i[h m s].each do |sym|
+        r = Geometry.rect_props @rects[sym]
+        @boxes[sym].each_with_index do |b, i|
+          b.col, b.row = @ordering.cells[i]
+          b.x = r.x + @box_w / 2 + b.col * @box_w + @pad
+          b.y = r.y + @box_h / 2 + b.row * @box_h + @pad
+          b.w = @box_w - @pad * 2
+          b.h = @box_h - @pad * 2
+        end
+      end
     end
 
     def tick(_args)
@@ -105,8 +151,7 @@ class TimerControl < Control
         @boxes[sym].each_with_index do |b, i|
           if b.created_at == Kernel.tick_count
             # initialize box
-            b.col = i % 10
-            b.row = i.idiv(10)
+            b.col, b.row = @ordering.cells[i]
             b.x = r.x + @box_w / 2 + b.col * @box_w + @pad
             b.y = r.y + @box_h / 2 + b.row * @box_h + @pad
             b.w = @box_w - @pad * 2
@@ -118,8 +163,7 @@ class TimerControl < Control
         # milliseconds
         r = Geometry.rect_props @rects[:s]
         i = @boxes[:s].length
-        @ms_box.col = i % 10
-        @ms_box.row = i.idiv(10)
+        @ms_box.col, @ms_box.row = @ordering.cells[i]
         @ms_box.x = r.x + @box_w / 2 + @ms_box.col * @box_w + @pad
         @ms_box.y = r.y + @box_h / 2 + @ms_box.row * @box_h + @pad
         @ms_box.a = @control.a * 0.8 * Easing.smooth_start(start_at: 0,
@@ -130,16 +174,7 @@ class TimerControl < Control
     end
 
     def draw(args)
-      args.outputs.borders << {
-        x: @control.x,
-        y: @control.y,
-        w: @control.w + 4 * @pad,
-        h: @control.h + 4 * @pad,
-        anchor_x: 0.5,
-        anchor_y: 0.5,
-        **@control.color,
-        a: 50
-      }
+      args.outputs.solids << @border
 
       args.outputs.solids << @rects[:s].merge(**@control.color, a: 20)
       args.outputs.solids << @boxes[:s]
@@ -156,18 +191,6 @@ class TimerControl < Control
       return :s if p.inside_rect? @rects[:s]
       return :m if p.inside_rect? @rects[:m]
       return :h if p.inside_rect? @rects[:h]
-    end
-
-    def point_inside_seconds?(p)
-      p.inside_rect? @rects[:s]
-    end
-
-    def point_inside_minutes?(p)
-      p.inside_rect? @rects[:m]
-    end
-
-    def point_inside_hours?(p)
-      p.inside_rect? @rects[:h]
     end
 
     def on_elapsed_changed(segment, amount); end

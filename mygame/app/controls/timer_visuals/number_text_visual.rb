@@ -14,9 +14,12 @@ class TimerControl < Control
       @size_px = @control.size_perc.remap(0, 1, SIZE_PX_MIN, SIZE_PX_MAX)
       @control.w, @control.h = GTK.calcstringbox(
         format_time(0),
-        size_px: @size_px, font: @font
+        size_px: @size_px,
+        font: @font
       )
     end
+
+    def next_mode; end
 
     def tick(_args)
       @indicators.each do |ind|
@@ -29,6 +32,7 @@ class TimerControl < Control
     end
 
     def draw(args)
+
       args.outputs.labels << {
         x: @control.x,
         y: @control.y,
@@ -41,10 +45,22 @@ class TimerControl < Control
       }
 
       args.outputs.solids << @indicators
+
+      args.outputs.borders << {
+        x: @control.x,
+        y: @control.y,
+        w: @control.w,
+        h: @control.h,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        **@control.color
+      }
     end
 
     # returns :s | :m | :h | nil
     def point_inside_segment(p)
+      return nil unless p.inside_rect?(@control)
+
       offset = p.x - (@control.x - @control.w / 2)
       over_at = 2 - (offset / (@control.w / 3)).floor # h -> 2, m -> 1, s -> 0
       return :s if over_at == 0
@@ -54,21 +70,10 @@ class TimerControl < Control
       nil
     end
 
-    def point_inside_seconds?(p)
-      point_inside_segment(p) == :s
-    end
-
-    def point_inside_minutes?(p)
-      point_inside_segment(p) == :m
-    end
-
-    def point_inside_hours?(p)
-      point_inside_segment(p) == :h
-    end
-
     def on_elapsed_changed(segment, amount)
       dir = (amount / amount.abs)
       over = { h: -1, m: 0, s: 1 }[segment]
+      puts @control.x
       x = @control.x + @control.w * (over * 0.38)
       y = @control.y + dir * @control.h / 2
       @indicators << {
@@ -86,3 +91,5 @@ class TimerControl < Control
     end
   end
 end
+
+GTK.reset
