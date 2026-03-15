@@ -47,6 +47,9 @@ Style/FrozenStringLiteralComment:
 Style/Next:
   Enabled: false
 
+Style/NumericPredicate:
+  Enabled: false
+
 Layout:
   Enabled: true
 
