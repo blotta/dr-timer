@@ -96,15 +96,14 @@ class Timer
   end
 
   def tick
-    return unless running? # && Kernel.tick_count.zmod?(30)
+    return unless running?
 
     if mode_up?
       @end = Time.now
     elsif mode_down?
       @start = Time.now
       if elapsed() <= 0
-        toggle_state()
-        @start = @end
+        reset()
       end
     end
   end

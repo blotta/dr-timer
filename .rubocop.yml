@@ -44,6 +44,9 @@ Style/IfUnlessModifier:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/Next:
+  Enabled: false
+
 Layout:
   Enabled: true
 

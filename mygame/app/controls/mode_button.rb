@@ -7,7 +7,7 @@ class ModeButton < Control
   def initialize(x: 0, y: 0, size: 100)
     super(x: x, y: y, w: size, h: size, anchor_x: 0.5, anchor_y: 0.5, **COLOR_NORMAL)
     @angle = 0
-    @path = :triangle
+    @path = nil
   end
 
   def tick(args)

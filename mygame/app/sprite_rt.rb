@@ -1,7 +1,6 @@
 module SpriteRT
-
   def make_triangle_rt(args)
-    return args.outputs.render_targets[:triangle].path if args.outputs.render_targets.queued?(:triangle)
+    return :triangle if args.outputs.render_targets.queued?(:triangle)
 
     size = 200
     p1 = { x: size / 2, y: 0 }
@@ -23,7 +22,7 @@ module SpriteRT
       source_y2: size / 2 + p2.y,
       source_x3: size / 2 + p3.x,
       source_y3: size / 2 + p3.y,
-      r: 255, g: 255, b: 255, a: 255,
+      r: 255, g: 255, b: 255, a: 255
       # path: :solid
     }
 
@@ -109,5 +108,4 @@ module SpriteRT
     }
   end
   module_function :make_reset_btn_rt
-
 end

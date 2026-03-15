@@ -178,6 +178,18 @@ class TimerControl < Control
       @control = control
       @rects = {}
       @boxes = { s: [], m: [], h: [] }
+      @ms_box = {
+        moved_at: Kernel.tick_count,
+        col: 1,
+        row: 1,
+        x: 0,
+        y: 0,
+        w: @box_w,
+        h: @box_h,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        **@control.color
+      }
       update_size()
     end
 
@@ -229,16 +241,22 @@ class TimerControl < Control
           b.h = @box_h - @pad * 2
         end
       end
+
+      r = Geometry.rect_props @rects[:s]
+      @ms_box.x = r.x + @box_w / 2 + @ms_box.col * @box_w + @pad
+      @ms_box.y = r.y + @box_h / 2 + @ms_box.row * @box_h + @pad
+      @ms_box.w = @box_w - @pad * 2
+      @ms_box.h = @box_h - @pad * 2
     end
 
     def tick(_args)
       h, m, s = time_segments(@control.timer.elapsed())
+      ms = s - s.floor
 
       ts = { h: h, m: m, s: s }
 
       ts.each_pair do |sym, value|
         diff = value.to_i - @boxes[sym].length
-        diff += 1 if sym == :s && @control.timer.running?
         if diff.positive?
           # add boxes
           diff.times do
@@ -265,12 +283,20 @@ class TimerControl < Control
             b.w = @box_w - @pad * 2
             b.h = @box_h - @pad * 2
           end
-
-          b.a = @control.a * Easing.smooth_stop(start_at: b.created_at,
-                                                end_at: b.created_at + 60,
-                                                tick_count: Kernel.tick_count,
-                                                power: 2)
+          b.a = @control.a
         end
+
+        # milliseconds
+        r = Geometry.rect_props @rects[:s]
+        i = @boxes[:s].length
+        @ms_box.col = i % 10
+        @ms_box.row = i.idiv(10)
+        @ms_box.x = r.x + @box_w / 2 + @ms_box.col * @box_w + @pad
+        @ms_box.y = r.y + @box_h / 2 + @ms_box.row * @box_h + @pad
+        @ms_box.a = @control.a * 0.8 * Easing.smooth_start(start_at: 0,
+                                                           end_at: 60,
+                                                           tick_count: ms * 60,
+                                                           power: 2)
       end
     end
 
@@ -288,6 +314,7 @@ class TimerControl < Control
 
       args.outputs.solids << @rects[:s].merge(**@control.color, a: 20)
       args.outputs.solids << @boxes[:s]
+      args.outputs.solids << @ms_box
 
       args.outputs.solids << @rects[:m].merge(**@control.color, a: 20)
       args.outputs.solids << @boxes[:m]
