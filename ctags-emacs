@@ -164,7 +164,7 @@ module GTKGTK5,124
     def directional_angledirectional_angle167,3350
     def method_missing m, *argsmethod_missing173,3478
 
-../../../../dragon/outputs.rb,5859
+../../../../dragon/outputs.rb,5917
 module GTKGTK6,124
   class SoundSound9,264
     def self.parse vparse13,332
@@ -234,52 +234,53 @@ module GTKGTK412,9901
     def watch_fps(...)watch_fps483,12296
     def background_color= valuebackground_color=487,12356
     def background_colorbackground_color527,13363
-    def clear_before_render= valueclear_before_render=538,13625
-    def clear_before_renderclear_before_render542,13704
-    def ticktick546,13768
-    def a11y_scruba11y_scrub555,13982
-    def get_a11y_entry_error all_entries, k, vget_a11y_entry_error590,14991
-    def tick_a11ytick_a11y645,16731
-    def a11y_pending_notifications?a11y_pending_notifications?768,21595
-    def a11y_clear_pending_notifications!a11y_clear_pending_notifications!774,21800
-    def can_screenshot?can_screenshot?779,21958
-    def clear_non_staticclear_non_static783,22019
-    def clear_non_static_reservedclear_non_static_reserved799,22369
-    def resetreset804,22458
-    def clearclear812,22646
-    def inspectinspect825,22938
-    def serializeserialize829,22984
-    def render_target namerender_target847,23859
-    def [] value[]851,23927
-    def soundssounds855,23985
-    def sounds= valuesounds=859,24023
-    def transient!transient!863,24076
-    def << other<<868,24139
-    def widthwidth872,24192
-    def __warn_outputs_size__ size, dimension__warn_outputs_size__876,24228
-    def width= valuewidth=889,24670
-    def heightheight893,24721
-    def height= valueheight=897,24759
-    def audioaudio906,24931
-    def set background_color: nilset910,24972
-  class RenderTargetsRenderTargets915,25088
-    def initialize argsinitialize920,25161
-    def [](value)[]925,25234
-    def queued? valuequeued?929,25289
-    def ready? valueready?933,25350
-    def each(&block)each937,25424
-  class TopLevelOutputs < OutputsTopLevelOutputs942,25489
-    def render_targetsrender_targets965,26341
-    def background_color= valuebackground_color=971,26463
-  class RenderTargetOutputs < OutputsRenderTargetOutputs978,26596
-    def initialize(opts)initialize979,26634
-    def w= valuew=985,26753
-    def width= valuewidth=991,26840
-    def h= valueh=997,26931
-    def height= valueheight=1003,27020
-    def datadata1009,27114
-    def resetreset1013,27151
-    def set w: nil, h: nil, background_color: nil, clear_before_render: nilset1018,27214
+    def background_color_hbackground_color_h538,13625
+    def clear_before_render= valueclear_before_render=548,13769
+    def clear_before_renderclear_before_render552,13848
+    def ticktick556,13912
+    def a11y_scruba11y_scrub565,14126
+    def get_a11y_entry_error all_entries, k, vget_a11y_entry_error600,15135
+    def tick_a11ytick_a11y655,16875
+    def a11y_pending_notifications?a11y_pending_notifications?778,21739
+    def a11y_clear_pending_notifications!a11y_clear_pending_notifications!784,21944
+    def can_screenshot?can_screenshot?789,22102
+    def clear_non_staticclear_non_static793,22163
+    def clear_non_static_reservedclear_non_static_reserved809,22513
+    def resetreset814,22602
+    def clearclear822,22790
+    def inspectinspect835,23082
+    def serializeserialize839,23128
+    def render_target namerender_target857,24003
+    def [] value[]861,24071
+    def soundssounds865,24129
+    def sounds= valuesounds=869,24167
+    def transient!transient!873,24220
+    def << other<<878,24283
+    def widthwidth882,24336
+    def __warn_outputs_size__ size, dimension__warn_outputs_size__886,24372
+    def width= valuewidth=899,24814
+    def heightheight903,24865
+    def height= valueheight=907,24903
+    def audioaudio916,25075
+    def set background_color: nilset920,25116
+  class RenderTargetsRenderTargets925,25232
+    def initialize argsinitialize932,25339
+    def [](value)[]938,25446
+    def queued? valuequeued?942,25501
+    def ready? valueready?946,25562
+    def each(&block)each950,25636
+  class TopLevelOutputs < OutputsTopLevelOutputs955,25701
+    def render_targetsrender_targets978,26553
+    def background_color= valuebackground_color=984,26675
+  class RenderTargetOutputs < OutputsRenderTargetOutputs991,26808
+    def initialize(opts)initialize992,26846
+    def w= valuew=998,26965
+    def width= valuewidth=1004,27052
+    def h= valueh=1010,27143
+    def height= valueheight=1016,27232
+    def datadata1022,27326
+    def resetreset1026,27363
+    def set w: nil, h: nil, background_color: nil, clear_before_render: nilset1031,27426
 
 ../../../../dragon/string.rb,1113
 class StringString6,123
@@ -443,7 +444,7 @@ def test_game_over args, asserttest_game_over114,3102
     def clear_summaryclear_summary145,3914
     def print_summaryprint_summary151,4011
 
-../../../../dragon/geometry.rb,5757
+../../../../dragon/geometry.rb,5964
 module GTKGTK6,125
   module GeometryGeometry7,136
     def inside_rect? outer, tolerance = 0.0inside_rect?8,154
@@ -466,72 +467,75 @@ module GTKGTK6,125
       def scale_rect rect, percentage, *anchorsscale_rect116,2933
       def rect_to_line rectrect_to_line129,3533
       def center_inside_rect rect, other_rectcenter_inside_rect138,3699
-      def center_inside_rect_x rect, other_rectcenter_inside_rect_x152,4134
-      def center_inside_rect_y rect, other_rectcenter_inside_rect_y165,4518
-      def shift_line line, x, yshift_line178,4898
-      def intersects_rect? *argsintersects_rect?191,5231
-      def line_y_intercept line, replace_infinity: nilline_y_intercept205,5656
-      def angle_delta angle_one, angle_twoangle_delta217,6023
-      def angle_within_range? test_angle, target_angle, rangeangle_within_range?223,6199
-      def angle_between_lines line_one, line_two, replace_infinity: nilangle_between_lines228,6352
-      def line_slope line, replace_infinity: Float::INFINITYline_slope234,6677
-      def line_rise_run lineline_rise_run270,7802
-      def ray_test point, lineray_test286,8244
-      def __shape_type__ shape__shape_type__312,8788
-      def __shape_to_rect__ shape__shape_to_rect__326,9061
-      def line_to_rect line, min_w: 0, min_h: 0line_to_rect350,9703
-      def line_rect line, min_w: 0, min_h: 0line_rect354,9813
-      def ray_intersect line_one, line_tworay_intersect397,10592
-      def line_intersect line_one, line_twoline_intersect435,11372
-      def to_square size, x, y, anchor_x = 0.5, anchor_y = nilto_square455,11931
-  def to_square size, x, y, anchor_x = 0.5, anchor_y = nilto_square462,12196
-      def distance point_one, point_twodistance480,12694
-      def angle_turn_direction angle, target_angleangle_turn_direction486,12950
-      def angle start_point, end_pointangle494,13212
-      def angle_from start_point, end_pointangle_from502,13529
-      def angle_to start_point, end_pointangle_to508,13750
-      def point_inside_circle? point, circle_center_point, radius = nilpoint_inside_circle?514,13967
-      def inside_rect? inner_rect, outer_rect, tolerance = 0.0inside_rect?521,14398
-      def intersect_bounding_box? inner_shape, outer_shape, tolerance = 0.0intersect_bounding_box?530,14731
-      def inside_bounding_box? inner_shape, outer_shape, tolerance = 0.0inside_bounding_box?544,15194
-      def __inside_rect__?(inner_rect, outer_rect, tolerance = 0.0)__inside_rect__?558,15654
-      def scale_rect_extended rect,scale_rect_extended587,17132
-      def rect_center_point rectrect_center_point621,18266
-      def line_center_point lineline_center_point629,18486
-      def __rect_center_point_normalized_rect__ rect__rect_center_point_normalized_rect__636,18704
-      def line_length lineline_length640,18827
-      def center rectcenter650,19121
-      def rect_props rrect_props659,19275
-      def line_horizontal? lineline_horizontal?686,19894
-      def line_vertical? lineline_vertical?697,20115
-      def line_angle lineline_angle708,20333
-      def vec2_dot_product v1, v2vec2_dot_product718,20632
-      def vec2_angle vvec2_angle728,20828
-      def vec2_add v1, v2vec2_add738,21015
-      def vec2_subtract v1, v2vec2_subtract748,21207
-      def vec2_normalize vvec2_normalize760,21455
-      def vec2_scale v, scalarvec2_scale771,21684
-      def line_vec2 lineline_vec2781,21891
-      def vec2_magnitude vvec2_magnitude793,22131
-      def distance_squared p1, p2distance_squared803,22304
-      def vec2_normal vvec2_normal813,22514
-      def circle_intersect_line? circle, linecircle_intersect_line?823,22677
-      def line_normal line, pointline_normal842,23437
-      def rect_to_circle rectrect_to_circle858,23994
-      def rect? shaperect?891,25143
-      def line? shapeline?919,25710
-      def circle? shapecircle?930,25966
-      def intersect_circle? circle_one, circle_twointersect_circle?938,26117
-      def point_on_line? point, line, tolerance = 0.1point_on_line?950,26539
-      def rect_navigate_left_right rect:, rects:, left_right: 0, using: nil, wrap: truerect_navigate_left_right971,27170
-      def rect_navigate_up_down rect:, rects:, up_down: 0, using: nil, wrap: truerect_navigate_up_down1099,31516
-      def angle_vector angleangle_vector1148,33028
-      def angle_vector_r angle_in_radiansangle_vector_r1157,33197
-      def rect_navigate rect:, rects:, left_right: nil, up_down: nil, directional_vector: nil, wrap_x: true, wrap_y: true, using: nilrect_navigate1164,33351
-      def rect_to_lines rectrect_to_lines1194,34748
-      def line_to_points lineline_to_points1204,35200
-      def points_to_line p1, p2points_to_line1211,35334
-      def line_midpoint lineline_midpoint1215,35426
+      def center_inside_rect_x rect, other_rectcenter_inside_rect_x151,4134
+      def center_inside_rect_y rect, other_rectcenter_inside_rect_y163,4518
+      def shift_line line, x, yshift_line175,4898
+      def intersects_rect? *argsintersects_rect?188,5231
+      def line_y_intercept line, replace_infinity: nilline_y_intercept202,5656
+      def angle_delta angle_one, angle_twoangle_delta214,6021
+      def angle_within_range? test_angle, target_angle, rangeangle_within_range?220,6197
+      def angle_between_lines line_one, line_two, replace_infinity: nilangle_between_lines225,6350
+      def line_slope line, replace_infinity: Float::INFINITYline_slope231,6675
+      def line_rise_run lineline_rise_run266,7798
+      def ray_test point, lineray_test282,8240
+      def __shape_type__ shape__shape_type__308,8784
+      def __shape_to_rect__ shape__shape_to_rect__322,9057
+      def line_to_rect line, min_w: 0, min_h: 0line_to_rect346,9697
+      def line_rect line, min_w: 0, min_h: 0line_rect350,9807
+      def ray_intersect line_one, line_tworay_intersect393,10584
+      def line_intersect line_one, line_twoline_intersect430,11364
+      def to_square size, x, y, anchor_x = 0.5, anchor_y = nilto_square449,11923
+  def to_square size, x, y, anchor_x = 0.5, anchor_y = nilto_square456,12188
+      def distance point_one, point_twodistance474,12686
+      def angle_turn_direction angle, target_angleangle_turn_direction480,12942
+      def angle start_point, end_pointangle488,13204
+      def angle_from start_point, end_pointangle_from496,13521
+      def angle_to start_point, end_pointangle_to502,13742
+      def point_inside_circle? point, circle_center_point, radius = nilpoint_inside_circle?508,13959
+      def inside_rect? inner_rect, outer_rect, tolerance = 0.0inside_rect?515,14390
+      def intersect_bounding_box? inner_shape, outer_shape, tolerance = 0.0intersect_bounding_box?524,14723
+      def inside_bounding_box? inner_shape, outer_shape, tolerance = 0.0inside_bounding_box?537,15186
+      def __inside_rect__?(inner_rect, outer_rect, tolerance = 0.0)__inside_rect__?550,15646
+      def scale_rect_extended rect,scale_rect_extended579,17124
+      def rect_center_point rectrect_center_point613,18258
+      def line_center_point lineline_center_point621,18478
+      def __rect_center_point_normalized_rect__ rect__rect_center_point_normalized_rect__628,18696
+      def line_length lineline_length632,18819
+      def center rectcenter641,19113
+      def rect_props rrect_props649,19266
+      def line_horizontal? lineline_horizontal?662,19524
+      def line_vertical? lineline_vertical?672,19745
+      def line_angle lineline_angle682,19963
+      def vec2_dot_product v1, v2vec2_dot_product691,20262
+      def vec2_angle vvec2_angle700,20458
+      def vec2_add v1, v2vec2_add709,20645
+      def vec2_subtract v1, v2vec2_subtract718,20837
+      def vec2_normalize vvec2_normalize729,21085
+      def vec2_scale v, scalarvec2_scale739,21314
+      def line_vec2 lineline_vec2748,21521
+      def vec2_magnitude vvec2_magnitude759,21761
+      def distance_squared p1, p2distance_squared768,21934
+      def vec2_normal vvec2_normal777,22144
+      def circle_intersect_line? circle, linecircle_intersect_line?786,22307
+      def line_normal line, pointline_normal804,23067
+      def rect_to_circle rectrect_to_circle819,23624
+      def rect? shaperect?850,24640
+      def line? shapeline?877,25207
+      def circle? shapecircle?888,25463
+      def intersect_circle? circle_one, circle_twointersect_circle?896,25614
+      def point_on_line? point, line, tolerance = 0.1point_on_line?907,26036
+      def rect_navigate_left_right rect:, rects:, left_right: 0, using: nil, wrap: truerect_navigate_left_right927,26667
+      def rect_navigate_up_down rect:, rects:, up_down: 0, using: nil, wrap: truerect_navigate_up_down1055,31013
+      def angle_vector angleangle_vector1104,32525
+      def angle_vector_r angle_in_radiansangle_vector_r1113,32694
+      def rect_navigate rect:, rects:, left_right: nil, up_down: nil, directional_vector: nil, wrap_x: true, wrap_y: true, using: nilrect_navigate1120,32848
+      def rect_to_lines rectrect_to_lines1150,34245
+      def line_to_points lineline_to_points1160,34697
+      def points_to_line p1, p2points_to_line1167,34831
+      def line_midpoint lineline_midpoint1171,34923
+      def zoom_rect(rect:,zoom_rect1177,35076
+      def lerp_rect from, to, step, tolerance: 0lerp_rect1241,37357
+      def find_collisions(rects_1, rects_2 = nil, using: nil)find_collisions1256,37955
 
 ../../../../dragon/inputs_docs.rb,157
 module InputsDocsInputsDocs6,128
@@ -539,7 +543,7 @@ module InputsDocsInputsDocs6,128
   def docs_classdocs_class13,212
 class GTK::InputsGTK20,426
 
-../../../../dragon/numeric.rb,5840
+../../../../dragon/numeric.rb,5839
 class NumericNumeric22,695
   def to_layout_row opts = {}to_layout_row26,758
   def to_layout_col opts = {}to_layout_col33,932
@@ -570,117 +574,117 @@ class NumericNumeric22,695
   def tenten318,9314
   def shift_right ishift_right322,9338
   def shift_left ishift_left326,9378
-  def shift_up ishift_up332,9492
-  def shift_down ishift_down338,9591
-  def randomize *definitionsrandomize344,9702
-  def rand_signrand_sign372,10523
-  def rand_ratiorand_ratio377,10587
-  def remainder_of_divide nremainder_of_divide381,10634
-  def ease_extended tick_count_override, duration, default_before, default_after, *definitionsease_extended386,10749
-  def global_ease duration, *definitionsglobal_ease396,11189
-  def ease duration, *definitionsease405,11526
-  def ease_spline_extended tick_count_override, duration, splineease_spline_extended414,11849
-  def global_ease_spline duration, splineglobal_ease_spline422,12190
-  def ease_spline duration, splineease_spline429,12427
-  def to_radiansto_radians436,12647
-  def to_degreesto_degrees444,12856
-  def to_square x, y, anchor_x = 0.5, anchor_y = nilto_square455,13122
-  def vector max_value = 1vector460,13320
-  def to_vector_r max_value = 1to_vector_r470,13724
-  def vector_x_r max_value = 1vector_x_r474,13822
-  def vector_y_r max_value = 1vector_y_r478,13891
-  def to_vector max_value = 1to_vector482,13960
-  def vector_y max_value = 1vector_y486,14052
-  def vector_x max_value = 1vector_x490,14130
-  def x_vector max_value = 1x_vector498,14325
-  def y_vector max_value = 1y_vector502,14384
-  def mod nmod506,14443
-  def mod_zero? *nsmod_zero?510,14475
-  def zmod? nzmod?514,14534
-  def multiply nmultiply518,14575
-  def fmult nfmult522,14612
-  def imult nimult526,14651
-  def mult nmult530,14692
-  def fdiv nfdiv534,14725
-  def idiv nidiv539,14834
-  def towards target, magnitudetowards546,15063
-  def lerp to, step, tolerance: 0lerp554,15280
-  def remap r1_begin, r1_end, r2_begin, r2_endremap563,15437
-  def map_with_ys ys, &blockmap_with_ys578,15937
-  def combinations other_intcombinations596,16242
-  def percentage_of npercentage_of600,16322
-  def cap icap604,16389
-  def cap_min_max min, maxcap_min_max609,16442
-  def lesser otherlesser615,16543
-  def greater othergreater620,16611
-  def subtract isubtract625,16680
-  def minus iminus629,16717
-  def add iadd633,16751
-  def plus iplus637,16783
-  def numbersnumbers641,16816
-  def each(&blk)each645,16856
-  def each_with_index(&blk)each_with_index658,17011
-  def map(&blk)map671,17191
-  def map_with_index(&blk)map_with_index685,17363
-  def times_with_index(&blk)times_with_index699,17560
-  def flat_map(&blk)flat_map712,17742
-  def __raise_arithmetic_exception__ other, m, e__raise_arithmetic_exception__726,17923
-  def serializeserialize739,18127
-  def self.from_top nfrom_top743,18159
-  def from_topfrom_top748,18246
-  def self.from_right nfrom_right752,18294
-  def from_rightfrom_right757,18386
-  def self.clamp n, min, maxclamp761,18438
-  def mid? l, rmid?765,18495
-  def self.from_left nfrom_left769,18557
-  def from_leftfrom_left774,18640
-  def self.from_bottom nfrom_bottom778,18690
-  def from_bottomfrom_bottom783,18777
-class FixnumFixnum788,18835
-  def even?even?792,18935
-  def odd?odd?797,19053
-  def signsign803,19225
-  def pos?pos?810,19359
-  def neg?neg?815,19437
-  def coscos819,19468
-  def cos_rcos_r823,19514
-  def cos_dcos_d827,19551
-  def sinsin831,19599
-  def sin_rsin_r835,19645
-  def sin_dsin_d839,19682
-  def tantan843,19730
-  def tan_dtan_d847,19776
-  def tan_rtan_r851,19824
-  def to_sf(decimal_places: 2, include_sign: false)to_sf855,19861
-  def to_sito_si863,20030
-  def ifloor intifloor873,20179
-class FloatFloat878,20243
-  def serializeserialize881,20276
-  def signsign885,20308
-  def replace_infinity scalarreplace_infinity891,20392
-  def to_sf(decimal_places: 2, include_sign: false)to_sf898,20556
-  def ifloor intifloor906,20725
-  def sinsin910,20785
-  def coscos914,20831
-  def sin_rsin_r918,20877
-  def sin_dsin_d922,20914
-  def cos_rcos_r926,20962
-  def cos_dcos_d930,20999
-  def tantan934,21047
-  def tan_dtan_d938,21093
-  def tan_rtan_r942,21141
-class IntegerInteger947,21182
-  def round *argsround948,21196
-  def nan?nan?952,21230
-  def center othercenter956,21258
-  def to_sfto_sf960,21315
-class NumericNumeric965,21352
-  def self.rand(arg = nil)rand966,21366
-  def self.compose_blendmode src_color_factor, dst_color_factor, color_operation, src_alpha_factor, dst_alpha_factor, alpha_operationcompose_blendmode1003,22635
-class FloatFloat1013,22964
-  def rand(*definitions)rand1014,22976
-class IntegerInteger1040,23800
-  def rand(*definitions)rand1041,23814
+  def shift_up ishift_up330,9428
+  def shift_down ishift_down334,9465
+  def randomize *definitionsrandomize338,9512
+  def rand_signrand_sign366,10333
+  def rand_ratiorand_ratio371,10397
+  def remainder_of_divide nremainder_of_divide375,10444
+  def ease_extended tick_count_override, duration, default_before, default_after, *definitionsease_extended380,10559
+  def global_ease duration, *definitionsglobal_ease390,10999
+  def ease duration, *definitionsease399,11336
+  def ease_spline_extended tick_count_override, duration, splineease_spline_extended408,11659
+  def global_ease_spline duration, splineglobal_ease_spline416,12000
+  def ease_spline duration, splineease_spline423,12237
+  def to_radiansto_radians430,12457
+  def to_degreesto_degrees438,12666
+  def to_square x, y, anchor_x = 0.5, anchor_y = nilto_square449,12932
+  def vector max_value = 1vector454,13130
+  def to_vector_r max_value = 1to_vector_r466,13662
+  def vector_x_r max_value = 1vector_x_r470,13760
+  def vector_y_r max_value = 1vector_y_r474,13829
+  def to_vector max_value = 1to_vector478,13898
+  def vector_y max_value = 1vector_y482,13990
+  def vector_x max_value = 1vector_x486,14068
+  def x_vector max_value = 1x_vector494,14263
+  def y_vector max_value = 1y_vector498,14322
+  def mod nmod502,14381
+  def mod_zero? *nsmod_zero?506,14413
+  def zmod? nzmod?510,14472
+  def multiply nmultiply514,14513
+  def fmult nfmult518,14550
+  def imult nimult522,14589
+  def mult nmult526,14630
+  def fdiv nfdiv530,14663
+  def idiv nidiv535,14772
+  def towards target, magnitudetowards542,15001
+  def lerp to, step, tolerance: 0lerp550,15218
+  def remap r1_begin, r1_end, r2_begin, r2_endremap559,15375
+  def map_with_ys ys, &blockmap_with_ys574,15875
+  def combinations other_intcombinations590,16106
+  def percentage_of npercentage_of594,16186
+  def cap icap598,16253
+  def cap_min_max min, maxcap_min_max603,16306
+  def lesser otherlesser609,16407
+  def greater othergreater614,16475
+  def subtract isubtract619,16544
+  def minus iminus623,16581
+  def add iadd627,16615
+  def plus iplus631,16647
+  def numbersnumbers635,16680
+  def each(&blk)each639,16720
+  def each_with_index(&blk)each_with_index652,16875
+  def map(&blk)map665,17055
+  def map_with_index(&blk)map_with_index679,17227
+  def times_with_index(&blk)times_with_index693,17424
+  def flat_map(&blk)flat_map706,17606
+  def __raise_arithmetic_exception__ other, m, e__raise_arithmetic_exception__720,17787
+  def serializeserialize733,17991
+  def self.from_top nfrom_top737,18023
+  def from_topfrom_top742,18110
+  def self.from_right nfrom_right746,18158
+  def from_rightfrom_right751,18250
+  def self.clamp n, min, maxclamp755,18302
+  def mid? l, rmid?759,18359
+  def self.from_left nfrom_left763,18421
+  def from_leftfrom_left768,18504
+  def self.from_bottom nfrom_bottom772,18554
+  def from_bottomfrom_bottom777,18641
+class FixnumFixnum782,18699
+  def even?even?786,18799
+  def odd?odd?791,18917
+  def signsign797,19089
+  def pos?pos?804,19223
+  def neg?neg?809,19301
+  def coscos813,19332
+  def cos_rcos_r817,19378
+  def cos_dcos_d821,19415
+  def sinsin825,19463
+  def sin_rsin_r829,19509
+  def sin_dsin_d833,19546
+  def tantan837,19594
+  def tan_dtan_d841,19640
+  def tan_rtan_r845,19688
+  def to_sf(decimal_places: 2, include_sign: false)to_sf849,19725
+  def to_sito_si857,19894
+  def ifloor intifloor867,20043
+class FloatFloat872,20107
+  def serializeserialize875,20140
+  def signsign879,20172
+  def replace_infinity scalarreplace_infinity885,20256
+  def to_sf(decimal_places: 2, include_sign: false)to_sf892,20420
+  def ifloor intifloor900,20589
+  def sinsin904,20649
+  def coscos908,20695
+  def sin_rsin_r912,20741
+  def sin_dsin_d916,20778
+  def cos_rcos_r920,20826
+  def cos_dcos_d924,20863
+  def tantan928,20911
+  def tan_dtan_d932,20957
+  def tan_rtan_r936,21005
+class IntegerInteger941,21046
+  def round *argsround942,21060
+  def nan?nan?946,21094
+  def center othercenter950,21122
+  def to_sfto_sf954,21179
+class NumericNumeric959,21216
+  def self.rand(arg = nil)rand960,21230
+  def self.compose_blendmode src_color_factor, dst_color_factor, color_operation, src_alpha_factor, dst_alpha_factor, alpha_operationcompose_blendmode997,22499
+class FloatFloat1007,22828
+  def rand(*definitions)rand1008,22840
+class IntegerInteger1034,23664
+  def rand(*definitions)rand1035,23678
 
 ../../../../dragon/nsole_menu.rbrb,976
 module GTKGTK6,129
@@ -750,7 +754,7 @@ class HashHash269,7865
   def * *args*278,8048
   def / *args/282,8134
 
-../../../../dragon/mouse.rb,2115
+../../../../dragon/mouse.rb,2289
 module GTKGTK6,122
   class MousePointMousePoint7,133
     def initialize x, yinitialize12,246
@@ -775,42 +779,44 @@ module GTKGTK6,122
     def heldheld113,2467
     def held_atheld_at117,2514
     def global_held_atglobal_held_at121,2576
-    def pointpoint125,2652
-    def inside_rect? rectinside_rect?129,2710
-    def inside_circle? center, radiusinside_circle?133,2775
-    def intersect_rect? other_rectintersect_rect?137,2870
-    def rectrect141,2952
-    def merge omerge145,3019
-    def ww149,3063
-    def hh153,3090
-    def leftleft157,3117
-    def middlemiddle161,3187
-    def rightright165,3263
-    def x1x1169,3336
-    def x2x2173,3400
-    def key_down? keykey_down?177,3464
-    def key_up? keykey_up?181,3520
-    def key_held? keykey_held?185,3572
-    def key_down_or_held? keykey_down_or_held?189,3628
-    def previous_clickprevious_click195,3742
-    def clearclear199,3809
-    def upup219,4317
-    def up_atup_at223,4360
-    def global_up_atglobal_up_at227,4418
-    def downdown231,4490
-    def to_hto_h235,4537
-    def to_hashto_hash239,4575
-    def serializeserialize243,4616
-    def to_sto_s261,4969
-    def buffered_clickbuffered_click267,5046
-    def buffered_heldbuffered_held275,5271
-  class FingerTouchFingerTouch284,5496
-    def initializeinitialize295,5808
-    def pointpoint307,6028
-    def inside_rect? rectinside_rect?311,6072
-    def inside_circle? center, radiusinside_circle?315,6137
-    def serializeserialize321,6268
-    def to_sto_s335,6611
+    def point offset: nilpoint125,2652
+    def inside_rect? rect, offset: nilinside_rect?133,2820
+    def inside_circle? center, radiusinside_circle?137,2914
+    def intersect_rect? other_rect, offset: nilintersect_rect?141,3009
+    def rect offset: nilrect145,3117
+    def merge omerge152,3252
+    def ww156,3296
+    def hh160,3323
+    def leftleft164,3350
+    def middlemiddle168,3420
+    def rightright172,3496
+    def x1x1176,3569
+    def x2x2180,3633
+    def key_down? keykey_down?184,3697
+    def key_up? keykey_up?188,3753
+    def key_held? keykey_held?192,3805
+    def key_down_or_held? keykey_down_or_held?196,3861
+    def previous_clickprevious_click202,3975
+    def clearclear206,4042
+    def upup226,4550
+    def up_atup_at230,4593
+    def global_up_atglobal_up_at234,4651
+    def downdown238,4723
+    def to_hto_h242,4770
+    def to_hashto_hash246,4808
+    def serializeserialize250,4849
+    def to_sto_s272,5464
+    def buffered_clickbuffered_click278,5541
+    def buffered_heldbuffered_held286,5766
+    def point_allscreen_offsetpoint_allscreen_offset294,5985
+    def rect_allscreen_offsetrect_allscreen_offset298,6067
+  class FingerTouchFingerTouch303,6153
+    def initializeinitialize314,6465
+    def pointpoint326,6685
+    def inside_rect? rectinside_rect?330,6729
+    def inside_circle? center, radiusinside_circle?334,6794
+    def serializeserialize340,6925
+    def to_sto_s353,7267
 
 ../../../../dragon/kernel_docs.rb,349
 module KernelDocsKernelDocs6,128
@@ -842,51 +848,51 @@ module GTKGTK6,123
 ../../../../dragon/args.rb,2032
 module GTKGTK6,121
   class ArgsArgs7,132
-    def initialize runtime, recordinginitialize29,672
-    def tick_counttick_count71,1780
-    def tick_count= valuetick_count=75,1832
-    def serializeserialize79,1899
-    def destructuredestructure90,2183
-    def clear_pixel_arraysclear_pixel_arrays94,2266
-    def pixel_arrays_clearpixel_arrays_clear98,2327
-    def pixel_arrayspixel_arrays102,2388
-    def pixel_array namepixel_array106,2438
-    def clear_render_targetsclear_render_targets114,2606
-    def render_targets_clearrender_targets_clear118,2671
-    def capture_render_target_sizescapture_render_target_sizes122,2736
-    def render_targetsrender_targets128,2890
-    def render_target namerender_target132,2944
-    def render_targets_render_atrender_targets_render_at174,4657
-    def solidssolids178,4738
-    def static_solidsstatic_solids182,4784
-    def spritessprites186,4844
-    def static_spritesstatic_sprites190,4892
-    def labelslabels194,4954
-    def static_labelsstatic_labels198,5000
-    def lineslines202,5060
-    def static_linesstatic_lines206,5104
-    def bordersborders210,5162
-    def static_bordersstatic_borders214,5210
-    def primitivesprimitives218,5272
-    def static_primitivesstatic_primitives222,5326
-    def keyboardkeyboard226,5394
-    def clickclick230,5443
-    def click_atclick_at236,5543
-    def mousemouse242,5651
-    def controller_onecontroller_one246,5694
-    def controller_twocontroller_two250,5755
-    def controller_threecontroller_three254,5816
-    def controller_fourcontroller_four258,5881
-    def autocomplete_methodsautocomplete_methods262,5944
-    def tick_beforetick_before266,6062
-    def __clear_events____clear_events__270,6163
-    def tick_aftertick_after278,6392
-    def resetreset318,7491
-    def method_missing name, *args, &blockmethod_missing330,7868
-class AudioHash < HashAudioHash349,8257
-  def volumevolume350,8280
-  def volume= valuevolume=373,8906
-  def sync!sync!378,8991
+    def initialize runtime, recordinginitialize28,650
+    def tick_counttick_count69,1738
+    def tick_count= valuetick_count=73,1790
+    def serializeserialize77,1857
+    def destructuredestructure88,2141
+    def clear_pixel_arraysclear_pixel_arrays92,2224
+    def pixel_arrays_clearpixel_arrays_clear96,2285
+    def pixel_arrayspixel_arrays100,2346
+    def pixel_array namepixel_array104,2396
+    def clear_render_targetsclear_render_targets112,2564
+    def render_targets_clearrender_targets_clear116,2629
+    def capture_render_target_sizescapture_render_target_sizes120,2694
+    def render_targetsrender_targets126,2848
+    def render_target namerender_target130,2902
+    def render_targets_render_atrender_targets_render_at179,4983
+    def solidssolids183,5064
+    def static_solidsstatic_solids187,5110
+    def spritessprites191,5170
+    def static_spritesstatic_sprites195,5218
+    def labelslabels199,5280
+    def static_labelsstatic_labels203,5326
+    def lineslines207,5386
+    def static_linesstatic_lines211,5430
+    def bordersborders215,5488
+    def static_bordersstatic_borders219,5536
+    def primitivesprimitives223,5598
+    def static_primitivesstatic_primitives227,5652
+    def keyboardkeyboard231,5720
+    def clickclick235,5769
+    def click_atclick_at241,5869
+    def mousemouse247,5977
+    def controller_onecontroller_one251,6020
+    def controller_twocontroller_two255,6081
+    def controller_threecontroller_three259,6142
+    def controller_fourcontroller_four263,6207
+    def autocomplete_methodsautocomplete_methods267,6270
+    def tick_beforetick_before271,6383
+    def __clear_events____clear_events__275,6484
+    def tick_aftertick_after283,6713
+    def resetreset323,7812
+    def method_missing name, *args, &blockmethod_missing335,8189
+class AudioHash < HashAudioHash354,8577
+  def volumevolume355,8600
+  def volume= valuevolume=378,9226
+  def sync!sync!383,9311
 
 ../../../../dragon/runte/c_bridgdge.rb,7104
 module GTKGTK6,125
@@ -973,7 +979,7 @@ module GTKGTK6,125
       def right_controller_position x, y, z, orientation_x, orientation_y, orientation_zright_controller_position1062,45471
       def headset_position x, y, z, orientation_x, orientation_y, orientation_zheadset_position1071,45988
       def windowevent_size_changed orientation_w, orientation_h,windowevent_size_changed1080,46388
-      def raw_event eventraw_event1178,50266
+      def raw_event eventraw_event1178,50291
 
 ../../../../dragon/ntime/draw.rbrb,492
 module GTKGTK6,121
@@ -995,13 +1001,13 @@ module GTKGTK6,124
     module HotloadHotload9,177
       def hotload_inithotload_init10,196
       def files_to_reloadfiles_to_reload23,586
-      def core_files_to_reloadcore_files_to_reload121,4102
-      def init_mtimes fileinit_mtimes132,4311
-      def hotload_source_fileshotload_source_files137,4477
-      def tick_hotloadtick_hotload152,4891
-      def on_load_succeeded fileon_load_succeeded157,5007
-      def reset_all_mtimesreset_all_mtimes163,5164
-      def reload_if_needed file, force = falsereload_if_needed176,5598
+      def core_files_to_reloadcore_files_to_reload123,4182
+      def init_mtimes fileinit_mtimes134,4391
+      def hotload_source_fileshotload_source_files139,4557
+      def tick_hotloadtick_hotload154,4971
+      def on_load_succeeded fileon_load_succeeded159,5087
+      def reset_all_mtimesreset_all_mtimes165,5244
+      def reload_if_needed file, force = falsereload_if_needed178,5678
 
 ../../../../dragon/runtime/a1_ememulation.rb,892
 module GTKGTK1,0
@@ -1298,18 +1304,18 @@ module GTKGTK6,124
 ../../../../dragon/ruime/backup.p.rb,843
 class TimeTime1,0
   def to_iso8601 include_date: true, include_time: true, separator: nil, date_separator: "-", time_separator: ":", date_time_separator: "T"to_iso86012,11
-  def to_iso8601_date(separator: "-")to_iso8601_date26,971
-  def to_iso8601_time(separator: ":")to_iso8601_time30,1102
-module GTKGTK35,1252
-  class Backup; class << selfBackup36,1263
-    def backup_directorybackup_directory37,1293
-    def backup_load_changes ffi_file:;backup_load_changes41,1350
-    def backup_file file, ffi_file:;backup_file60,2011
-    def backup_write_changes changes, ffi_file:;backup_write_changes100,3282
-    def backup_create file, ffi_file:, production:;backup_create148,4805
-    def backup_create_index ffi_file:;backup_create_index171,5713
-    def backup_cssbackup_css178,6059
-    def backup_htmlbackup_html228,8664
+  def to_iso8601_date(separator: "-")to_iso8601_date26,970
+  def to_iso8601_time(separator: ":")to_iso8601_time30,1101
+module GTKGTK35,1251
+  class Backup; class << selfBackup36,1262
+    def backup_directorybackup_directory37,1292
+    def backup_load_changes ffi_file:;backup_load_changes41,1349
+    def backup_file file, ffi_file:;backup_file60,2010
+    def backup_write_changes changes, ffi_file:;backup_write_changes100,3281
+    def backup_create file, ffi_file:, production:;backup_create148,4804
+    def backup_create_index ffi_file:;backup_create_index171,5712
+    def backup_cssbackup_css178,6058
+    def backup_htmlbackup_html228,8663
 
 ../../../../dragon/runme/draw_vrvr.rb,374
 module GTKGTK1,0
@@ -1322,49 +1328,7 @@ module GTKGTK1,0
       def draw_vr_border sdraw_vr_border116,4439
       def draw_vr_primitive pdraw_vr_primitive130,4910
 
-../../../../dragon/fn.rb,1908
-module GTKGTK2,16
-  class FnFn3,27
-   def self.add(*nums)add4,38
-    def self.+(*nums)+17,300
-    def self.sub(*nums)sub21,348
-    def self.-(*nums)-43,818
-    def self.div(*nums)div47,866
-    def self./(*nums)/73,1448
-    def self.idiv(*nums)idiv77,1496
-    def self.mul(*nums)mul103,2101
-    def self.*(*nums)*129,2683
-    def self.lt(*nums)lt133,2731
-    def self.<(*nums)<155,3159
-    def self.lte(*nums)lte159,3206
-    def self.<=(*nums)<=181,3635
-    def self.gt(*nums)gt185,3684
-    def self.>(*nums)>207,4112
-    def self.gte(*nums)gte211,4159
-    def self.>=(*nums)>=233,4588
-    def self.acopy arrayacopy237,4637
-    def self.aget array, indexaget241,4686
-    def self.alength arrayalength247,4814
-    def self.amap array, blockamap252,4899
-    def self.and(*vals)and258,5029
-    def self.or(*vals)or267,5172
-    def self.eq?(*vals)eq274,5266
-    def self.==(*vals)==287,5473
-    def self.apply array, blockapply291,5522
-    def self.areduce array, initial_value, blockareduce297,5648
-    def self.array_hash *arrayarray_hash305,5830
-    def self.gsub string, *from_to_pairsgsub309,5889
-    def self.__object_to_org__ o, opts = {}__object_to_org__321,6234
-    def self.__org_s__ org, aggregate = nil__org_s__405,9689
-    def self.pretty_format_verbose opretty_format_verbose474,12416
-    def self.pretty_print_verbose opretty_print_verbose478,12500
-    def self.pretty_format_array o, indentation_stackpretty_format_array484,12608
-    def self.pretty_format_sort_keys keyspretty_format_sort_keys532,14142
-    def self.pretty_format_hash o, indentation_stackpretty_format_hash550,14555
-    def self.pretty_format_object o, indentation_stackpretty_format_object602,16106
-    def self.pretty_format opretty_format641,17715
-    def self.pretty_print opretty_print656,18172
-    def self.eq_any? o, *listeq_any660,18238
+../../../../dragon/fn.rb,0
 
 ../../../../dragon/api.rb,2202
 module GTKGTK9,237
@@ -1398,15 +1362,15 @@ module GTKGTK9,237
     def get_api_log args, reqget_api_log413,11565
     def tick argstick420,11779
     def url_decode args, stringurl_decode441,12719
-    def file_extensionsfile_extensions481,14011
-    def routesroutes485,14099
-    def process! optsprocess!532,16595
-    def process_single! optsprocess_single!542,16877
-    def static_file_routesstatic_file_routes562,17488
-    def get_cached_static_file args, reqget_cached_static_file571,17731
-    def get_static_file args, reqget_static_file581,18091
-    def get_query_params reqget_query_params640,19811
-    def get_uri_and_query_string reqget_uri_and_query_string647,19982
+    def file_extensionsfile_extensions480,13990
+    def routesroutes484,14078
+    def process! optsprocess!531,16574
+    def process_single! optsprocess_single!541,16856
+    def static_file_routesstatic_file_routes561,17467
+    def get_cached_static_file args, reqget_cached_static_file570,17710
+    def get_static_file args, reqget_static_file580,18070
+    def get_query_params reqget_query_params639,19790
+    def get_uri_and_query_string reqget_uri_and_query_string646,19961
 
 ../../../../dragon/hasdeprecateded.rb,324
 module HashDeprecatedHashDeprecated1,0
@@ -1461,19 +1425,19 @@ class HashHash3,103
   def rect_shift_up dyrect_shift_up186,3489
   def shift_rect dx, dyshift_rect190,3540
   def associate hash = nilassociate196,3657
-  def anchor_rect x_perc, y_percanchor_rect210,3935
-  def as_hashas_hash214,4026
-  def merge other, &blockmerge218,4056
-  def merge! other, &blockmerge!226,4216
-  def copycopy234,4379
-  def into otherinto260,4854
-  def << other<<268,4954
-  def >> other>>272,4993
-  def to_sfto_sf277,5047
-  def map_2d &blockmap_2d281,5127
-  def each_2d &blockeach_2d292,5321
-  def clear!clear!303,5506
-class HashHash308,5540
+  def anchor_rect x_perc, y_percanchor_rect208,3869
+  def as_hashas_hash212,3960
+  def merge other, &blockmerge216,3990
+  def merge! other, &blockmerge!224,4150
+  def copycopy232,4313
+  def into otherinto258,4788
+  def << other<<266,4888
+  def >> other>>270,4927
+  def to_sfto_sf275,4981
+  def map_2d &blockmap_2d279,5061
+  def each_2d &blockeach_2d290,5255
+  def clear!clear!301,5440
+class HashHash306,5474
 
 ../../../../dragon/inputs.rb,7014
 module GTKGTK6,123
@@ -1549,7 +1513,7 @@ module GTKGTK6,123
       def up_down = @inputs.keyboard.key_held.directional_vector&.y&.sign || @inputs.controller_one.key_held.directional_vector&.y&.sign || 0up_down273,10377
       def last_up_down = @inputs.keyboard.key_held.last_directional_vector&.y&.sign || @inputs.controller_one.key_held.last_directional_vector&.y&.sign || 0last_up_down274,10519
 
-../../../../dragon/primitive.rb,12329
+../../../../dragon/primitive.rb,12323
 module GTKGTK1,0
   module PrimitivePrimitive2,11
     module CommonCommon3,30
@@ -1591,278 +1555,278 @@ module GTKGTK1,0
       def y2y2151,1924
       def center_inside_rect *other_rectcenter_inside_rect155,1960
       def shift_rect *argsshift_rect173,2481
-      def rect_shift *argsrect_shift179,2621
-      def rect_shift_right vrect_shift_right186,2818
-      def rect_shift_left vrect_shift_left198,3034
-      def rect_shift_up vrect_shift_up204,3183
-      def rect_shift_down vrect_shift_down216,3393
-      def to_hashto_hash222,3539
-    module DeterminedDetermined227,3636
-    module ColorColor230,3667
-      def looks_like_a_sprite?looks_like_a_sprite?231,3684
-      def rr236,3790
-      def r= valuer=241,3867
-      def gg245,3921
-      def g= valueg=250,3998
-      def bb254,4052
-      def b= valueb=259,4129
-      def aa263,4183
-      def a= valuea=268,4262
-    module TriangleTriangle273,4324
-      def __raise_triangle_primitive_not_supported__ m__raise_triangle_primitive_not_supported__276,4370
-def tick argstick283,4626
-      def xx312,5583
-      def x= valuex=316,5660
-      def x1x1320,5745
-      def x1= valuex1=324,5824
-      def y1y1328,5911
-      def y1= valuey1=332,5990
-      def x2x2336,6077
-      def x2= valuex2=340,6156
-      def y2y2344,6243
-      def y2= valuey2=348,6322
-      def x3x3352,6409
-      def x3= valuex3=356,6488
-      def y3y3360,6575
-      def y3= valuey3=364,6654
-      def rr368,6741
-      def r= valuer=372,6818
-      def gg376,6903
-      def g= valueg=380,6980
-      def bb384,7065
-      def b= valueb=388,7142
-      def aa392,7227
-      def a= valuea=396,7304
-      def pathpath400,7389
-      def path= valuepath=404,7472
-      def blendmode_enumblendmode_enum408,7563
-      def blendmode_enum= valueblendmode_enum=412,7666
-      def to_hashto_hash416,7777
-      def source_xsource_x420,7866
-      def source_x= valuesource_x=424,7956
-      def source_ysource_y428,8043
-      def source_y= valuesource_y=432,8133
-      def source_x2source_x2436,8220
-      def source_x2= valuesource_x2=440,8312
-      def source_y2source_y2444,8401
-      def source_y2= valuesource_y2=448,8493
-      def source_x3source_x3452,8582
-      def source_x3= valuesource_x3=456,8674
-      def source_y3source_y3460,8763
-      def source_y3= valuesource_y3=464,8855
-      def primitive_markerprimitive_marker468,8944
-    module SolidSolid473,9008
-      def blendmode_enumblendmode_enum476,9051
-      def blendmode_enum= valueblendmode_enum=480,9100
-      def anchor_xanchor_x484,9167
-      def anchor_x= valueanchor_x=488,9210
-      def anchor_yanchor_y492,9271
-      def anchor_y= valueanchor_y=496,9315
-      def to_hashto_hash500,9377
-      def primitive_markerprimitive_marker506,9589
-    module BorderBorder511,9650
-      def blendmode_enumblendmode_enum514,9694
-      def blendmode_enum= valueblendmode_enum=518,9743
-      def anchor_xanchor_x522,9810
-      def anchor_x= valueanchor_x=526,9853
-      def anchor_yanchor_y530,9914
-      def anchor_y= valueanchor_y=534,9958
-      def to_hashto_hash538,10020
-      def primitive_markerprimitive_marker544,10232
-    module LabelLabel549,10294
-      def primitive_markerprimitive_marker552,10337
-      def texttext556,10390
-      def text= valuetext=560,10429
-      def defines_enums?defines_enums?564,10486
-      def size_enumsize_enum571,10772
-      def size_enum= valuesize_enum=576,10860
-      def alignment_enumalignment_enum588,11085
-      def alignment_enum= valuealignment_enum=593,11178
-      def rr605,11408
-      def r= valuer=613,11512
-      def gg621,11645
-      def g= valueg=629,11749
-      def bb637,11882
-      def b= valueb=645,11986
-      def aa653,12119
-      def a= valuea=661,12223
-      def fontfont669,12356
-      def font= valuefont=673,12395
-      def vertical_alignment_enumvertical_alignment_enum677,12452
-      def vertical_alignment_enum= valuevertical_alignment_enum=681,12513
-      def blendmode_enumblendmode_enum685,12590
-      def blendmode_enum= valueblendmode_enum=689,12640
-      def anchor_xanchor_x693,12708
-      def anchor_x= valueanchor_x=697,12752
-      def anchor_yanchor_y701,12814
-      def anchor_y= valueanchor_y=705,12858
-      def to_hashto_hash709,12920
-      def ww723,13322
-      def hh727,13387
-    module LineLine732,13460
-      def primitive_markerprimitive_marker735,13502
-      def xx739,13554
-      def x= valuex=743,13590
-      def yy747,13644
-      def y= valuey=751,13680
-      def x2x2755,13734
-      def x2= valuex2=759,13771
-      def y2y2763,13826
-      def y2= valuey2=767,13863
-      def ww771,13918
-      def hh775,13953
-      def blendmode_enumblendmode_enum779,13988
-      def blendmode_enum= valueblendmode_enum=783,14037
-      def to_hashto_hash787,14104
-    module SpriteSprite794,14287
-      def primitive_markerprimitive_marker797,14331
-      def pathpath801,14385
-      def path= valuepath=805,14424
-      def angleangle809,14481
-      def angle= valueangle=813,14521
-      def angle_xangle_x817,14579
-      def angle_x= valueangle_x=821,14618
-      def angle_yangle_y824,14654
-      def angle_y= valueangle_y=828,14693
-      def aa831,14729
-      def a= valuea=835,14765
-      def rr839,14819
-      def r= valuer=843,14855
-      def gg847,14909
-      def g= valueg=851,14945
-      def bb855,14999
-      def b= valueb=859,15035
-      def tile_xtile_x863,15089
-      def tile_x= valuetile_x=867,15131
-      def tile_ytile_y871,15191
-      def tile_y= valuetile_y=875,15233
-      def tile_wtile_w879,15293
-      def tile_w= valuetile_w=883,15335
-      def tile_htile_h887,15395
-      def tile_h= valuetile_h=891,15437
-      def flip_horizontallyflip_horizontally895,15497
-      def flip_horizontally= valueflip_horizontally=899,15550
-      def flip_verticallyflip_vertically903,15621
-      def flip_vertically= valueflip_vertically=907,15672
-      def angle_anchor_xangle_anchor_x911,15741
-      def angle_anchor_x= valueangle_anchor_x=915,15791
-      def angle_anchor_yangle_anchor_y919,15859
-      def angle_anchor_y= valueangle_anchor_y=923,15909
-      def source_xsource_x927,15977
-      def source_x= valuesource_x=931,16021
-      def source_ysource_y935,16083
-      def source_y= valuesource_y=939,16127
-      def source_wsource_w943,16189
-      def source_w= valuesource_w=947,16233
-      def source_hsource_h951,16295
-      def source_h= valuesource_h=955,16339
-      def blendmode_enumblendmode_enum959,16401
-      def blendmode_enum= valueblendmode_enum=963,16451
-      def anchor_xanchor_x967,16519
-      def anchor_x= valueanchor_x=971,16563
-      def anchor_yanchor_y975,16625
-      def anchor_y= valueanchor_y=979,16669
-      def to_hashto_hash983,16731
-    module ConversionCapabilitiesConversionCapabilities1012,17513
-      def raise_ambigous! mraise_ambigous!1013,17547
-      def mark_assert!mark_assert!1038,18037
-      def raise_frozen! mark_method, propertyraise_frozen!1083,19583
-      def mark_as_point!mark_as_point!1103,20215
-      def mark_as_rect!mark_as_rect!1109,20322
-      def mark_as_solid!mark_as_solid!1116,20450
-      def mark_as_triangle!mark_as_triangle!1124,20613
-      def mark_as_border!mark_as_border!1130,20726
-      def mark_as_line!mark_as_line!1138,20891
-      def mark_as_label!mark_as_label!1146,21053
-      def mark_as_primitive! typemark_as_primitive!1153,21183
-      def mark_as_sprite!mark_as_sprite!1159,21312
-      def __flatten_inner_arrays_and_hashes__!__flatten_inner_arrays_and_hashes__!1166,21443
-      def mark_as_common!mark_as_common!1191,22323
-      def pathpath1219,23304
-      def path= valuepath=1226,23449
-      def inside_rect? outer_rectinside_rect?1233,23610
-      def intersects_rect? other, tolerance = 0.1intersects_rect?1240,23798
-      def intersect_rect? other, tolerance = 0.1intersect_rect?1247,24016
-      def rectrect1254,24231
-      def pointpoint1261,24372
-      def scale_rect percentage, *anchorsscale_rect1268,24518
-      def scale_rect_extended *argsscale_rect_extended1275,24720
-      def center_inside_rect *other_rectcenter_inside_rect1282,24919
-      def texttext1289,25127
-      def text= valuetext=1296,25270
-      def leftleft1303,25429
-      def rightright1310,25572
-      def toptop1317,25716
-      def bottombottom1324,25854
-      def w_halfw_half1331,26004
-      def width_halfwidth_half1338,26151
-      def h_halfh_half1345,26310
-      def height_halfheight_half1352,26457
-      def xx1359,26619
-      def x1x11366,26753
-      def shift_rect *argsshift_rect1373,26888
-      def rect_shift *argsrect_shift1380,27060
-      def rect_shift_right vrect_shift_right1387,27232
-      def rect_shift_left vrect_shift_left1394,27414
-      def rect_shift_up vrect_shift_up1401,27593
-      def rect_shift_down vrect_shift_down1408,27767
-      def x= valuex=1415,27946
-      def x1= valuex1=1422,28096
-      def x2x21429,28247
-      def x3x31436,28382
-      def x3= valuex3=1443,28525
-      def y2y21450,28684
-      def y= valuey=1457,28819
-      def yy1464,28969
-      def zz1471,29103
-      def z= valuez=1476,29165
-      def y1= valuey1=1481,29242
-      def y1y11488,29393
-      def y3 valuey31495,29528
-      def y3= valuey3=1502,29684
-      def source_x2source_x21509,29843
-      def source_x2=source_x2=1516,30014
-      def source_y2source_y21523,30188
-      def source_y2=source_y2=1530,30359
-      def source_x3source_x31537,30533
-      def source_x3=source_x3=1544,30704
-      def source_y3source_y31551,30878
-      def source_y3=source_y3=1558,31049
-      def ww1565,31223
-      def w= valuew=1572,31355
-      def widthwidth1579,31503
-      def hh1586,31647
-      def h= valueh=1593,31779
-      def heightheight1600,31927
-      def angleangle1607,32074
-      def angle= valueangle=1614,32222
-      def angle_xangle_x1621,32386
-      def angle_x= valueangle_x=1626,32461
-      def angle_yangle_y1631,32551
-      def angle_y= valueangle_y=1636,32626
-      def angle_given_point other_pointangle_given_point1641,32716
-      def angle_to other_pointangle_to1648,32923
-      def angle_from other_pointangle_from1655,33103
-      def aa1662,33289
-      def a= valuea=1666,33339
-      def pointpoint1670,33397
-      def solidsolid1677,33536
-      def spritesprite1684,33675
-      def labellabel1691,33818
-      def lineline1698,33957
-      def borderborder1705,34092
-      def to_hashto_hash1712,34235
-      def associate hash = nilassociate1716,34297
-      def anchor_rect anchor_x, anchor_yanchor_rect1720,34374
-      def spritessprites1727,34575
-      def solidssolids1735,34795
-      def labelslabels1743,35010
-      def bordersborders1751,35225
-      def lineslines1759,35445
-      def outputs_add_dwim os, mark_method, primitive_nameoutputs_add_dwim1767,35655
-      def outputs_mark! o, mark_method, primitive_nameoutputs_mark!1822,37173
-      def outputs_resolved? ooutputs_resolved?1832,37417
-      def outputs_resolve_collection targetoutputs_resolve_collection1841,37742
+      def rect_shift *argsrect_shift177,2545
+      def rect_shift_right vrect_shift_right182,2666
+      def rect_shift_left vrect_shift_left192,2804
+      def rect_shift_up vrect_shift_up196,2876
+      def rect_shift_down vrect_shift_down206,3011
+      def to_hashto_hash210,3080
+    module DeterminedDetermined215,3177
+    module ColorColor218,3208
+      def looks_like_a_sprite?looks_like_a_sprite?219,3225
+      def rr224,3331
+      def r= valuer=229,3408
+      def gg233,3462
+      def g= valueg=238,3539
+      def bb242,3593
+      def b= valueb=247,3670
+      def aa251,3724
+      def a= valuea=256,3803
+    module TriangleTriangle261,3865
+      def __raise_triangle_primitive_not_supported__ m__raise_triangle_primitive_not_supported__264,3911
+def tick argstick271,4167
+      def xx300,5124
+      def x= valuex=304,5201
+      def x1x1308,5286
+      def x1= valuex1=312,5365
+      def y1y1316,5452
+      def y1= valuey1=320,5531
+      def x2x2324,5618
+      def x2= valuex2=328,5697
+      def y2y2332,5784
+      def y2= valuey2=336,5863
+      def x3x3340,5950
+      def x3= valuex3=344,6029
+      def y3y3348,6116
+      def y3= valuey3=352,6195
+      def rr356,6282
+      def r= valuer=360,6359
+      def gg364,6444
+      def g= valueg=368,6521
+      def bb372,6606
+      def b= valueb=376,6683
+      def aa380,6768
+      def a= valuea=384,6845
+      def pathpath388,6930
+      def path= valuepath=392,7013
+      def blendmode_enumblendmode_enum396,7104
+      def blendmode_enum= valueblendmode_enum=400,7207
+      def to_hashto_hash404,7318
+      def source_xsource_x408,7407
+      def source_x= valuesource_x=412,7497
+      def source_ysource_y416,7584
+      def source_y= valuesource_y=420,7674
+      def source_x2source_x2424,7761
+      def source_x2= valuesource_x2=428,7853
+      def source_y2source_y2432,7942
+      def source_y2= valuesource_y2=436,8034
+      def source_x3source_x3440,8123
+      def source_x3= valuesource_x3=444,8215
+      def source_y3source_y3448,8304
+      def source_y3= valuesource_y3=452,8396
+      def primitive_markerprimitive_marker456,8485
+    module SolidSolid461,8549
+      def blendmode_enumblendmode_enum464,8592
+      def blendmode_enum= valueblendmode_enum=468,8641
+      def anchor_xanchor_x472,8708
+      def anchor_x= valueanchor_x=476,8751
+      def anchor_yanchor_y480,8812
+      def anchor_y= valueanchor_y=484,8856
+      def to_hashto_hash488,8918
+      def primitive_markerprimitive_marker494,9130
+    module BorderBorder499,9191
+      def blendmode_enumblendmode_enum502,9235
+      def blendmode_enum= valueblendmode_enum=506,9284
+      def anchor_xanchor_x510,9351
+      def anchor_x= valueanchor_x=514,9394
+      def anchor_yanchor_y518,9455
+      def anchor_y= valueanchor_y=522,9499
+      def to_hashto_hash526,9561
+      def primitive_markerprimitive_marker532,9773
+    module LabelLabel537,9835
+      def primitive_markerprimitive_marker540,9878
+      def texttext544,9931
+      def text= valuetext=548,9970
+      def defines_enums?defines_enums?552,10027
+      def size_enumsize_enum559,10313
+      def size_enum= valuesize_enum=564,10401
+      def alignment_enumalignment_enum576,10626
+      def alignment_enum= valuealignment_enum=581,10719
+      def rr593,10949
+      def r= valuer=601,11053
+      def gg609,11186
+      def g= valueg=617,11290
+      def bb625,11423
+      def b= valueb=633,11527
+      def aa641,11660
+      def a= valuea=649,11764
+      def fontfont657,11897
+      def font= valuefont=661,11936
+      def vertical_alignment_enumvertical_alignment_enum665,11993
+      def vertical_alignment_enum= valuevertical_alignment_enum=669,12054
+      def blendmode_enumblendmode_enum673,12131
+      def blendmode_enum= valueblendmode_enum=677,12181
+      def anchor_xanchor_x681,12249
+      def anchor_x= valueanchor_x=685,12293
+      def anchor_yanchor_y689,12355
+      def anchor_y= valueanchor_y=693,12399
+      def to_hashto_hash697,12461
+      def ww711,12863
+      def hh715,12928
+    module LineLine720,13001
+      def primitive_markerprimitive_marker723,13043
+      def xx727,13095
+      def x= valuex=731,13131
+      def yy735,13185
+      def y= valuey=739,13221
+      def x2x2743,13275
+      def x2= valuex2=747,13312
+      def y2y2751,13367
+      def y2= valuey2=755,13404
+      def ww759,13459
+      def hh763,13494
+      def blendmode_enumblendmode_enum767,13529
+      def blendmode_enum= valueblendmode_enum=771,13578
+      def to_hashto_hash775,13645
+    module SpriteSprite782,13828
+      def primitive_markerprimitive_marker785,13872
+      def pathpath789,13926
+      def path= valuepath=793,13965
+      def angleangle797,14022
+      def angle= valueangle=801,14062
+      def angle_xangle_x805,14120
+      def angle_x= valueangle_x=809,14159
+      def angle_yangle_y812,14195
+      def angle_y= valueangle_y=816,14234
+      def aa819,14270
+      def a= valuea=823,14306
+      def rr827,14360
+      def r= valuer=831,14396
+      def gg835,14450
+      def g= valueg=839,14486
+      def bb843,14540
+      def b= valueb=847,14576
+      def tile_xtile_x851,14630
+      def tile_x= valuetile_x=855,14672
+      def tile_ytile_y859,14732
+      def tile_y= valuetile_y=863,14774
+      def tile_wtile_w867,14834
+      def tile_w= valuetile_w=871,14876
+      def tile_htile_h875,14936
+      def tile_h= valuetile_h=879,14978
+      def flip_horizontallyflip_horizontally883,15038
+      def flip_horizontally= valueflip_horizontally=887,15091
+      def flip_verticallyflip_vertically891,15162
+      def flip_vertically= valueflip_vertically=895,15213
+      def angle_anchor_xangle_anchor_x899,15282
+      def angle_anchor_x= valueangle_anchor_x=903,15332
+      def angle_anchor_yangle_anchor_y907,15400
+      def angle_anchor_y= valueangle_anchor_y=911,15450
+      def source_xsource_x915,15518
+      def source_x= valuesource_x=919,15562
+      def source_ysource_y923,15624
+      def source_y= valuesource_y=927,15668
+      def source_wsource_w931,15730
+      def source_w= valuesource_w=935,15774
+      def source_hsource_h939,15836
+      def source_h= valuesource_h=943,15880
+      def blendmode_enumblendmode_enum947,15942
+      def blendmode_enum= valueblendmode_enum=951,15992
+      def anchor_xanchor_x955,16060
+      def anchor_x= valueanchor_x=959,16104
+      def anchor_yanchor_y963,16166
+      def anchor_y= valueanchor_y=967,16210
+      def to_hashto_hash971,16272
+    module ConversionCapabilitiesConversionCapabilities1000,17054
+      def raise_ambigous! mraise_ambigous!1001,17088
+      def mark_assert!mark_assert!1026,17578
+      def raise_frozen! mark_method, propertyraise_frozen!1071,19124
+      def mark_as_point!mark_as_point!1091,19756
+      def mark_as_rect!mark_as_rect!1097,19863
+      def mark_as_solid!mark_as_solid!1104,19991
+      def mark_as_triangle!mark_as_triangle!1112,20154
+      def mark_as_border!mark_as_border!1118,20267
+      def mark_as_line!mark_as_line!1126,20432
+      def mark_as_label!mark_as_label!1134,20594
+      def mark_as_primitive! typemark_as_primitive!1141,20724
+      def mark_as_sprite!mark_as_sprite!1147,20853
+      def __flatten_inner_arrays_and_hashes__!__flatten_inner_arrays_and_hashes__!1154,20984
+      def mark_as_common!mark_as_common!1179,21864
+      def pathpath1207,22845
+      def path= valuepath=1214,22990
+      def inside_rect? outer_rectinside_rect?1221,23151
+      def intersects_rect? other, tolerance = 0.1intersects_rect?1228,23339
+      def intersect_rect? other, tolerance = 0.1intersect_rect?1235,23557
+      def rectrect1242,23772
+      def pointpoint1249,23913
+      def scale_rect percentage, *anchorsscale_rect1256,24059
+      def scale_rect_extended *argsscale_rect_extended1263,24261
+      def center_inside_rect *other_rectcenter_inside_rect1270,24460
+      def texttext1277,24668
+      def text= valuetext=1284,24811
+      def leftleft1291,24970
+      def rightright1298,25113
+      def toptop1305,25257
+      def bottombottom1312,25395
+      def w_halfw_half1319,25545
+      def width_halfwidth_half1326,25692
+      def h_halfh_half1333,25851
+      def height_halfheight_half1340,25998
+      def xx1347,26160
+      def x1x11354,26294
+      def shift_rect *argsshift_rect1361,26429
+      def rect_shift *argsrect_shift1368,26601
+      def rect_shift_right vrect_shift_right1375,26773
+      def rect_shift_left vrect_shift_left1382,26955
+      def rect_shift_up vrect_shift_up1389,27134
+      def rect_shift_down vrect_shift_down1396,27308
+      def x= valuex=1403,27487
+      def x1= valuex1=1410,27637
+      def x2x21417,27788
+      def x3x31424,27923
+      def x3= valuex3=1431,28066
+      def y2y21438,28225
+      def y= valuey=1445,28360
+      def yy1452,28510
+      def zz1459,28644
+      def z= valuez=1464,28706
+      def y1= valuey1=1469,28783
+      def y1y11476,28934
+      def y3 valuey31483,29069
+      def y3= valuey3=1490,29225
+      def source_x2source_x21497,29384
+      def source_x2=source_x2=1504,29555
+      def source_y2source_y21511,29729
+      def source_y2=source_y2=1518,29900
+      def source_x3source_x31525,30074
+      def source_x3=source_x3=1532,30245
+      def source_y3source_y31539,30419
+      def source_y3=source_y3=1546,30590
+      def ww1553,30764
+      def w= valuew=1560,30896
+      def widthwidth1567,31044
+      def hh1574,31188
+      def h= valueh=1581,31320
+      def heightheight1588,31468
+      def angleangle1595,31615
+      def angle= valueangle=1602,31763
+      def angle_xangle_x1609,31927
+      def angle_x= valueangle_x=1614,32002
+      def angle_yangle_y1619,32092
+      def angle_y= valueangle_y=1624,32167
+      def angle_given_point other_pointangle_given_point1629,32257
+      def angle_to other_pointangle_to1636,32464
+      def angle_from other_pointangle_from1643,32644
+      def aa1650,32830
+      def a= valuea=1654,32880
+      def pointpoint1658,32938
+      def solidsolid1665,33077
+      def spritesprite1672,33216
+      def labellabel1679,33359
+      def lineline1686,33498
+      def borderborder1693,33633
+      def to_hashto_hash1700,33776
+      def associate hash = nilassociate1704,33838
+      def anchor_rect anchor_x, anchor_yanchor_rect1708,33915
+      def spritessprites1715,34116
+      def solidssolids1723,34336
+      def labelslabels1731,34551
+      def bordersborders1739,34766
+      def lineslines1747,34986
+      def outputs_add_dwim os, mark_method, primitive_nameoutputs_add_dwim1755,35196
+      def outputs_mark! o, mark_method, primitive_nameoutputs_mark!1810,36714
+      def outputs_resolved? ooutputs_resolved?1820,36958
+      def outputs_resolve_collection targetoutputs_resolve_collection1829,37283
 
 ../../../../dragon/layout_docs.rb,248
 module LayoutDocsLayoutDocs6,129
@@ -1954,80 +1918,80 @@ class IOSWizard < WizardIOSWizard8,209
   def sim_build?sim_build?207,4629
   def hotload_build?hotload_build?211,4677
   def start opts = nilstart215,4747
-  def always_failalways_fail243,6145
-  def check_for_xcodecheck_for_xcode248,6234
-  def check_for_brewcheck_for_brew268,6988
-  def init_wizard_statusinit_wizard_status283,7484
-  def restartrestart300,7970
-  def resetreset305,8024
-  def check_for_distribution_profilecheck_for_distribution_profile309,8066
-  def check_for_dev_profilecheck_for_dev_profile333,9361
-  def provisioning_profile_path environmentprovisioning_profile_path364,10995
-  def ios_metadata_templateios_metadata_template369,11207
-  def ios_metadataios_metadata387,12163
-  def game_metadatagame_metadata404,12699
-  def raise_ios_metadata_requiredraise_ios_metadata_required416,13078
-  def determine_team_identifierdetermine_team_identifier424,13459
-  def determine_app_namedetermine_app_name439,13964
-  def provisioning_profile_xml environmentprovisioning_profile_xml455,14455
-  def determine_app_iddetermine_app_id475,14929
-  def determine_devcertdetermine_devcert490,15441
-  def determine_prodcertdetermine_prodcert505,15964
-  def set_app_name nameset_app_name512,16211
-  def set_dev_profile pathset_dev_profile517,16273
-  def clear_tmp_directoryclear_tmp_directory527,16498
-  def set_app_id idset_app_id532,16577
-  def check_for_devicecheck_for_device538,16669
-  def check_for_certscheck_for_certs570,17911
-  def codesign_allocate_pathcodesign_allocate_path586,18343
-  def codesign_pathcodesign_path590,18490
-  def idevice_id_pathidevice_id_path594,18541
-  def ideviceinstaller_cli_appideviceinstaller_cli_app598,18587
-  def security_cli_appsecurity_cli_app602,18648
-  def xcodebuild_cli_appxcodebuild_cli_app606,18702
-  def connected_devicesconnected_devices610,18751
-  def cli_app_exist? appcli_app_exist?616,18884
-  def write_entitlements_plistwrite_entitlements_plist620,18953
-  def code_sign_binarycode_sign_binary661,20361
-  def __get_plist_orientation_values_xml____get_plist_orientation_values_xml__674,21249
-  def __get_plist_orientation_values____get_plist_orientation_values__690,21529
-  def development_write_info_plistdevelopment_write_info_plist710,22550
-  def production_write_info_plistproduction_write_info_plist846,27080
-  def tmp_directorytmp_directory978,31524
-  def app_pathapp_path982,31577
-  def game_dirgame_dir986,31639
-  def embed_mobileprovisionembed_mobileprovision990,31682
-  def clear_payload_directoryclear_payload_directory996,31882
-  def root_folder_directoriesroot_folder_directories1007,32196
-  def stage_ios_appstage_ios_app1015,32588
-  def stage_sim_appstage_sim_app1026,32989
-  def create_payloadcreate_payload1038,33486
-  def write_server_ip_addresswrite_server_ip_address1045,33708
-  def create_dev_payload_directorycreate_dev_payload_directory1058,34167
-  def create_test_payload_directorycreate_test_payload_directory1070,34467
-  def create_prod_payload_directorycreate_prod_payload_directory1083,34836
-  def create_sim_payload_directorycreate_sim_payload_directory1096,35186
-  def create_ipacreate_ipa1107,35416
-  def do_zipdo_zip1113,35556
-  def sh cmdsh1124,35760
-  def deploy_to_devicedeploy_to_device1134,35964
-  def simctl_list_devicessimctl_list_devices1146,36371
-  def install_simulator_if_neededinstall_simulator_if_needed1185,37509
-  def simctl_list_devices_max_versionsimctl_list_devices_max_version1211,38461
-  def simctl_iphone_device_id_max_versionsimctl_iphone_device_id_max_version1219,38759
-  def simctl_iphone_device_id_by_namesimctl_iphone_device_id_by_name1225,38947
-  def deploy_to_simdeploy_to_sim1231,39119
-  def print_publish_helpprint_publish_help1256,40105
-  def compile_iconscompile_icons1277,41123
-  def stage_native_libsstage_native_libs1292,42004
-  def set_version versionset_version1297,42400
-  def app_nameapp_name1302,42505
-  def app_versionapp_version1306,42541
-  def determine_app_versiondetermine_app_version1316,42936
-  def certificate_namecertificate_name1321,43038
-  def display_namedisplay_name1325,43090
-  def reset_simulatorsreset_simulators1329,43133
-  def get_steps_to_executeget_steps_to_execute1336,43315
+  def always_failalways_fail243,6135
+  def check_for_xcodecheck_for_xcode248,6224
+  def check_for_brewcheck_for_brew268,6978
+  def init_wizard_statusinit_wizard_status283,7474
+  def restartrestart300,7960
+  def resetreset305,8014
+  def check_for_distribution_profilecheck_for_distribution_profile309,8056
+  def check_for_dev_profilecheck_for_dev_profile333,9351
+  def provisioning_profile_path environmentprovisioning_profile_path364,10985
+  def ios_metadata_templateios_metadata_template369,11197
+  def ios_metadataios_metadata387,12153
+  def game_metadatagame_metadata404,12689
+  def raise_ios_metadata_requiredraise_ios_metadata_required416,13068
+  def determine_team_identifierdetermine_team_identifier424,13449
+  def determine_app_namedetermine_app_name439,13954
+  def provisioning_profile_xml environmentprovisioning_profile_xml455,14445
+  def determine_app_iddetermine_app_id475,14919
+  def determine_devcertdetermine_devcert490,15431
+  def determine_prodcertdetermine_prodcert505,15954
+  def set_app_name nameset_app_name512,16201
+  def set_dev_profile pathset_dev_profile517,16263
+  def clear_tmp_directoryclear_tmp_directory527,16488
+  def set_app_id idset_app_id532,16567
+  def check_for_devicecheck_for_device538,16659
+  def check_for_certscheck_for_certs570,17901
+  def codesign_allocate_pathcodesign_allocate_path586,18333
+  def codesign_pathcodesign_path590,18480
+  def idevice_id_pathidevice_id_path594,18531
+  def ideviceinstaller_cli_appideviceinstaller_cli_app598,18577
+  def security_cli_appsecurity_cli_app602,18638
+  def xcodebuild_cli_appxcodebuild_cli_app606,18692
+  def connected_devicesconnected_devices610,18741
+  def cli_app_exist? appcli_app_exist?616,18874
+  def write_entitlements_plistwrite_entitlements_plist620,18943
+  def code_sign_binarycode_sign_binary661,20351
+  def __get_plist_orientation_values_xml____get_plist_orientation_values_xml__674,21239
+  def __get_plist_orientation_values____get_plist_orientation_values__690,21519
+  def development_write_info_plistdevelopment_write_info_plist710,22540
+  def production_write_info_plistproduction_write_info_plist846,27070
+  def tmp_directorytmp_directory978,31514
+  def app_pathapp_path982,31567
+  def game_dirgame_dir986,31629
+  def embed_mobileprovisionembed_mobileprovision990,31672
+  def clear_payload_directoryclear_payload_directory996,31872
+  def root_folder_directoriesroot_folder_directories1007,32186
+  def stage_ios_appstage_ios_app1015,32578
+  def stage_sim_appstage_sim_app1026,32979
+  def create_payloadcreate_payload1038,33476
+  def write_server_ip_addresswrite_server_ip_address1045,33698
+  def create_dev_payload_directorycreate_dev_payload_directory1058,34157
+  def create_test_payload_directorycreate_test_payload_directory1070,34457
+  def create_prod_payload_directorycreate_prod_payload_directory1083,34826
+  def create_sim_payload_directorycreate_sim_payload_directory1096,35176
+  def create_ipacreate_ipa1107,35406
+  def do_zipdo_zip1113,35546
+  def sh cmdsh1124,35750
+  def deploy_to_devicedeploy_to_device1134,35954
+  def simctl_list_devicessimctl_list_devices1146,36361
+  def install_simulator_if_neededinstall_simulator_if_needed1185,37499
+  def simctl_list_devices_max_versionsimctl_list_devices_max_version1211,38451
+  def simctl_iphone_device_id_max_versionsimctl_iphone_device_id_max_version1219,38749
+  def simctl_iphone_device_id_by_namesimctl_iphone_device_id_by_name1225,38937
+  def deploy_to_simdeploy_to_sim1231,39109
+  def print_publish_helpprint_publish_help1256,40095
+  def compile_iconscompile_icons1277,41113
+  def stage_native_libsstage_native_libs1292,41994
+  def set_version versionset_version1297,42390
+  def app_nameapp_name1302,42495
+  def app_versionapp_version1306,42531
+  def determine_app_versiondetermine_app_version1316,42926
+  def certificate_namecertificate_name1321,43028
+  def display_namedisplay_name1325,43080
+  def reset_simulatorsreset_simulators1329,43123
+  def get_steps_to_executeget_steps_to_execute1336,43305
 
 ../../../../dragon/conoller/keysys.rb,726
 module GTKGTK6,132
@@ -2164,217 +2128,217 @@ module GTKGTK22,273
     def ticktick39,775
   class RuntimeRuntime46,930
     def initialize platform, production, vrmode, logical_width, logical_height, argv, binary_path, y_offset, orientation, remote_hotload_enabled, a11y_enabledinitialize77,2243
-        def tick argstick189,6324
-    def rebootreboot209,6975
-    def purge_user_global_variablespurge_user_global_variables215,7105
-    def purge_user_modulespurge_user_modules226,7390
-    def production?production?236,7680
-    def register_cvar name, desc, type, defltregister_cvar240,7727
-    def is_vris_vr244,8017
-    def reload_historyreload_history248,8065
-    def reload_history_pendingreload_history_pending252,8124
-    def cli_argumentscli_arguments258,8269
-    def reset_touch_countreset_touch_count279,8846
-    def increase_touch_countincrease_touch_count285,9042
-    def quit!quit!293,9291
-    def request_quitrequest_quit303,9606
-    def request_quit_fatal reasonrequest_quit_fatal308,9756
-    def quit_requested?quit_requested?312,9841
-    def debug_require!debug_require!316,9896
-    def __require_sync__ path__require_sync__322,10092
-    def get_require_metadata fileget_require_metadata332,10415
-    class LoadError < ExceptionLoadError358,11645
-      def initialize path, inner_exception, messageinitialize361,11713
-    def disable_reset_via_ctrl_rdisable_reset_via_ctrl_r368,11871
-    def enable_reset_via_ctrl_renable_reset_via_ctrl_r372,11945
-    def disable_consoledisable_console376,12017
-    def disable_console!disable_console!381,12109
-    def enable_consoleenable_console385,12165
-    def enable_console!enable_console!389,12219
-    def show_console reason = nilshow_console393,12273
-    def hide_consolehide_console397,12343
-    def start_replay file_name = nil, speed: nilstart_replay401,12393
-    def reset_and_replay file_name = nil, speed: 1, force: false, &blockreset_and_replay407,12584
-  def tick argstick431,13223
-    def stop_replaystop_replay457,13868
-    def start_recording seed_valuestart_recording461,13926
-    def set_rng valueset_rng466,14034
-    def stop_recording file_name = nilstop_recording472,14187
-    def cancel_recordingcancel_recording476,14277
-    def record_input_history name, value_1, value_2, value_count, clear_cache = falserecord_input_history481,14365
-    def record_input_history_3_params name, value_1, value_2, value_3, clear_cache = falserecord_input_history_3_params486,14572
-    def load_image file_nameload_image490,14764
-    def write_file file_name, textwrite_file494,14846
-    def write_file_root file_name, textwrite_file_root504,15033
-    def append_file file_name, textappend_file508,15125
-    def append_file_root file_name, textappend_file_root518,15315
-    def read_file file_nameread_file522,15409
-    def list_files dirlist_files532,15581
-    def stat_file pathstat_file540,15749
-    def delete_file pathdelete_file544,15807
-    def delete_file_if_exist pathdelete_file_if_exist554,16032
-    def delete_file_if_exist? pathdelete_file_if_exist?564,16266
-    def parse_xml xmlstr, stripcontent=trueparse_xml569,16353
-    def parse_xml_file fname, stripcontent=trueparse_xml_file573,16454
-    def parse_json jsonstrparse_json577,16563
-    def parse_json_file fnameparse_json_file581,16635
-    class HTTPCallbacksHTTPCallbacks588,16968
-      def ready newstateready591,17020
-      def http_response_header key, valuehttp_response_header601,17291
-      def http_response_data newdatahttp_response_data606,17423
-      def http_donehttp_done611,17545
-    def http_get url, extra_headers=nilhttp_get616,17605
-    def http_head url, extra_headers=nilhttp_head621,17754
-    def http_post url, form_fields=nil, extra_headers=nilhttp_post626,17905
-    def http_post_body url, body, extra_headers=nilhttp_post_body639,18322
-    def http_put url, fname, extra_headers=nilhttp_put644,18495
-    def export! with_comments = nil, file_name_override = nilexport!649,18658
-    def export_state! with_comments = nil, file_name_override = nilexport_state!653,18783
-    def passespasses683,19603
-    def toast id, messagetoast690,19740
-    def target passtarget694,19808
-    def render_width passrender_width698,19868
-    def render_height passrender_height702,19931
-    def render_transient passrender_transient706,19996
-    def raise_conversion_for_rendering_failed p, e, name = nilraise_conversion_for_rendering_failed710,20071
-    def reset_statereset_state735,20741
-    def __reboot__(mousex, mousey, relative_x, relative_y)__reboot__744,20938
-    def reset rng_override = nil, seed: nil, include_sprites: truereset755,21246
-    def reset_next_tick rng_override = nil, seed: nilreset_next_tick764,21676
-    def __reset_render_targets____reset_render_targets__771,21958
-    def __reset__ rng_override = nil, seed: nil, include_sprites: true__reset__779,22116
-    def last_reset_global_atlast_reset_global_at835,23645
-    def last_tick_exception_global_atlast_tick_exception_global_at839,23717
-    def last_reset_callerlast_reset_caller843,23807
-    def paused?paused?847,23874
-    def pause!pause!851,23913
-    def unpause!unpause!855,23958
-    def queue_key_up keyqueue_key_up867,24303
-    def pin_root_valuespin_root_values871,24371
-    def audioaudio880,24657
-    def queue_sound path, gainqueue_sound886,24875
-    def stop_musicstop_music895,25279
-    def dequeue_sounds passdequeue_sounds901,25579
-    def process_one_time_soundsprocess_one_time_sounds910,25934
-    class HTTPRequestHTTPRequest918,26292
-      def initialize runtime, address, method, uri, headers, raw_body, reqcptrinitialize921,26410
-      def serializeserialize948,27327
-      def inspectinspect960,27556
-      def to_sto_s964,27608
-      def rejectreject984,27846
-      def respond httpcode, body=nil, headers=nilrespond988,27989
-    def new_http_request address, method, uri, headers, body, reqcptrnew_http_request995,28218
-    def http_respond req, reqcptr, httpcode, body, headers_hashhttp_respond1000,28404
-    def stage_replay_valuesstage_replay_values1009,28692
-    def clear_draw_primitives passclear_draw_primitives1013,28766
-    def a11y_inputs_tick_beforea11y_inputs_tick_before1021,28977
-    def inputs_tick_beforeinputs_tick_before1048,29854
-    def a11y_enable!a11y_enable!1098,32202
-    def a11y_disable!a11y_disable!1102,32262
-    def a11y_enabled?a11y_enabled?1106,32324
-    def inputs_tick_afterinputs_tick_after1110,32403
-    def clear_draw_passesclear_draw_passes1165,34701
-    def clear_inputsclear_inputs1173,34923
-    def tick_consoletick_console1219,37566
-    def print_console_activation_helpprint_console_activation_help1225,37756
-    def console_button_primitiveconsole_button_primitive1235,38080
-    def schedule_callback tick_count, &callbackschedule_callback1249,38573
-    def on_tick_count tick_count, &callbackon_tick_count1258,38916
-    def tick_scheduled_callbackstick_scheduled_callbacks1272,39294
-    def tick_controller_configtick_controller_config1292,39859
-    def tick_gtk_engine_beforetick_gtk_engine_before1304,40369
-    def unpause_if_neededunpause_if_needed1353,41864
-    def tick_remote_hotload_clienttick_remote_hotload_client1361,42148
-    def get_thermal_stateget_thermal_state1381,42756
-    def check_thermal_statecheck_thermal_state1385,42825
-    def tick_gtk_engine_aftertick_gtk_engine_after1396,43373
-    def a11y_logical_to_points logicala11y_logical_to_points1450,45610
-    def a11y_tick_gtk_engine_aftera11y_tick_gtk_engine_after1458,45931
-    def tick_apitick_api1489,47080
-    def tick_usr_enginetick_usr_engine1493,47128
-    def skip_tick_usr_engine?skip_tick_usr_engine?1524,47881
-    def calc_wrapper tick_override_lambda = nilcalc_wrapper1534,48128
-    def render_replay_mouserender_replay_mouse1557,48699
-    def __nil_state_migration_message____nil_state_migration_message__1613,50418
-  def boot argsboot1623,50766
-  def boot argsboot1631,50857
-  def tick argstick1640,51012
-  def tick argstick1650,51217
-    def __invalid_state_type_message____invalid_state_type_message__1666,51578
-  def boot argsboot1671,51786
-  def tick argstick1676,51911
-    def __sdl_tick__simulation____sdl_tick__simulation__1684,52052
-    def disable_aggressive_gc!disable_aggressive_gc!1753,54628
-    def __sdl_tick__ sdl_tick__sdl_tick__1757,54704
-    def unhandled_exception eunhandled_exception1796,55851
-    def export_error! exception_textexport_error!1811,56420
-    def pretty_print_exception_and_export! epretty_print_exception_and_export!1819,56641
-    def text_fonttext_font1852,57795
-    def calcstringbox str, sz_enum = 0, fnt = "font.ttf", size_enum: nil, size_px: nil, font: nilcalcstringbox1856,57832
-    def calcstringbox_h str, sz_enum = 0, fnt = "font.ttf", size_enum: nil, size_px: nil, font: nilcalcstringbox_h1889,58556
-    def autocomplete_methodsautocomplete_methods1894,58785
-    def ignore_search_term? wordignore_search_term?1898,58894
-    def grep_did_you_mean_recommendations instance, methodgrep_did_you_mean_recommendations1905,59061
-    def grep_did_you_mean instance, method, prefix = "", delimeter = ", ", take: nilgrep_did_you_mean1916,59396
-    def grep_source_file file, *strings_with_recommendationsgrep_source_file1940,60091
-    def grep_source *strings_with_recommendationsgrep_source1973,61120
-    def teststests2013,62349
-    def log_levellog_level2017,62385
-    def log_levelslog_levels2021,62437
-    def log_level= valuelog_level=2025,62483
-    def seedseed2037,62775
-    def system cmdsystem2041,62813
-    def exec cmdexec2045,62863
-    def self.argv_window_scale argvargv_window_scale2049,62904
-    def self.argv_window_position_x argvargv_window_position_x2053,63011
-    def self.argv_window_position_y argvargv_window_position_y2057,63127
-    def self.parse_cli_argument_i argv, name, default = 0parse_cli_argument_i2061,63243
-    def self.parse_cli_argument argv, name, default = nilparse_cli_argument2065,63366
-    def show_cursorshow_cursor2086,64008
-    def hide_cursorhide_cursor2092,64133
-    def cursor_shown?cursor_shown?2105,64385
-    def set_system_cursor typeset_system_cursor2109,64436
-    def set_cursor fname, hot_x=0, hot_y=0set_cursor2113,64524
-    def set_mouse_grab valueset_mouse_grab2117,64627
-    def openurl urlopenurl2123,64774
-    def mailto email:, subject:, body: nil, exception: nil;mailto2129,64873
-    def take_screenshottake_screenshot2134,65056
-    def simulate_render_targets_resetsimulate_render_targets_reset2138,65132
-    def simulate_render_device_resetsimulate_render_device_reset2142,65229
-    def serializeserialize2146,65324
-    def get_base_dirget_base_dir2155,65504
-    def open_docsopen_docs2159,65577
-    def export_docs!export_docs!2163,65668
-    def get_game_idget_game_id2167,65724
-    def get_pixels pathget_pixels2177,66014
-    def trace_nil_punning!trace_nil_punning!2186,66161
-    def untrace_nil_punning!untrace_nil_punning!2197,66497
-    def disable_nil_punning!disable_nil_punning!2201,66576
-            def tick argstick2212,66915
-    def enable_nil_punning!enable_nil_punning!2240,67508
-            def tick argstick2251,67856
-    def disable_nil_coersion!disable_nil_coersion!2273,68219
-    def start_server!(port: nil, enable_in_prod: false, **rest)start_server!2277,68285
-    def dlopen namedlopen2301,68970
-    def get_dlopen_path(*args)get_dlopen_path2305,69031
-    def disable_controller_config!disable_controller_config!2309,69110
-    def disable_controller_configdisable_controller_config2313,69195
-    def enable_controller_config!enable_controller_config!2317,69271
-    def enable_controller_configenable_controller_config2321,69356
-    def __tick_count____tick_count__2325,69430
-    def __global_tick_count____global_tick_count__2329,69486
-    def quitquit2333,69556
-    def benchmark(opts = nil, **kwargs)benchmark2337,69646
-    def get_texture_atlas sprites_directoryget_texture_atlas2344,69908
-    def create_uuidcreate_uuid2350,70141
-class FileFile2358,70259
-  def self.read pathread2359,70270
-  def self.write path, contentswrite2363,70322
-  def self.append path, contentsappend2367,70396
-module GTKGTK2372,70476
-    def reset rng_override = nil, seed: nil, include_sprites: truereset2374,70503
-    def unhandled_exception eunhandled_exception2378,70655
-    def method_missing(m, *args, &block)method_missing2383,70775
+        def tick argstick188,6294
+    def rebootreboot208,6945
+    def purge_user_global_variablespurge_user_global_variables214,7075
+    def purge_user_modulespurge_user_modules225,7360
+    def production?production?235,7650
+    def register_cvar name, desc, type, defltregister_cvar239,7697
+    def is_vris_vr243,7987
+    def reload_historyreload_history247,8035
+    def reload_history_pendingreload_history_pending251,8094
+    def cli_argumentscli_arguments257,8239
+    def reset_touch_countreset_touch_count278,8816
+    def increase_touch_countincrease_touch_count284,9012
+    def quit!quit!292,9261
+    def request_quitrequest_quit302,9576
+    def request_quit_fatal reasonrequest_quit_fatal307,9726
+    def quit_requested?quit_requested?311,9811
+    def debug_require!debug_require!315,9866
+    def __require_sync__ path__require_sync__321,10062
+    def get_require_metadata fileget_require_metadata331,10385
+    class LoadError < ExceptionLoadError357,11615
+      def initialize path, inner_exception, messageinitialize360,11683
+    def disable_reset_via_ctrl_rdisable_reset_via_ctrl_r367,11841
+    def enable_reset_via_ctrl_renable_reset_via_ctrl_r371,11915
+    def disable_consoledisable_console375,11987
+    def disable_console!disable_console!380,12079
+    def enable_consoleenable_console384,12135
+    def enable_console!enable_console!388,12189
+    def show_console reason = nilshow_console392,12243
+    def hide_consolehide_console396,12313
+    def start_replay file_name = nil, speed: nilstart_replay400,12363
+    def reset_and_replay file_name = nil, speed: 1, force: false, &blockreset_and_replay406,12554
+  def tick argstick430,13193
+    def stop_replaystop_replay456,13838
+    def start_recording seed_valuestart_recording460,13896
+    def set_rng valueset_rng465,14004
+    def stop_recording file_name = nilstop_recording471,14157
+    def cancel_recordingcancel_recording475,14247
+    def record_input_history name, value_1, value_2, value_count, clear_cache = falserecord_input_history480,14335
+    def record_input_history_3_params name, value_1, value_2, value_3, clear_cache = falserecord_input_history_3_params485,14542
+    def load_image file_nameload_image489,14734
+    def write_file file_name, textwrite_file493,14816
+    def write_file_root file_name, textwrite_file_root503,15003
+    def append_file file_name, textappend_file507,15095
+    def append_file_root file_name, textappend_file_root517,15285
+    def read_file file_nameread_file521,15379
+    def list_files dirlist_files531,15551
+    def stat_file pathstat_file539,15719
+    def delete_file pathdelete_file543,15777
+    def delete_file_if_exist pathdelete_file_if_exist553,16002
+    def delete_file_if_exist? pathdelete_file_if_exist?563,16236
+    def parse_xml xmlstr, stripcontent=trueparse_xml568,16323
+    def parse_xml_file fname, stripcontent=trueparse_xml_file572,16424
+    def parse_json jsonstrparse_json576,16533
+    def parse_json_file fnameparse_json_file580,16605
+    class HTTPCallbacksHTTPCallbacks587,16938
+      def ready newstateready590,16990
+      def http_response_header key, valuehttp_response_header600,17261
+      def http_response_data newdatahttp_response_data605,17393
+      def http_donehttp_done610,17515
+    def http_get url, extra_headers=nilhttp_get615,17575
+    def http_head url, extra_headers=nilhttp_head620,17724
+    def http_post url, form_fields=nil, extra_headers=nilhttp_post625,17875
+    def http_post_body url, body, extra_headers=nilhttp_post_body638,18292
+    def http_put url, fname, extra_headers=nilhttp_put643,18465
+    def export! with_comments = nil, file_name_override = nilexport!648,18628
+    def export_state! with_comments = nil, file_name_override = nilexport_state!652,18753
+    def passespasses682,19573
+    def toast id, messagetoast689,19710
+    def target passtarget693,19778
+    def render_width passrender_width697,19838
+    def render_height passrender_height701,19901
+    def render_transient passrender_transient705,19966
+    def raise_conversion_for_rendering_failed p, e, name = nilraise_conversion_for_rendering_failed709,20041
+    def reset_statereset_state734,20711
+    def __reboot__(mousex, mousey, relative_x, relative_y)__reboot__743,20908
+    def reset rng_override = nil, seed: nil, include_sprites: truereset754,21216
+    def reset_next_tick rng_override = nil, seed: nilreset_next_tick763,21646
+    def __reset_render_targets____reset_render_targets__770,21928
+    def __reset__ rng_override = nil, seed: nil, include_sprites: true__reset__779,22136
+    def last_reset_global_atlast_reset_global_at836,23700
+    def last_tick_exception_global_atlast_tick_exception_global_at840,23772
+    def last_reset_callerlast_reset_caller844,23862
+    def paused?paused?848,23929
+    def pause!pause!852,23968
+    def unpause!unpause!856,24013
+    def queue_key_up keyqueue_key_up868,24358
+    def pin_root_valuespin_root_values872,24426
+    def audioaudio881,24712
+    def queue_sound path, gainqueue_sound887,24930
+    def stop_musicstop_music896,25334
+    def dequeue_sounds passdequeue_sounds902,25634
+    def process_one_time_soundsprocess_one_time_sounds911,25989
+    class HTTPRequestHTTPRequest919,26347
+      def initialize runtime, address, method, uri, headers, raw_body, reqcptrinitialize922,26465
+      def serializeserialize949,27382
+      def inspectinspect961,27611
+      def to_sto_s965,27663
+      def rejectreject985,27901
+      def respond httpcode, body=nil, headers=nilrespond989,28044
+    def new_http_request address, method, uri, headers, body, reqcptrnew_http_request996,28273
+    def http_respond req, reqcptr, httpcode, body, headers_hashhttp_respond1001,28459
+    def stage_replay_valuesstage_replay_values1010,28747
+    def clear_draw_primitives passclear_draw_primitives1014,28821
+    def a11y_inputs_tick_beforea11y_inputs_tick_before1022,29032
+    def inputs_tick_beforeinputs_tick_before1049,29909
+    def a11y_enable!a11y_enable!1099,32257
+    def a11y_disable!a11y_disable!1103,32317
+    def a11y_enabled?a11y_enabled?1107,32379
+    def inputs_tick_afterinputs_tick_after1111,32458
+    def clear_draw_passesclear_draw_passes1166,34756
+    def clear_inputsclear_inputs1174,34978
+    def tick_consoletick_console1220,37621
+    def print_console_activation_helpprint_console_activation_help1226,37811
+    def console_button_primitiveconsole_button_primitive1236,38135
+    def schedule_callback tick_count, &callbackschedule_callback1250,38628
+    def on_tick_count tick_count, &callbackon_tick_count1259,38971
+    def tick_scheduled_callbackstick_scheduled_callbacks1273,39349
+    def tick_controller_configtick_controller_config1293,39914
+    def tick_gtk_engine_beforetick_gtk_engine_before1305,40424
+    def unpause_if_neededunpause_if_needed1361,42263
+    def tick_remote_hotload_clienttick_remote_hotload_client1369,42547
+    def get_thermal_stateget_thermal_state1389,43155
+    def check_thermal_statecheck_thermal_state1393,43224
+    def tick_gtk_engine_aftertick_gtk_engine_after1404,43772
+    def a11y_logical_to_points logicala11y_logical_to_points1451,45671
+    def a11y_tick_gtk_engine_aftera11y_tick_gtk_engine_after1459,45992
+    def tick_apitick_api1490,47141
+    def tick_usr_enginetick_usr_engine1494,47189
+    def skip_tick_usr_engine?skip_tick_usr_engine?1525,47942
+    def calc_wrapper tick_override_lambda = nilcalc_wrapper1535,48189
+    def render_replay_mouserender_replay_mouse1558,48760
+    def __nil_state_migration_message____nil_state_migration_message__1614,50479
+  def boot argsboot1624,50827
+  def boot argsboot1632,50918
+  def tick argstick1641,51073
+  def tick argstick1651,51278
+    def __invalid_state_type_message____invalid_state_type_message__1667,51639
+  def boot argsboot1672,51847
+  def tick argstick1677,51972
+    def __sdl_tick__simulation____sdl_tick__simulation__1685,52113
+    def disable_aggressive_gc!disable_aggressive_gc!1754,54689
+    def __sdl_tick__ sdl_tick__sdl_tick__1758,54765
+    def unhandled_exception eunhandled_exception1799,56051
+    def export_error! exception_textexport_error!1814,56620
+    def pretty_print_exception_and_export! epretty_print_exception_and_export!1822,56841
+    def text_fonttext_font1855,57934
+    def calcstringbox str, sz_enum = 0, fnt = "font.ttf", size_enum: nil, size_px: nil, font: nilcalcstringbox1859,57971
+    def calcstringbox_h str, sz_enum = 0, fnt = "font.ttf", size_enum: nil, size_px: nil, font: nilcalcstringbox_h1892,58695
+    def autocomplete_methodsautocomplete_methods1897,58924
+    def ignore_search_term? wordignore_search_term?1901,59033
+    def grep_did_you_mean_recommendations instance, methodgrep_did_you_mean_recommendations1908,59200
+    def grep_did_you_mean instance, method, prefix = "", delimeter = ", ", take: nilgrep_did_you_mean1919,59535
+    def grep_source_file file, *strings_with_recommendationsgrep_source_file1943,60230
+    def grep_source *strings_with_recommendationsgrep_source1976,61259
+    def teststests2016,62488
+    def log_levellog_level2020,62524
+    def log_levelslog_levels2024,62576
+    def log_level= valuelog_level=2028,62622
+    def seedseed2040,62914
+    def system cmdsystem2044,62952
+    def exec cmdexec2048,63002
+    def self.argv_window_scale argvargv_window_scale2052,63043
+    def self.argv_window_position_x argvargv_window_position_x2056,63150
+    def self.argv_window_position_y argvargv_window_position_y2060,63266
+    def self.parse_cli_argument_i argv, name, default = 0parse_cli_argument_i2064,63382
+    def self.parse_cli_argument argv, name, default = nilparse_cli_argument2068,63505
+    def show_cursorshow_cursor2089,64147
+    def hide_cursorhide_cursor2095,64272
+    def cursor_shown?cursor_shown?2108,64524
+    def set_system_cursor typeset_system_cursor2112,64575
+    def set_cursor fname, hot_x=0, hot_y=0set_cursor2116,64663
+    def set_mouse_grab valueset_mouse_grab2120,64766
+    def openurl urlopenurl2126,64913
+    def mailto email:, subject:, body: nil, exception: nil;mailto2132,65012
+    def take_screenshottake_screenshot2137,65195
+    def simulate_render_targets_resetsimulate_render_targets_reset2141,65271
+    def simulate_render_device_resetsimulate_render_device_reset2145,65368
+    def serializeserialize2149,65463
+    def get_base_dirget_base_dir2158,65643
+    def open_docsopen_docs2162,65716
+    def export_docs!export_docs!2166,65807
+    def get_game_idget_game_id2170,65863
+    def get_pixels pathget_pixels2180,66153
+    def trace_nil_punning!trace_nil_punning!2189,66300
+    def untrace_nil_punning!untrace_nil_punning!2200,66636
+    def disable_nil_punning!disable_nil_punning!2204,66715
+            def tick argstick2215,67054
+    def enable_nil_punning!enable_nil_punning!2243,67647
+            def tick argstick2254,67995
+    def disable_nil_coersion!disable_nil_coersion!2276,68358
+    def start_server!(port: nil, enable_in_prod: false, **rest)start_server!2280,68424
+    def dlopen namedlopen2304,69109
+    def get_dlopen_path(*args)get_dlopen_path2308,69170
+    def disable_controller_config!disable_controller_config!2312,69249
+    def disable_controller_configdisable_controller_config2316,69334
+    def enable_controller_config!enable_controller_config!2320,69410
+    def enable_controller_configenable_controller_config2324,69495
+    def __tick_count____tick_count__2328,69569
+    def __global_tick_count____global_tick_count__2332,69625
+    def quitquit2336,69695
+    def benchmark(opts = nil, **kwargs)benchmark2340,69785
+    def get_texture_atlas sprites_directoryget_texture_atlas2347,70047
+    def create_uuidcreate_uuid2353,70280
+class FileFile2361,70398
+  def self.read pathread2362,70409
+  def self.write path, contentswrite2366,70461
+  def self.append path, contentsappend2370,70535
+module GTKGTK2375,70615
+    def reset rng_override = nil, seed: nil, include_sprites: truereset2377,70642
+    def unhandled_exception eunhandled_exception2381,70794
+    def method_missing(m, *args, &block)method_missing2386,70914
 
 ../../../../dragon/assert.rb,778
 module GTKGTK6,123
@@ -2393,61 +2357,62 @@ def test_does_this_work args, asserttest_does_this_work91,2017
 def test_does_this_work args, asserttest_does_this_work122,2837
     def nil! value, message = nilnil!129,2986
 
-../../../../dragon/layout.rb,2712
+../../../../dragon/layout.rb,2801
 module GTKGTK6,123
   class LayoutLayout7,134
     def initialize w, h, aspect_ratio_w, aspect_ratio_h, orientationinitialize12,311
-    def tick_after left, bottom, w, h, aspect_ratio_w, aspect_ratio_h, orientation, origin_nametick_after16,458
-    def reinitialize w, h, aspect_ratio_w, aspect_ratio_h, orientationreinitialize32,907
-    def rect(*ignore_splat,rect76,2363
-    def rects items,rects195,6090
-    def font_relative_size_enum size_enumfont_relative_size_enum261,8072
-    def font_px_to_pt pxfont_px_to_pt269,8334
-    def font_pt_to_px ptfont_pt_to_px273,8395
-    def font_size_cellfont_size_cell277,8449
-    def font_size_xlfont_size_xl281,8511
-    def font_size_lgfont_size_lg285,8562
-    def font_size_medfont_size_med289,8619
-    def font_size_smfont_size_sm293,8677
-    def font_size_xsfont_size_xs297,8734
-    def font_sizefont_size301,8791
-    def logical_rectlogical_rect305,8845
-    def safe_rectsafe_rect312,9006
-    def control_rectcontrol_rect319,9152
-    def row_countrow_count326,9399
-    def row_max_indexrow_max_index330,9443
-    def col_countcol_count334,9494
-    def col_max_indexcol_max_index338,9538
-    def gutter_heightgutter_height342,9589
-    def gutter_widthgutter_width346,9634
-    def outer_gutterouter_gutter350,9678
-    def cell_heightcell_height354,9727
-    def cell_widthcell_width358,9773
-    def rect_defaultsrect_defaults362,9818
-    def row nrow379,10134
-    def row_from_bottom nrow_from_bottom383,10199
-    def col ncol387,10288
-    def col_from_right ncol_from_right391,10353
-    def w nw395,10445
-    def h nh399,10508
-    def rect_group optsrect_group403,10571
-    def calc_row_offset opts = {}calc_row_offset443,11869
-    def calc_col_offset opts = {}calc_col_offset449,12025
-    def point opts = {}point455,12181
-    def rect_center reference, targetrect_center466,12428
-    def __debug_primitives_crosshair__(allscreen:)__debug_primitives_crosshair__472,12658
-    def __debug_primitives_seperators__(allscreen:)__debug_primitives_seperators__547,14606
-    def __debug_primitives_cell_prefabs__(color:, allscreen:)__debug_primitives_cell_prefabs__689,21195
-    def __debug_primitives__(color:, allscreen:)__debug_primitives__733,22943
-    def debug_primitives(invert_colors: false, allscreen: false, a: 255)debug_primitives739,23200
-    def serializeserialize764,23928
-    def inspectinspect780,24317
-    def to_sto_s784,24363
-    def orientation_changed!orientation_changed!788,24406
-    def resetreset797,24680
-    def landscape?landscape?801,24777
-    def portrait?portrait?805,24827
-      def method_missing(m, *args, &block)method_missing810,24893
+    def tick_before left, bottom, w, h, aspect_ratio_w, aspect_ratio_h, orientation, origin_nametick_before16,458
+    def reinitialize w, h, aspect_ratio_w, aspect_ratio_h, orientationreinitialize32,908
+    def allscreen_rect(*ignore_splat, **kwargs)allscreen_rect76,2364
+    def rect(*ignore_splat,rect80,2480
+    def rects items,rects199,6207
+    def font_relative_size_enum size_enumfont_relative_size_enum265,8189
+    def font_px_to_pt pxfont_px_to_pt273,8451
+    def font_pt_to_px ptfont_pt_to_px277,8512
+    def font_size_cellfont_size_cell281,8566
+    def font_size_xlfont_size_xl285,8628
+    def font_size_lgfont_size_lg289,8679
+    def font_size_medfont_size_med293,8736
+    def font_size_smfont_size_sm297,8794
+    def font_size_xsfont_size_xs301,8851
+    def font_sizefont_size305,8908
+    def logical_rectlogical_rect309,8962
+    def safe_rectsafe_rect316,9123
+    def control_rectcontrol_rect323,9269
+    def row_countrow_count330,9516
+    def row_max_indexrow_max_index334,9560
+    def col_countcol_count338,9611
+    def col_max_indexcol_max_index342,9655
+    def gutter_heightgutter_height346,9706
+    def gutter_widthgutter_width350,9751
+    def outer_gutterouter_gutter354,9795
+    def cell_heightcell_height358,9844
+    def cell_widthcell_width362,9890
+    def rect_defaultsrect_defaults366,9935
+    def row nrow383,10251
+    def row_from_bottom nrow_from_bottom387,10316
+    def col ncol391,10405
+    def col_from_right ncol_from_right395,10470
+    def w nw399,10562
+    def h nh403,10625
+    def rect_group optsrect_group407,10688
+    def calc_row_offset opts = {}calc_row_offset447,11986
+    def calc_col_offset opts = {}calc_col_offset453,12142
+    def point opts = {}point459,12298
+    def rect_center reference, targetrect_center470,12545
+    def __debug_primitives_crosshair__(color:, allscreen:)__debug_primitives_crosshair__476,12775
+    def __debug_primitives_seperators__(color:, allscreen:)__debug_primitives_seperators__557,14867
+    def __debug_primitives_cell_prefabs__(color:, allscreen:)__debug_primitives_cell_prefabs__705,21736
+    def __debug_primitives__(color:, allscreen:)__debug_primitives__749,23484
+    def debug_primitives(invert_colors: false, allscreen: false, a: 255)debug_primitives755,23769
+    def serializeserialize780,24497
+    def inspectinspect796,24886
+    def to_sto_s800,24932
+    def orientation_changed!orientation_changed!804,24975
+    def resetreset813,25249
+    def landscape?landscape?817,25346
+    def portrait?portrait?821,25396
+      def method_missing(m, *args, &block)method_missing826,25462
 
 ../../../../dragon/attr_gtk.rb,904
 module AttrGTKAttrGTK6,125
@@ -3207,7 +3172,7 @@ module GTKGTK1,0
   class CvarsCvars42,642
       def method_missing(m, *args, &block)method_missing44,674
 
-../../../../dragon/object.rb,3907
+../../../../dragon/object.rb,3848
 class BareDefinitionsContainerBareDefinitionsContainer2,11
   def initializeinitialize5,67
   def argsargs9,121
@@ -3222,65 +3187,62 @@ class ModuleModule43,643
   def attr *varsattr44,656
   def attributesattributes51,778
 class ObjectObject57,845
-  def fnfn58,858
-  def self.attr *varsattr62,881
-  def self.attributesattributes69,1008
-  def raise_immediately e, m, *argsraise_immediately74,1076
-  def raise_with_caller e, inner_exceptionraise_with_caller85,1271
-  def __supports_ivars__?__supports_ivars__?93,1391
-  def fast_randfast_rand99,1522
-  def __gtk_ruby_source_files____gtk_ruby_source_files__105,1703
-  def __pretty_print_exception__ e, inner_exception = nil__pretty_print_exception__116,1906
-  def __pretty_format_exception_text_uninitialized_constant__ e__pretty_format_exception_text_uninitialized_constant__140,3137
-  def __caller_to_org__ title, kaller__caller_to_org__160,3731
-  def __pretty_format_exception_text_recommend_Numeric_rand__ e__pretty_format_exception_text_recommend_Numeric_rand__165,3876
-  def __pretty_format_exception_text_recommend_reset_next_tick__ e__pretty_format_exception_text_recommend_reset_next_tick__196,4708
-  def __gtk_ruby_string_contains_source_file_path__? s__gtk_ruby_string_contains_source_file_path__?232,6241
-  def __caller_without_noise____caller_without_noise__236,6359
-  def raise_error_with_kind_of_okay_message e, name, *argsraise_error_with_kind_of_okay_message240,6478
-  def better_instance_informationbetter_instance_information261,6962
-  def better_class_hierarchy_informationbetter_class_hierarchy_information265,7038
-  def raise_method_missing_better_error name, *args, &blockraise_method_missing_better_error287,7745
-  def __looks_like_docs__? name, *args, &block__looks_like_docs__?322,8669
-  def __normalized_docs_method__ name, *args, &block__normalized_docs_method__331,9062
-  def __try_invoke_docs_method__ name, *args, &block__try_invoke_docs_method__337,9245
-  def method_missing_core name, *args, &blockmethod_missing_core349,9751
-  def method_missing name, *args, &blockmethod_missing388,10667
-  def __custom_object_methods____custom_object_methods__392,10759
-  def autocomplete_methodsautocomplete_methods396,10908
-  def __object_methods____object_methods__400,10972
-  def helphelp406,13845
-  def primitive_markerprimitive_marker421,14229
-  def metadata_object_idmetadata_object_id425,14267
-  def repl &blockrepl429,14313
-  def repl_silent &blockrepl_silent434,14453
-  def xreplxrepl438,14540
-  def commentcomment441,14559
-  def serializeserialize444,14580
-  def idid451,14755
-  def associate hash = nilassociate455,14779
-  def letlet459,14836
-  def greetinggreeting464,14982
-  def greetinggreeting474,15178
-  def ivar mivar486,15390
-  def ivar! m, vivar!490,15451
-  def __help_contract_implementation contract_methods__help_contract_implementation494,15519
-  def __help_contract_implementation__ contract_methods__help_contract_implementation__498,15725
-  def docsdocs512,16185
-  module PersonDocsPersonDocs525,16668
-    def docs_classdocs_class526,16688
-    def docs_say_hellodocs_say_hello533,16797
-  class PersonPerson541,16910
-    def say_hellosay_hello545,16964
-  def into otherinto554,17042
-  def hmap opts = {}hmap558,17084
-  def pretty_print opretty_print562,17121
-  def pretty_format opretty_format566,17172
-  def to_sfto_sf573,17295
-  def numeric_or_default default = 0numeric_or_default577,17328
-  def f_or_default default = 0f_or_default582,17424
-  def s_or_default default = ''s_or_default587,17514
-  def i_or_default default = 0i_or_default592,17598
+  def self.attr *varsattr58,858
+  def self.attributesattributes65,985
+  def raise_with_caller e, inner_exceptionraise_with_caller70,1053
+  def __supports_ivars__?__supports_ivars__?78,1173
+  def fast_randfast_rand84,1304
+  def __gtk_ruby_source_files____gtk_ruby_source_files__90,1485
+  def __pretty_print_exception__ e, inner_exception = nil__pretty_print_exception__101,1688
+  def __pretty_format_exception_superclass_mismatch__ e__pretty_format_exception_superclass_mismatch__127,3042
+  def __pretty_format_exception_text_uninitialized_constant__ e__pretty_format_exception_text_uninitialized_constant__146,3451
+  def __caller_to_org__ title, kaller__caller_to_org__166,4045
+  def __pretty_format_exception_text_recommend_Numeric_rand__ e__pretty_format_exception_text_recommend_Numeric_rand__171,4190
+  def __pretty_format_exception_text_recommend_reset_next_tick__ e__pretty_format_exception_text_recommend_reset_next_tick__202,5022
+  def __gtk_ruby_string_contains_source_file_path__? s__gtk_ruby_string_contains_source_file_path__?238,6555
+  def __caller_without_noise____caller_without_noise__242,6673
+  def raise_error_with_kind_of_okay_message e, name, *argsraise_error_with_kind_of_okay_message246,6792
+  def better_instance_informationbetter_instance_information267,7276
+  def better_class_hierarchy_informationbetter_class_hierarchy_information271,7352
+  def raise_method_missing_better_error name, *args, &blockraise_method_missing_better_error293,8059
+  def __looks_like_docs__? name, *args, &block__looks_like_docs__?328,8982
+  def __normalized_docs_method__ name, *args, &block__normalized_docs_method__337,9375
+  def __try_invoke_docs_method__ name, *args, &block__try_invoke_docs_method__343,9558
+  def method_missing_core name, *args, &blockmethod_missing_core355,10064
+  def method_missing name, *args, &blockmethod_missing394,10980
+  def __custom_object_methods____custom_object_methods__398,11072
+  def autocomplete_methodsautocomplete_methods402,11221
+  def __object_methods____object_methods__406,11285
+  def helphelp412,14138
+  def primitive_markerprimitive_marker427,14522
+  def metadata_object_idmetadata_object_id431,14560
+  def repl &blockrepl435,14606
+  def repl_silent &blockrepl_silent440,14746
+  def xreplxrepl444,14833
+  def commentcomment447,14852
+  def serializeserialize450,14873
+  def idid457,15048
+  def associate hash = nilassociate461,15072
+  def letlet465,15129
+  def greetinggreeting470,15275
+  def greetinggreeting480,15471
+  def ivar mivar492,15683
+  def ivar! m, vivar!496,15744
+  def __help_contract_implementation contract_methods__help_contract_implementation500,15812
+  def __help_contract_implementation__ contract_methods__help_contract_implementation__504,16018
+  def docsdocs518,16478
+  module PersonDocsPersonDocs531,16961
+    def docs_classdocs_class532,16981
+    def docs_say_hellodocs_say_hello539,17090
+  class PersonPerson547,17203
+    def say_hellosay_hello551,17257
+  def into otherinto560,17335
+  def hmap opts = {}hmap564,17377
+  def to_sfto_sf568,17414
+  def numeric_or_default default = 0numeric_or_default572,17447
+  def f_or_default default = 0f_or_default577,17543
+  def s_or_default default = ''s_or_default582,17633
+  def i_or_default default = 0i_or_default587,17717
 
 ../../../../dragon/directional_input_heer_methodods.rb,317
 module GTKGTK6,149
@@ -3291,7 +3253,7 @@ module GTKGTK6,149
     def directional_vectordirectional_vector42,1421
     def directional_angledirectional_angle68,1913
 
-../../../../dragon/log.rb,2619
+../../../../dragon/log.rb,2636
 module GTKGTK26,698
   class LogLog27,709
     def self.write_to_log_and_puts *argswrite_to_log_and_puts28,721
@@ -3339,9 +3301,9 @@ class ObjectObject181,4851
   def log_bright_white *argslog_bright_white291,7026
   def log_error *argslog_error295,7115
   def log_info *argslog_info299,7175
-  def log_once(*ids, message, include_caller: false)log_once303,7233
-  def log_once_important(*ids, message, include_caller: false)log_once_important307,7363
-  def log_once_info(*ids, message, include_caller: false)log_once_info311,7513
+  def log_once(*ids, message, include_caller: false, raise_if: false)log_once303,7233
+  def log_once_important(*ids, message, include_caller: false)log_once_important311,7435
+  def log_once_info(*ids, message, include_caller: false)log_once_info315,7585
 
 ../../../../dragon/recording.rb,2410
 module GTKGTK6,126
@@ -3505,7 +3467,103 @@ module GTKGTK108,2787
   class WizardsWizards109,2798
     def initializeinitialize112,2845
 
-../../../../dragon/console.rb,5691
+../../../../dragon/vendor/pp.rb,2737
+class PP < PrettyPrintPP56,1838
+  class StringOutStringOut57,1861
+    def initializeinitialize58,1879
+    def <<(o)<<62,1921
+    def flush; end;flush67,1967
+  def PP.pp(obj, out=ConsoleOut, width=120)pp81,2287
+  def PP.pretty_format(obj, width=120)pretty_format89,2438
+  def PP.singleline_pp(obj, out=ConsoleOut)singleline_pp101,2728
+  def PP.mcall(obj, mod, meth, *args, &block)mcall109,2876
+  module PPMethodsPPMethods122,3245
+    def guard_inspect_keyguard_inspect_key128,3424
+    def check_inspect_key(id)check_inspect_key142,3879
+    def push_inspect_key(id)push_inspect_key149,4161
+    def pop_inspect_key(id)pop_inspect_key154,4344
+    def guard_inspect(object) # :nodoc:guard_inspect158,4455
+    def pp(obj)pp181,5135
+    def object_group(obj, &block) # :yield:object_group201,5589
+    def object_address_group(obj, &block)object_address_group207,5789
+    def comma_breakablecomma_breakable217,6046
+    def seplist(list, sep=nil, iter_method=:each) # :yield: elementseplist246,6934
+    def pp_object(obj)pp_object263,7384
+    def pp_hash(obj)pp_hash279,7771
+      def pp_hash_pair(k, v)pp_hash_pair291,8024
+      def pp_hash_pair(k, v)pp_hash_pair308,8375
+  class SingleLine < PrettyPrint::SingleLine # :nodoc:SingleLine321,8548
+  module ObjectMixin # :nodoc:ObjectMixin325,8632
+    def __pretty_print__(q)__pretty_print__339,9201
+    def __pretty_print_cycle__(q)__pretty_print_cycle__356,9726
+    def __pretty_print_instance_variables____pretty_print_instance_variables__367,10036
+    def __pretty_print_inspect____pretty_print_inspect__379,10579
+class Array # :nodoc:Array388,10848
+  def __pretty_print__(q) # :nodoc:__pretty_print__389,10870
+  def __pretty_print_cycle__(q) # :nodoc:__pretty_print_cycle__397,10996
+class Hash # :nodoc:Hash402,11085
+  def __pretty_print__(q) # :nodoc:__pretty_print__403,11106
+  def __pretty_print_cycle__(q) # :nodoc:__pretty_print_cycle__407,11168
+class Struct # :nodoc:Struct412,11257
+  def __pretty_print__(q) # :nodoc:__pretty_print__413,11280
+  def __pretty_print_cycle__(q) # :nodoc:__pretty_print_cycle__427,11653
+class Range # :nodoc:Range432,11782
+  def __pretty_print__(q) # :nodoc:__pretty_print__433,11804
+class String # :nodoc:String444,12086
+  def __pretty_print__(q) # :nodoc:__pretty_print__445,12109
+class Object < BasicObject # :nodoc:Object459,12375
+    def __pretty_print_cycle__(q)__pretty_print_cycle__465,12529
+    def __pretty_print__(q)__pretty_print__473,12667
+module KernelKernel479,12731
+  def pretty_inspectpretty_inspect483,12842
+  def pretty_format(obj)pretty_format487,12905
+  def pp(*objs)pp494,13043
+  def pretty_print(...) = pp(...)pretty_print501,13162
+
+../../../../dragon/vendor/etty_p_print.rb,2182
+class PrettyPrintPrettyPrint28,1046
+  def PrettyPrint.format(output=''.dup, maxwidth=79, newline="\n", genspace=lambda {|n| ' ' * n})format42,1307
+  def PrettyPrint.singleline_format(output=''.dup, maxwidth=nil, newline=nil, genspace=nil)singleline_format56,1768
+  def initialize(output=''.dup, maxwidth=79, newline="\n", &genspace)initialize79,2666
+  def current_groupcurrent_group152,5217
+  def break_outmost_groupsbreak_outmost_groups157,5331
+  def text(obj, width=obj.length)text177,5950
+  def fill_breakable(sep=' ', width=sep.length)fill_breakable209,6928
+  def breakable(sep=' ', width=sep.length)breakable221,7356
+  def group(indent=0, open_obj='', close_obj='', open_width=open_obj.length, close_width=close_obj.length)group246,8114
+  def group_subgroup_sub257,8430
+  def nest(indent)nest274,8798
+  def flushflush285,8942
+  class Text # :nodoc:Text296,9240
+    def initializeinitialize307,9643
+    def output(out, output_width)output318,9962
+    def add(obj, width)add325,10188
+  class Breakable # :nodoc:Breakable334,10411
+    def initialize(sep, width, q)initialize342,10633
+    def output(out, output_width)output368,11286
+  class Group # :nodoc:Group391,11979
+    def initialize(depth)initialize396,12113
+    def breakbreak409,12423
+    def break?break?414,12519
+    def first?first?421,12696
+  class GroupQueue # :nodoc:GroupQueue437,13056
+    def initialize(*groups)initialize442,13199
+    def enq(group)enq451,13444
+    def deqdeq458,13617
+    def delete(group)delete474,13972
+  class SingleLineSingleLine493,14378
+    def initialize(output, maxwidth=nil, newline=nil)initialize502,14800
+    def pp_text(obj, width=nil)pp_text510,15029
+    def breakable(sep=' ', width=nil)breakable517,15240
+    def fill_breakable(sep=' ', width=nil)fill_breakable524,15457
+    def nest(indent) # :nodoc:nest531,15613
+    def group(indent=nil, open_obj='', close_obj='', open_width=nil, close_width=nil)group543,16077
+    def group_sub # :nodoc:group_sub552,16320
+    def break_outmost_groups # :nodoc:break_outmost_groups557,16423
+    def flush # :nodoc:flush561,16525
+    def first?first?565,16623
+
+../../../../dragon/console.rb,5630
 module GTKGTK11,329
   class ConsoleConsole12,340
     def initializeinitialize27,1018
@@ -3545,74 +3603,73 @@ module GTKGTK11,329
     def toast id = nil, *messagestoast364,10063
     def console_toggle_keysconsole_toggle_keys368,10146
     def console_toggle_key_down? argsconsole_toggle_key_down?379,10332
-    def try_search_docs exceptiontry_search_docs383,10440
-    def eval_the_set_commandeval_the_set_command413,11529
-    def inputs_scroll_up_full? argsinputs_scroll_up_full?469,13450
-    def scroll_to_bottomscroll_to_bottom475,13652
-    def scroll_up_fullscroll_up_full479,13708
-    def inputs_scroll_up_half? argsinputs_scroll_up_half?484,13836
-    def scroll_up_halfscroll_up_half489,13978
-    def inputs_scroll_down_full? argsinputs_scroll_down_full?494,14114
-    def scroll_down_fullscroll_down_full500,14320
-    def inputs_scroll_down_half? argsinputs_scroll_down_half?505,14434
-    def inputs_clear_command? argsinputs_clear_command?510,14578
-    def scroll_down_halfscroll_down_half515,14719
-    def mouse_wheel_scroll argsmouse_wheel_scroll520,14841
-    def __paste____paste__555,15518
-    def __copy____copy__559,15588
-    def process_inputs argsprocess_inputs563,15672
-    def write_primitive_and_return_offset(args, left, y, str, archived: false)write_primitive_and_return_offset651,18875
-    def write_line(args, left, y, str, archived: false)write_line662,19287
-    def should_tick?should_tick?670,19655
-    def logo_final_ylogo_final_y677,19816
-    def slide_progress_bottomslide_progress_bottom681,19903
-    def render argsrender685,19975
-    def render_log_offset argsrender_log_offset750,22853
-    def include_error_marker? textinclude_error_marker?761,23163
-    def error_markerserror_markers765,23283
-    def include_subdued_markers? textinclude_subdued_markers?769,23447
-    def include_any_words? text, wordsinclude_any_words?773,23576
-    def subdued_markerssubdued_markers777,23711
-    def calc argscalc781,23792
-    def tick argstick799,24218
-    def process_clear_logs_request_queueprocess_clear_logs_request_queue831,25371
-    def process_add_primitive_queueprocess_add_primitive_queue839,25672
-    def set_command_with_history_silent command, histories, show_reason = nilset_command_with_history_silent851,26003
-    def defaults_set_command_extendeddefaults_set_command_extended855,26182
-    def set_command_extended optsset_command_extended864,26354
-    def set_command_with_history command, histories, show_reason = nilset_command_with_history881,26882
-    def set_command command, show_reason = nilset_command886,27055
-    def set_command_silent command, show_reason = nilset_command_silent891,27180
-    def set_system_command command, show_reason = nilset_system_command895,27306
-    def system_commandsystem_command903,27550
-    def ww913,27684
-    def hh917,27716
-    def toptop921,27748
-    def leftleft925,27784
-    def bottombottom929,27822
-    def rightright933,27864
-    def line_height_pxline_height_px937,27904
-    def lines_on_one_pagelines_on_one_page941,27968
-    def line(y:, color:)line945,28038
-    def include_row_marker? log_entryinclude_row_marker?949,28128
-    def include_header_marker? log_entryinclude_header_marker?953,28201
-    def include_header_1_marker? log_entryinclude_header_1_marker?961,28467
-    def include_header_2_marker? log_entryinclude_header_2_marker?966,28609
-    def include_header_3_marker? log_entryinclude_header_3_marker?971,28752
-    def code? log_entrycode?976,28896
-    def just_symbol? log_entryjust_symbol?980,28993
-    def code_comment? log_entrycode_comment?985,29170
-    def codeblock_marker? log_entrycodeblock_marker?990,29286
-    def color_for_plain_text log_entrycolor_for_plain_text996,29476
-    def color_for_log_entry(log_entry)color_for_log_entry1022,30221
-    def promptprompt1045,30921
-    def current_input_strcurrent_input_str1049,31063
-    def current_input_str=(str)current_input_str=1053,31129
-    def clearclear1057,31207
-    def slide_progressslide_progress1064,31320
-    def clear_logs global_at: Kernel.global_tick_countclear_logs1074,31748
+    def eval_the_set_commandeval_the_set_command383,10440
+    def inputs_scroll_up_full? argsinputs_scroll_up_full?438,12331
+    def scroll_to_bottomscroll_to_bottom444,12533
+    def scroll_up_fullscroll_up_full448,12589
+    def inputs_scroll_up_half? argsinputs_scroll_up_half?453,12717
+    def scroll_up_halfscroll_up_half458,12859
+    def inputs_scroll_down_full? argsinputs_scroll_down_full?463,12995
+    def scroll_down_fullscroll_down_full469,13201
+    def inputs_scroll_down_half? argsinputs_scroll_down_half?474,13315
+    def inputs_clear_command? argsinputs_clear_command?479,13459
+    def scroll_down_halfscroll_down_half484,13600
+    def mouse_wheel_scroll argsmouse_wheel_scroll489,13722
+    def __paste____paste__524,14399
+    def __copy____copy__528,14469
+    def process_inputs argsprocess_inputs532,14553
+    def write_primitive_and_return_offset(args, left, y, str, archived: false)write_primitive_and_return_offset620,17756
+    def write_line(args, left, y, str, archived: false)write_line631,18168
+    def should_tick?should_tick?639,18536
+    def logo_final_ylogo_final_y646,18697
+    def slide_progress_bottomslide_progress_bottom650,18784
+    def render argsrender654,18856
+    def render_log_offset argsrender_log_offset719,21734
+    def include_error_marker? textinclude_error_marker?730,22044
+    def error_markerserror_markers734,22164
+    def include_subdued_markers? textinclude_subdued_markers?738,22328
+    def include_any_words? text, wordsinclude_any_words?742,22457
+    def subdued_markerssubdued_markers746,22592
+    def calc argscalc750,22673
+    def tick argstick768,23099
+    def process_clear_logs_request_queueprocess_clear_logs_request_queue800,24252
+    def process_add_primitive_queueprocess_add_primitive_queue808,24553
+    def set_command_with_history_silent command, histories, show_reason = nilset_command_with_history_silent820,24884
+    def defaults_set_command_extendeddefaults_set_command_extended824,25063
+    def set_command_extended optsset_command_extended833,25235
+    def set_command_with_history command, histories, show_reason = nilset_command_with_history850,25763
+    def set_command command, show_reason = nilset_command855,25936
+    def set_command_silent command, show_reason = nilset_command_silent860,26061
+    def set_system_command command, show_reason = nilset_system_command864,26187
+    def system_commandsystem_command872,26431
+    def ww882,26565
+    def hh886,26597
+    def toptop890,26629
+    def leftleft894,26665
+    def bottombottom898,26703
+    def rightright902,26745
+    def line_height_pxline_height_px906,26785
+    def lines_on_one_pagelines_on_one_page910,26849
+    def line(y:, color:)line914,26919
+    def include_row_marker? log_entryinclude_row_marker?918,27009
+    def include_header_marker? log_entryinclude_header_marker?922,27082
+    def include_header_1_marker? log_entryinclude_header_1_marker?930,27348
+    def include_header_2_marker? log_entryinclude_header_2_marker?935,27490
+    def include_header_3_marker? log_entryinclude_header_3_marker?940,27633
+    def code? log_entrycode?945,27777
+    def just_symbol? log_entryjust_symbol?949,27874
+    def code_comment? log_entrycode_comment?954,28051
+    def codeblock_marker? log_entrycodeblock_marker?959,28167
+    def color_for_plain_text log_entrycolor_for_plain_text965,28357
+    def color_for_log_entry(log_entry)color_for_log_entry991,29102
+    def promptprompt1014,29802
+    def current_input_strcurrent_input_str1018,29944
+    def current_input_str=(str)current_input_str=1022,30010
+    def clearclear1026,30088
+    def slide_progressslide_progress1033,30201
+    def clear_logs global_at: Kernel.global_tick_countclear_logs1043,30629
 
-../../../../dragon/grid.rb,6513
+../../../../dragon/grid.rb,6786
 module GTKGTK6,121
   class GridGrid7,132
     def orientation_changed?orientation_changed?68,1140
@@ -3639,95 +3696,99 @@ module GTKGTK6,121
     def h_halfh_half194,4049
     def rectrect198,4086
     def rect_pxrect_px202,4153
-    def allscreen_rectallscreen_rect206,4235
-    def allscreen_rect_pxallscreen_rect_px210,4352
-    def letterbox?letterbox?214,4484
-    def letterboxletterbox218,4529
-    def letterbox= valueletterbox=222,4573
-    def landscape?landscape?226,4632
-    def portrait?portrait?230,4701
-    def origin_center?origin_center?234,4768
-    def origin_bottom_left?origin_bottom_left?238,4830
-    def aspect_ratio_waspect_ratio_w242,4902
-    def aspect_ratio_haspect_ratio_h246,4960
-    def hd?hd?250,5018
-    def highdpi?highdpi?256,5119
-      def origin_name = $grid.origin_nameorigin_name263,5257
-      def x = $grid.xx264,5299
-      def x_px = $grid.x_pxx_px265,5321
-      def y = $grid.yy266,5349
-      def y_px = $grid.y_pxy_px267,5371
-      def w = $grid.ww268,5399
-      def w_px = $grid.w_pxw_px269,5421
-      def h = $grid.hh270,5449
-      def h_px = $grid.h_pxh_px271,5471
-      def bottom = $grid.bottombottom272,5499
-      def bottom_px = $grid.bottom_pxbottom_px273,5531
-      def top = $grid.toptop274,5569
-      def top_px = $grid.top_pxtop_px275,5595
-      def left = $grid.leftleft276,5627
-      def left_px = $grid.left_pxleft_px277,5655
-      def right = $grid.rightright278,5689
-      def right_px = $grid.right_pxright_px279,5719
-      def center_x = $grid.center_xcenter_x280,5755
-      def center_y = $grid.center_ycenter_y281,5791
-      def center = $grid.centercenter282,5827
-      def origin_x = $grid.origin_xorigin_x283,5859
-      def origin_y = $grid.origin_yorigin_y284,5895
-      def render_origin_x = $grid.render_origin_xrender_origin_x285,5931
-      def render_origin_y = $grid.render_origin_yrender_origin_y286,5981
-      def allscreen_left = $grid.allscreen_leftallscreen_left287,6031
-      def allscreen_left_px = $grid.allscreen_left_pxallscreen_left_px288,6079
-      def allscreen_right = $grid.allscreen_rightallscreen_right289,6133
-      def allscreen_right_px = $grid.allscreen_right_pxallscreen_right_px290,6183
-      def allscreen_top = $grid.allscreen_topallscreen_top291,6239
-      def allscreen_top_px = $grid.allscreen_top_pxallscreen_top_px292,6285
-      def allscreen_bottom = $grid.allscreen_bottomallscreen_bottom293,6337
-      def allscreen_bottom_px = $grid.allscreen_bottom_pxallscreen_bottom_px294,6389
-      def allscreen_w = $grid.allscreen_wallscreen_w295,6447
-      def allscreen_w_px = $grid.allscreen_w_pxallscreen_w_px296,6489
-      def allscreen_w_pt = $grid.allscreen_w_ptallscreen_w_pt297,6537
-      def allscreen_h = $grid.allscreen_hallscreen_h298,6585
-      def allscreen_h_px = $grid.allscreen_h_pxallscreen_h_px299,6627
-      def allscreen_h_pt = $grid.allscreen_h_ptallscreen_h_pt300,6675
-      def allscreen_offset_x = $grid.allscreen_offset_xallscreen_offset_x301,6723
-      def allscreen_offset_x_px = $grid.allscreen_offset_x_pxallscreen_offset_x_px302,6779
-      def allscreen_offset_y = $grid.allscreen_offset_yallscreen_offset_y303,6841
-      def allscreen_offset_y_px = $grid.allscreen_offset_y_pxallscreen_offset_y_px304,6897
-      def native_scale = $grid.native_scalenative_scale305,6959
-      def render_scale = $grid.render_scalerender_scale306,7003
-      def texture_scale = $grid.texture_scaletexture_scale307,7047
-      def texture_scale_enum = $grid.texture_scale_enumtexture_scale_enum308,7093
-      def high_dpi_scale = $grid.high_dpi_scalehigh_dpi_scale309,7149
-      def orientation_changed = $grid.orientation_changedorientation_changed310,7197
-      def orientation_changed? = $grid.orientation_changed?orientation_changed?311,7255
-      def orientation = $grid.orientationorientation312,7315
-      def origin_bottom_left!(force: false) = $grid.origin_bottom_left!(force: force)origin_bottom_left!313,7357
-      def origin_center!(force: false) = $grid.origin_center!(force: force)origin_center!314,7443
-      def x = $grid.xx315,7519
-      def x_px = $grid.x_pxx_px316,7541
-      def y = $grid.yy317,7569
-      def y_px = $grid.y_pxy_px318,7591
-      def allscreen_x = $grid.allscreen_xallscreen_x319,7619
-      def allscreen_x_px = $grid.allscreen_x_pxallscreen_x_px320,7661
-      def allscreen_y = $grid.allscreen_yallscreen_y321,7709
-      def allscreen_y_px = $grid.allscreen_y_pxallscreen_y_px322,7751
-      def w_half = $grid.w_halfw_half323,7799
-      def h_half = $grid.h_halfh_half324,7831
-      def rect = $grid.rectrect325,7863
-      def rect_px = $grid.rect_pxrect_px326,7891
-      def allscreen_rect = $grid.allscreen_rectallscreen_rect327,7925
-      def allscreen_rect_px = $grid.allscreen_rect_pxallscreen_rect_px328,7973
-      def letterbox? = $grid.letterbox?letterbox?329,8027
-      def letterbox = $grid.letterboxletterbox330,8067
-      def landscape? = $grid.landscape?landscape?331,8105
-      def portrait? = $grid.portrait?portrait?332,8145
-      def origin_center? = $grid.origin_center?origin_center?333,8183
-      def origin_bottom_left? = $grid.origin_bottom_left?origin_bottom_left?334,8231
-      def aspect_ratio_w = $grid.aspect_ratio_waspect_ratio_w335,8289
-      def aspect_ratio_h = $grid.aspect_ratio_haspect_ratio_h336,8337
-      def hd? = $grid.hd?hd?337,8385
-      def hd = $grid.hdhd338,8411
-      def highdpi? = $grid.highdpi?highdpi?339,8435
-      def highdpi = $grid.highdpihighdpi340,8471
-      def method_missing(m, *args, &block)method_missing342,8506
+    def allscreen_offsetallscreen_offset206,4235
+    def allscreen_offset_pxallscreen_offset_px210,4326
+    def allscreen_rectallscreen_rect214,4426
+    def allscreen_rect_pxallscreen_rect_px218,4543
+    def letterbox?letterbox?222,4675
+    def letterboxletterbox226,4720
+    def letterbox= valueletterbox=230,4764
+    def landscape?landscape?234,4823
+    def portrait?portrait?238,4892
+    def origin_center?origin_center?242,4959
+    def origin_bottom_left?origin_bottom_left?246,5021
+    def aspect_ratio_waspect_ratio_w250,5093
+    def aspect_ratio_haspect_ratio_h254,5151
+    def hd?hd?258,5209
+    def highdpi?highdpi?264,5310
+      def origin_name = $grid.origin_nameorigin_name271,5448
+      def x = $grid.xx272,5490
+      def x_px = $grid.x_pxx_px273,5512
+      def y = $grid.yy274,5540
+      def y_px = $grid.y_pxy_px275,5562
+      def w = $grid.ww276,5590
+      def w_px = $grid.w_pxw_px277,5612
+      def h = $grid.hh278,5640
+      def h_px = $grid.h_pxh_px279,5662
+      def bottom = $grid.bottombottom280,5690
+      def bottom_px = $grid.bottom_pxbottom_px281,5722
+      def top = $grid.toptop282,5760
+      def top_px = $grid.top_pxtop_px283,5786
+      def left = $grid.leftleft284,5818
+      def left_px = $grid.left_pxleft_px285,5846
+      def right = $grid.rightright286,5880
+      def right_px = $grid.right_pxright_px287,5910
+      def center_x = $grid.center_xcenter_x288,5946
+      def center_y = $grid.center_ycenter_y289,5982
+      def center = $grid.centercenter290,6018
+      def origin_x = $grid.origin_xorigin_x291,6050
+      def origin_y = $grid.origin_yorigin_y292,6086
+      def render_origin_x = $grid.render_origin_xrender_origin_x293,6122
+      def render_origin_y = $grid.render_origin_yrender_origin_y294,6172
+      def allscreen_left = $grid.allscreen_leftallscreen_left295,6222
+      def allscreen_left_px = $grid.allscreen_left_pxallscreen_left_px296,6270
+      def allscreen_right = $grid.allscreen_rightallscreen_right297,6324
+      def allscreen_right_px = $grid.allscreen_right_pxallscreen_right_px298,6374
+      def allscreen_top = $grid.allscreen_topallscreen_top299,6430
+      def allscreen_top_px = $grid.allscreen_top_pxallscreen_top_px300,6476
+      def allscreen_bottom = $grid.allscreen_bottomallscreen_bottom301,6528
+      def allscreen_bottom_px = $grid.allscreen_bottom_pxallscreen_bottom_px302,6580
+      def allscreen_w = $grid.allscreen_wallscreen_w303,6638
+      def allscreen_w_px = $grid.allscreen_w_pxallscreen_w_px304,6680
+      def allscreen_w_pt = $grid.allscreen_w_ptallscreen_w_pt305,6728
+      def allscreen_h = $grid.allscreen_hallscreen_h306,6776
+      def allscreen_h_px = $grid.allscreen_h_pxallscreen_h_px307,6818
+      def allscreen_h_pt = $grid.allscreen_h_ptallscreen_h_pt308,6866
+      def allscreen_offset_x = $grid.allscreen_offset_xallscreen_offset_x309,6914
+      def allscreen_offset_x_px = $grid.allscreen_offset_x_pxallscreen_offset_x_px310,6970
+      def allscreen_offset_y = $grid.allscreen_offset_yallscreen_offset_y311,7032
+      def allscreen_offset_y_px = $grid.allscreen_offset_y_pxallscreen_offset_y_px312,7088
+      def native_scale = $grid.native_scalenative_scale313,7150
+      def render_scale = $grid.render_scalerender_scale314,7194
+      def texture_scale = $grid.texture_scaletexture_scale315,7238
+      def texture_scale_enum = $grid.texture_scale_enumtexture_scale_enum316,7284
+      def high_dpi_scale = $grid.high_dpi_scalehigh_dpi_scale317,7340
+      def orientation_changed = $grid.orientation_changedorientation_changed318,7388
+      def orientation_changed? = $grid.orientation_changed?orientation_changed?319,7446
+      def orientation = $grid.orientationorientation320,7506
+      def origin_bottom_left!(force: false) = $grid.origin_bottom_left!(force: force)origin_bottom_left!321,7548
+      def origin_center!(force: false) = $grid.origin_center!(force: force)origin_center!322,7634
+      def x = $grid.xx323,7710
+      def x_px = $grid.x_pxx_px324,7732
+      def y = $grid.yy325,7760
+      def y_px = $grid.y_pxy_px326,7782
+      def allscreen_x = $grid.allscreen_xallscreen_x327,7810
+      def allscreen_x_px = $grid.allscreen_x_pxallscreen_x_px328,7852
+      def allscreen_y = $grid.allscreen_yallscreen_y329,7900
+      def allscreen_y_px = $grid.allscreen_y_pxallscreen_y_px330,7942
+      def w_half = $grid.w_halfw_half331,7990
+      def h_half = $grid.h_halfh_half332,8022
+      def rect = $grid.rectrect333,8054
+      def rect_px = $grid.rect_pxrect_px334,8082
+      def allscreen_rect = $grid.allscreen_rectallscreen_rect335,8116
+      def allscreen_rect_px = $grid.allscreen_rect_pxallscreen_rect_px336,8164
+      def allscreen_offset = $grid.allscreen_offsetallscreen_offset337,8218
+      def allscreen_offset_px = $grid.allscreen_offset_pxallscreen_offset_px338,8270
+      def letterbox? = $grid.letterbox?letterbox?339,8328
+      def letterbox = $grid.letterboxletterbox340,8368
+      def landscape? = $grid.landscape?landscape?341,8406
+      def portrait? = $grid.portrait?portrait?342,8446
+      def origin_center? = $grid.origin_center?origin_center?343,8484
+      def origin_bottom_left? = $grid.origin_bottom_left?origin_bottom_left?344,8532
+      def aspect_ratio_w = $grid.aspect_ratio_waspect_ratio_w345,8590
+      def aspect_ratio_h = $grid.aspect_ratio_haspect_ratio_h346,8638
+      def hd? = $grid.hd?hd?347,8686
+      def hd = $grid.hdhd348,8712
+      def highdpi? = $grid.highdpi?highdpi?349,8736
+      def highdpi = $grid.highdpihighdpi350,8772
+      def method_missing(m, *args, &block)method_missing352,8807

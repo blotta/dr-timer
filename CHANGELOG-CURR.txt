@@ -1,3 +1,87 @@
+* 6.47
+** [Bugfix] Fixed segfault with ~Geometry.find_collisions~.
+** [Support] Added perlin noise functions (stb_perlin).
+   - ~Geometry.perlin_noise~
+   - ~Geometry.perlin_noise_seed~
+   - ~Geometry.perlin_ridge_noise~
+   - ~Geometry.perlin_fbm_noise~
+   - ~Geometry.perlin_turbulence_noise~
+
+   See docs for details of how to use these functions.
+** [Support] Added ./sprites/circle/solid.png as a default texture.
+   It's a solid white circle that you can use to render a circle to
+   the screen (and change its color by providing rgb to the sprite
+   primitive).
+** [Samples] Added perlin noise sample app.
+   Sample app demonstrates the generation of various perlin noise functions.
+   Sample app location: =./samples/08_procgen/01_perlin_noise=
+** [Samples] Added sample app showing how to create a clipped circular minimap.
+   Sample app location: =./samples/07_advanced_rendering/22_circular_minimap_clip_area=
+** [Samples] Added sample app that shows an RTS starting point.
+   Sample app locaiton: =./samples/99_genre_rts/01_rts_starting_point=
+* 6.46
+** [Pro] [Support] Added ~Layout.allscreen_rect~.
+   Function provides correct Grid alignment within render targets when ~hd_letterbox=false~.
+** [Samples] Added sample app that shows how to combine easing and lerping functions for visual effects.
+   Sample app location: =samples/08_tweening_lerping_easing_functions/02_easing_and_lerping_combined=
+** [Samples] Added sample app/reference implementation that shows multi orientation, multi platform scene management.
+   Sample app location: =./samples/07_advanced_rendering_hd/06_multi_platform_multi_orientation=
+** [Support] ~Mouse#rect~ accepts ~offset:~ optional parameter for (convenience function).
+   This is helpful when determing mouse position within a render target (offset is added to x, y of rect).
+** [Support] ~Geometry.rect_props~ moved to a C implementation.
+   Re-implemented in C because it's a commonly used method across ~Geometry~.
+** [Support] ~Geometry.zoom_rect~ added.
+   Function rescales rect that's passed in while retaining location.
+** [Support] ~Geometry.lerp_rect~ added (convenience function).
+   Handles the lerping of all rect properties.
+** [Support] Added support for using ~it~ within a block.
+   mRuby patch added to ./docs/oss/mruby
+
+   Usage:
+   #+begin_src ruby
+     10.times do |index|
+       puts index
+     end
+
+     # OR
+
+     10.times do
+       puts _1
+     end
+
+     # OR
+
+     10.times do
+       puts it
+     end
+   #+end_src
+** [Support] Incorporated cRuby's pretty print implementation.
+   ~Object#pretty_inspect~ added and ~pp~ is available at the top level.
+
+   Example:
+   #+begin_src ruby
+     def tick args
+       args.state.rects ||= 10.map do
+         {
+           x: rand(100),
+           y: rand(100),
+           w: rand(100),
+           h: rand(100)
+         }
+       end
+
+       if args.inputs.keyboard.key_down.enter
+         pp args.state.rects
+         puts args.state.rects.pretty_inspect
+       end
+
+       args.outputs.watch args.state.rects.pretty_inspect
+     end
+   #+end_src
+
+   - Modified source is located under ./docs/oss/dragon/vendor.
+   - open-source-licenses.txt updated to include pp and pretty_print.
+   - Fn (args.fn) experimental pretty print constructs removed.
 * 6.45
 ** [Moved My Cheese] Fixed Itch.io butler auto download.
 ** [Samples] Added line of sight sample app.
