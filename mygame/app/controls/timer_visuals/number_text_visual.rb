@@ -45,16 +45,6 @@ class TimerControl < Control
       }
 
       args.outputs.solids << @indicators
-
-      args.outputs.borders << {
-        x: @control.x,
-        y: @control.y,
-        w: @control.w,
-        h: @control.h,
-        anchor_x: 0.5,
-        anchor_y: 0.5,
-        **@control.color
-      }
     end
 
     # returns :s | :m | :h | nil
